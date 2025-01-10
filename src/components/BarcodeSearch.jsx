@@ -7,26 +7,65 @@ const BarcodeSearch = () => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
 
+  // Function to validate and format EAN
+  const formatEAN = (ean) => {
+    if (!ean) return null;
+    
+    // Remove any non-digit characters
+    const cleanEan = ean.toString().replace(/\D/g, '');
+    
+    // Check if it starts with 2 (weight-based barcode)
+    if (cleanEan.startsWith('2')) {
+      // Format: 2PPPPPWWWWWC
+      // P = Product code (5 digits)
+      // W = Weight (5 digits)
+      // C = Check digit (1 digit)
+      return cleanEan;
+    }
+    
+    // Regular EAN-13 format
+    if (cleanEan.length !== 13) {
+      return cleanEan.padStart(13, '0');
+    }
+    
+    return cleanEan;
+  };
+
   useEffect(() => {
     if (result && result.EAN) {
       try {
         // Clear any previous barcode
         document.getElementById('barcode').innerHTML = '';
         
-        // Generate new barcode with specific settings for better scanning
-        JsBarcode("#barcode", result.EAN, {
+        // Format the EAN
+        const formattedEAN = formatEAN(result.EAN);
+        
+        if (!formattedEAN) {
+          throw new Error('Invalid EAN code');
+        }
+
+        // Generate the barcode with improved settings
+        JsBarcode("#barcode", formattedEAN, {
           format: "EAN13",
-          width: 3,
-          height: 150,
+          width: 2,
+          height: 100,
           displayValue: true,
-          fontSize: 20,
+          fontSize: 16,
           margin: 10,
           background: "#ffffff",
-          lineColor: "#000000"
+          lineColor: "#000000",
+          text: formattedEAN, // Explicitly set the text to display
+          valid: (valid) => {
+            if (!valid) {
+              throw new Error('Invalid barcode format');
+            }
+          }
         });
       } catch (error) {
         console.error("Error generating barcode:", error);
-        setError('Invalid EAN code format');
+        // Clear the SVG in case of error
+        document.getElementById('barcode').innerHTML = '';
+        setError('Unable to generate barcode');
       }
     }
   }, [result]);
@@ -85,27 +124,29 @@ const BarcodeSearch = () => {
         </div>
 
         {/* Results Container */}
-        <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
-          <div className="bg-gray-50 rounded-lg p-6 min-h-[400px] flex flex-col items-center justify-center">
-            {error ? (
-              <p className="text-red-500 text-center text-lg">{error}</p>
-            ) : result ? (
-              <div className="flex flex-col items-center gap-6">
-                <p className="text-xl text-center font-medium break-words max-w-full">
-                  {result["libellé eCommerce"]}
-                </p>
-                <div className="bg-white p-4 rounded-lg">
-                  <svg id="barcode" className="max-w-full"></svg>
+        <div className="w-full flex justify-center">
+          <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
+            <div className="bg-gray-50 rounded-lg p-6 min-h-[400px] flex flex-col items-center justify-center text-center">
+              {error ? (
+                <p className="text-red-500 text-center text-lg">{error}</p>
+              ) : result ? (
+                <div className="flex flex-col items-center gap-6 w-full">
+                  <p className="text-xl text-center font-medium break-words w-full">
+                    {result["libellé eCommerce"]}
+                  </p>
+                  <div className="bg-white p-4 rounded-lg flex justify-center w-full">
+                    <svg id="barcode" className="w-full"></svg>
+                  </div>
+                  <p className="text-lg font-bold">
+                    EAN: {result.EAN}
+                  </p>
                 </div>
-                <p className="text-lg font-bold">
-                  EAN: {result.EAN}
+              ) : (
+                <p className="text-gray-500 text-center text-lg">
+                  Enter a product name to search
                 </p>
-              </div>
-            ) : (
-              <p className="text-gray-500 text-center text-lg">
-                Enter a product name to search
-              </p>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
