@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import JsBarcode from 'jsbarcode';
 import { database } from '../data/database';
+import { constantDatabase } from '../data/constantDatabase';
 
 const BarcodeSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [barcodeError, setBarcodeError] = useState(false);
 
   // Function to validate and format EAN
   const formatEAN = (ean) => {
@@ -16,10 +18,6 @@ const BarcodeSearch = () => {
     
     // Check if it starts with 2 (weight-based barcode)
     if (cleanEan.startsWith('2')) {
-      // Format: 2PPPPPWWWWWC
-      // P = Product code (5 digits)
-      // W = Weight (5 digits)
-      // C = Check digit (1 digit)
       return cleanEan;
     }
     
@@ -34,17 +32,15 @@ const BarcodeSearch = () => {
   useEffect(() => {
     if (result && result.EAN) {
       try {
-        // Clear any previous barcode
         document.getElementById('barcode').innerHTML = '';
+        setBarcodeError(false);
         
-        // Format the EAN
         const formattedEAN = formatEAN(result.EAN);
         
         if (!formattedEAN) {
           throw new Error('Invalid EAN code');
         }
 
-        // Generate the barcode with improved settings
         JsBarcode("#barcode", formattedEAN, {
           format: "EAN13",
           width: 2,
@@ -54,7 +50,7 @@ const BarcodeSearch = () => {
           margin: 10,
           background: "#ffffff",
           lineColor: "#000000",
-          text: formattedEAN, // Explicitly set the text to display
+          text: formattedEAN,
           valid: (valid) => {
             if (!valid) {
               throw new Error('Invalid barcode format');
@@ -63,12 +59,24 @@ const BarcodeSearch = () => {
         });
       } catch (error) {
         console.error("Error generating barcode:", error);
-        // Clear the SVG in case of error
         document.getElementById('barcode').innerHTML = '';
-        setError('Unable to generate barcode');
+        setBarcodeError(true);
+        // Don't set error state here to allow displaying the item details
       }
     }
   }, [result]);
+
+  const searchInDatabase = (searchTerm, db) => {
+    for (const item of db) {
+      if (item["Articles Ecommerce"]) {
+        const foundItem = item["Articles Ecommerce"].find(article => 
+          article["libellé eCommerce"].toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        if (foundItem) return foundItem;
+      }
+    }
+    return null;
+  };
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
@@ -77,19 +85,23 @@ const BarcodeSearch = () => {
       return;
     }
 
-    let foundItem = null;
-    for (const item of database) {
-      if (item["Articles Ecommerce"]) {
-        foundItem = item["Articles Ecommerce"].find(article => 
-          article["libellé eCommerce"].toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        if (foundItem) break;
-      }
+    // First search in constant database
+    let foundItem = searchInDatabase(searchTerm, constantDatabase);
+    let isFromConstant = true;
+
+    // If not found in constant database, search in main database
+    if (!foundItem) {
+      foundItem = searchInDatabase(searchTerm, database);
+      isFromConstant = false;
     }
 
     if (foundItem) {
-      setResult(foundItem);
+      setResult({
+        ...foundItem,
+        isConstant: isFromConstant
+      });
       setError('');
+      setBarcodeError(false);
     } else {
       setResult(null);
       setError('Product not found');
@@ -136,6 +148,9 @@ const BarcodeSearch = () => {
                   </p>
                   <div className="bg-white p-4 rounded-lg flex justify-center w-full">
                     <svg id="barcode" className="w-full"></svg>
+                    {barcodeError && (
+                      <p className="text-red-500 text-sm mt-2">Unable to generate barcode</p>
+                    )}
                   </div>
                   <p className="text-lg font-bold">
                     EAN: {result.EAN}
