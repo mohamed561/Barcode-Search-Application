@@ -12,20 +12,20 @@ const BarcodeSearch = () => {
   // Function to validate and format EAN
   const formatEAN = (ean) => {
     if (!ean) return null;
-    
+
     // Remove any non-digit characters
     const cleanEan = ean.toString().replace(/\D/g, '');
-    
+
     // Check if it starts with 2 (weight-based barcode)
     if (cleanEan.startsWith('2')) {
       return cleanEan;
     }
-    
+
     // Regular EAN-13 format
     if (cleanEan.length !== 13) {
       return cleanEan.padStart(13, '0');
     }
-    
+
     return cleanEan;
   };
 
@@ -34,9 +34,9 @@ const BarcodeSearch = () => {
       try {
         document.getElementById('barcode').innerHTML = '';
         setBarcodeError(false);
-        
+
         const formattedEAN = formatEAN(result.EAN);
-        
+
         if (!formattedEAN) {
           throw new Error('Invalid EAN code');
         }
@@ -69,7 +69,7 @@ const BarcodeSearch = () => {
   const searchInDatabase = (searchTerm, db) => {
     for (const item of db) {
       if (item["Articles Ecommerce"]) {
-        const foundItem = item["Articles Ecommerce"].find(article => 
+        const foundItem = item["Articles Ecommerce"].find(article =>
           article["libellé eCommerce"].toLowerCase().includes(searchTerm.toLowerCase())
         );
         if (foundItem) return foundItem;
@@ -114,19 +114,37 @@ const BarcodeSearch = () => {
     }
   };
 
+  const clearSearch = () => {
+    setSearchTerm('');
+    setError('');
+    setResult(null);
+    document.getElementById('search-input').focus(); // Re-focus the input
+  };
+  
+
   return (
     <div className="fixed inset-0 bg-black flex flex-col items-center justify-between p-4">
       <div className="w-full max-w-lg mx-auto flex-1 flex flex-col items-center gap-6 pt-10">
         {/* Search Container */}
-        <div className="w-full flex flex-col items-center gap-4">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Enter product name"
-            className="w-full max-w-md px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="w-full flex flex-col items-center gap-4 relative">
+        <input
+  id="search-input" // Add this id
+  type="text"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  onKeyPress={handleKeyPress}
+  placeholder="Enter product name"
+  className="w-full max-w-md px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
+          {searchTerm && (
+            <button
+              onClick={clearSearch}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xl"
+            >
+              &times;
+            </button>
+          )}
           <button 
             onClick={handleSearch}
             className="w-48 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-medium transition-colors duration-200"
