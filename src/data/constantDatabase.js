@@ -43,8 +43,8 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Saucisse poulet piquant 250g",
+            "EAN": "2666612002658",
             "isConstant": true
           },
           {
