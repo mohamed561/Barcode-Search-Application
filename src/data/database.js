@@ -6,6 +6,10 @@ export const database = [
         "libellé eCommerce": "​​​​Brosse à dents 360° interdentaire medium 1+1 gratuit - COLGATE"
       },
       {
+        "EAN": "40807638",
+        "libellé eCommerce": "Pâtes torsade + penne 2 paquets x500g -50% sur le 2ème - DARI"
+      },
+      {
         "EAN": "6111262470211",
         "libellé eCommerce": "Zamita de maïs Goufia 1Kg - COOPÉRATIVE ITTIHAD"
       },
