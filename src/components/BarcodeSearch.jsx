@@ -9,21 +9,17 @@ const BarcodeSearch = () => {
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
 
-  // Function to validate and format EAN
   const formatEAN = (ean) => {
     if (!ean) return null;
 
-    // Remove any non-digit characters
     const cleanEan = ean.toString().replace(/\D/g, '');
 
-    // Check if it starts with 2 (weight-based barcode)
-    if (cleanEan.startsWith('2')) {
+    if (cleanEan.length === 8) {
       return cleanEan;
     }
 
-    // Regular EAN-13 format
-    if (cleanEan.length !== 13) {
-      return cleanEan.padStart(13, '0');
+    if (cleanEan.length === 13) {
+      return cleanEan.replace(/^0+/, '');
     }
 
     return cleanEan;
@@ -41,8 +37,10 @@ const BarcodeSearch = () => {
           throw new Error('Invalid EAN code');
         }
 
+        const barcodeFormat = formattedEAN.length === 8 ? "EAN8" : "EAN13";
+
         JsBarcode("#barcode", formattedEAN, {
-          format: "EAN13",
+          format: barcodeFormat,
           width: 2,
           height: 100,
           displayValue: true,
@@ -61,7 +59,6 @@ const BarcodeSearch = () => {
         console.error("Error generating barcode:", error);
         document.getElementById('barcode').innerHTML = '';
         setBarcodeError(true);
-        // Don't set error state here to allow displaying the item details
       }
     }
   }, [result]);
@@ -85,11 +82,9 @@ const BarcodeSearch = () => {
       return;
     }
 
-    // First search in constant database
     let foundItem = searchInDatabase(searchTerm, constantDatabase);
     let isFromConstant = true;
 
-    // If not found in constant database, search in main database
     if (!foundItem) {
       foundItem = searchInDatabase(searchTerm, database);
       isFromConstant = false;
@@ -118,24 +113,22 @@ const BarcodeSearch = () => {
     setSearchTerm('');
     setError('');
     setResult(null);
-    document.getElementById('search-input').focus(); // Re-focus the input
+    document.getElementById('search-input').focus();
   };
-  
 
   return (
     <div className="fixed inset-0 bg-black flex flex-col items-center justify-between p-4">
       <div className="w-full max-w-lg mx-auto flex-1 flex flex-col items-center gap-6 pt-10">
-        {/* Search Container */}
         <div className="w-full flex flex-col items-center gap-4 relative">
-        <input
-  id="search-input" // Add this id
-  type="text"
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-  onKeyPress={handleKeyPress}
-  placeholder="Enter product name"
-  className="w-full max-w-md px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-/>
+          <input
+            id="search-input"
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Enter product name"
+            className="w-full max-w-md px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
           {searchTerm && (
             <button
@@ -153,7 +146,6 @@ const BarcodeSearch = () => {
           </button>
         </div>
 
-        {/* Results Container */}
         <div className="w-full flex justify-center">
           <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
             <div className="bg-gray-50 rounded-lg p-6 min-h-[400px] flex flex-col items-center justify-center text-center">
@@ -184,7 +176,6 @@ const BarcodeSearch = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <div className="w-full text-white text-center py-4">
         <p className="text-sm md:text-base">Made by: Wyatt</p>
         <p className="text-sm md:text-base">Powered by: Team AINSBAA</p>

@@ -48,8 +48,8 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Coquelet x2 environ 800g",
+            "EAN": "2630485000011",
             "isConstant": true
           },
           {
@@ -88,13 +88,13 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Viande hachée de dinde nature 500g",
+            "EAN": "2610121005259",
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Viande hachée de dinde épicée 500g",
+            "EAN": "2610120005250",
             "isConstant": true
           },
           {
