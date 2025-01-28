@@ -120015,15 +120015,15 @@ export const database = [
       },
       {
         "EAN": "6111252420301",
-        "libellé eCommerce": "7 Up  canette 33cl"
+        "libellé eCommerce": "7 Up canette 33cl"
       },
       {
         "EAN": "6111035000218",
-        "libellé eCommerce": "7 Up  50cl"
+        "libellé eCommerce": "7 Up 50cl"
       },
       {
         "EAN": "6111252420202",
-        "libellé eCommerce": "7 Up  33cl"
+        "libellé eCommerce": "7 Up 33cl"
       },
       {
         "EAN": "6111251635287",
