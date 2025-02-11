@@ -11,18 +11,14 @@ const BarcodeSearch = () => {
 
   const formatEAN = (ean) => {
     if (!ean) return null;
-
     const cleanEan = ean.toString().replace(/\D/g, '');
-
-    if (cleanEan.length === 8) {
-      return cleanEan;
-    }
-
-    if (cleanEan.length === 13) {
-      return cleanEan.replace(/^0+/, '');
-    }
-
+    if (cleanEan.length === 8) return cleanEan;
+    if (cleanEan.length === 13) return cleanEan.replace(/^0+/, '');
     return cleanEan;
+  };
+
+  const normalizeString = (str) => {
+    return str.toLowerCase().replace(/[^a-z0-9]/g, '');
   };
 
   useEffect(() => {
@@ -30,15 +26,12 @@ const BarcodeSearch = () => {
       try {
         document.getElementById('barcode').innerHTML = '';
         setBarcodeError(false);
-
         const formattedEAN = formatEAN(result.EAN);
 
-        if (!formattedEAN) {
-          throw new Error('Invalid EAN code');
-        }
+        if (!formattedEAN) throw new Error('Invalid EAN code');
 
         const barcodeFormat = formattedEAN.length === 8 ? "EAN8" : "EAN13";
-
+        
         JsBarcode("#barcode", formattedEAN, {
           format: barcodeFormat,
           width: 2,
@@ -50,9 +43,7 @@ const BarcodeSearch = () => {
           lineColor: "#000000",
           text: formattedEAN,
           valid: (valid) => {
-            if (!valid) {
-              throw new Error('Invalid barcode format');
-            }
+            if (!valid) throw new Error('Invalid barcode format');
           }
         });
       } catch (error) {
@@ -64,11 +55,14 @@ const BarcodeSearch = () => {
   }, [result]);
 
   const searchInDatabase = (searchTerm, db) => {
+    const normalizedSearchTerm = normalizeString(searchTerm);
+    
     for (const item of db) {
       if (item["Articles Ecommerce"]) {
-        const foundItem = item["Articles Ecommerce"].find(article =>
-          article["libellé eCommerce"].toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const foundItem = item["Articles Ecommerce"].find(article => {
+          const normalizedLibelle = normalizeString(article["libellé eCommerce"]);
+          return normalizedLibelle.includes(normalizedSearchTerm);
+        });
         if (foundItem) return foundItem;
       }
     }
@@ -91,10 +85,7 @@ const BarcodeSearch = () => {
     }
 
     if (foundItem) {
-      setResult({
-        ...foundItem,
-        isConstant: isFromConstant
-      });
+      setResult({ ...foundItem, isConstant: isFromConstant });
       setError('');
       setBarcodeError(false);
     } else {
@@ -104,9 +95,7 @@ const BarcodeSearch = () => {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
+    if (e.key === 'Enter') handleSearch();
   };
 
   const clearSearch = () => {
@@ -129,7 +118,6 @@ const BarcodeSearch = () => {
             placeholder="Enter product name"
             className="w-full max-w-md px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-
           {searchTerm && (
             <button
               onClick={clearSearch}
@@ -162,9 +150,7 @@ const BarcodeSearch = () => {
                       <p className="text-red-500 text-sm mt-2">Unable to generate barcode</p>
                     )}
                   </div>
-                  <p className="text-lg font-bold">
-                    EAN: {result.EAN}
-                  </p>
+                  <p className="text-lg font-bold">EAN: {result.EAN}</p>
                 </div>
               ) : (
                 <p className="text-gray-500 text-center text-lg">
