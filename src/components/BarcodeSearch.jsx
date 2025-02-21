@@ -194,7 +194,7 @@ const BarcodeSearch = () => {
 
       <div className="w-full text-white text-center py-4">
         {isEasterEgg ? (
-          <p className="text-sm md:text-base">💚💚💚 Dima Raja 💚💚💚</p>
+          <p className="text-sm md:text-base">🦅🦅🦅 T3ich Raja 🦅🦅🦅</p>
         ) : (
           <>
             <p className="text-sm md:text-base">Made by: Wyatt</p>
