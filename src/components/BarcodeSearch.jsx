@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import JsBarcode from 'jsbarcode';
 import { database } from '../data/database';
 import { constantDatabase } from '../data/constantDatabase';
+import easterEggGif from '../assets/easter-egg.gif';
 
 const BarcodeSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
+  const [isEasterEgg, setIsEasterEgg] = useState(false);
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -73,9 +75,20 @@ const BarcodeSearch = () => {
     if (!searchTerm.trim()) {
       setError('Please enter a product name');
       setResult(null);
+      setIsEasterEgg(false);
       return;
     }
 
+    // Easter egg check
+    if (searchTerm.trim() === '4=4') {
+      setResult({ easterEgg: true });
+      setError('');
+      setBarcodeError(false);
+      setIsEasterEgg(true);
+      return;
+    }
+
+    setIsEasterEgg(false);
     let foundItem = searchInDatabase(searchTerm, constantDatabase);
     let isFromConstant = true;
 
@@ -102,6 +115,7 @@ const BarcodeSearch = () => {
     setSearchTerm('');
     setError('');
     setResult(null);
+    setIsEasterEgg(false);
     document.getElementById('search-input').focus();
   };
 
@@ -123,7 +137,7 @@ const BarcodeSearch = () => {
               onClick={clearSearch}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xl"
             >
-              &times;
+              ×
             </button>
           )}
           <button 
@@ -138,20 +152,36 @@ const BarcodeSearch = () => {
           <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
             <div className="bg-gray-50 rounded-lg p-6 min-h-[400px] flex flex-col items-center justify-center text-center">
               {error ? (
-                <p className="text-red-500 text-center text-lg">{error}</p>
+                error === 'Product not found' ? (
+                  <img
+                    src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2Y3NDdyeGE0cTR0OXZnOXJtMXVhbjA1cTBxemlvY3RjamVoeXVidSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6JvWkYi1LxuncMDNng/giphy.gif"
+                    alt="Not found animation"
+                    className="w-[150px] h-auto"
+                  />
+                ) : (
+                  <p className="text-red-500 text-center text-lg">{error}</p>
+                )
               ) : result ? (
-                <div className="flex flex-col items-center gap-6 w-full">
-                  <p className="text-xl text-center font-medium break-words w-full">
-                    {result["libellé eCommerce"]}
-                  </p>
-                  <div className="bg-white p-4 rounded-lg flex justify-center w-full">
-                    <svg id="barcode" className="w-full"></svg>
-                    {barcodeError && (
-                      <p className="text-red-500 text-sm mt-2">Unable to generate barcode</p>
-                    )}
+                result.easterEgg ? (
+                  <img
+                    src={easterEggGif}
+                    alt="Easter egg animation"
+                    className="w-[200px] h-auto"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-6 w-full">
+                    <p className="text-xl text-center font-medium break-words w-full">
+                      {result["libellé eCommerce"]}
+                    </p>
+                    <div className="bg-white p-4 rounded-lg flex justify-center w-full">
+                      <svg id="barcode" className="w-full"></svg>
+                      {barcodeError && (
+                        <p className="text-red-500 text-sm mt-2">Unable to generate barcode</p>
+                      )}
+                    </div>
+                    <p className="text-lg font-bold">EAN: {result.EAN}</p>
                   </div>
-                  <p className="text-lg font-bold">EAN: {result.EAN}</p>
-                </div>
+                )
               ) : (
                 <p className="text-gray-500 text-center text-lg">
                   Enter a product name to search
@@ -163,8 +193,14 @@ const BarcodeSearch = () => {
       </div>
 
       <div className="w-full text-white text-center py-4">
-        <p className="text-sm md:text-base">Made by: Wyatt</p>
-        <p className="text-sm md:text-base">Powered by: Team AINSBAA</p>
+        {isEasterEgg ? (
+          <p className="text-sm md:text-base">💚💚💚 Dima Raja 💚💚💚</p>
+        ) : (
+          <>
+            <p className="text-sm md:text-base">Made by: Wyatt</p>
+            <p className="text-sm md:text-base">Powered by: Team AINSBAA</p>
+          </>
+        )}
       </div>
     </div>
   );
