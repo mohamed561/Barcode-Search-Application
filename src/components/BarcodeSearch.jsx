@@ -152,15 +152,7 @@ const BarcodeSearch = () => {
           <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
             <div className="bg-gray-50 rounded-lg p-6 min-h-[400px] flex flex-col items-center justify-center text-center">
               {error ? (
-                error === 'Product not found' ? (
-                  <img
-                    src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2Y3NDdyeGE0cTR0OXZnOXJtMXVhbjA1cTBxemlvY3RjamVoeXVidSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6JvWkYi1LxuncMDNng/giphy.gif"
-                    alt="Not found animation"
-                    className="w-[150px] h-auto"
-                  />
-                ) : (
-                  <p className="text-red-500 text-center text-lg">{error}</p>
-                )
+                <p className="text-red-500 text-lg font-medium">{error}</p>
               ) : result ? (
                 result.easterEgg ? (
                   <img
