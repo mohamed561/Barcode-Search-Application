@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bsa-eosin.vercel.app//sitemap.xml
