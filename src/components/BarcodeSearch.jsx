@@ -1,3 +1,4 @@
+<meta name="google-site-verification" content="4vVWKVtziRoM4FUWxmGgAfPuLWT71TMUWPBD-ZaKNJc" />
 import React, { useState, useEffect } from 'react';
 import JsBarcode from 'jsbarcode';
 import { database } from '../data/database';
