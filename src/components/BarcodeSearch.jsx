@@ -10,7 +10,7 @@ const BarcodeSearch = () => {
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
   const [isEasterEgg, setIsEasterEgg] = useState(false);
-  const [showFeedbackPopup, setShowFeedbackPopup] = useState(true); // New state
+  const [showFeedbackPopup, setShowFeedbackPopup] = useState(false); // Changed to false
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -55,7 +55,13 @@ const BarcodeSearch = () => {
   }, [result]);
 
   useEffect(() => {
-    setShowFeedbackPopup(true); // Show popup on load
+    const lastShown = localStorage.getItem('feedbackPopupLastShown');
+    const now = new Date().getTime();
+    const oneDay = 24 * 60 * 60 * 1000;
+
+    if (!lastShown || now - parseInt(lastShown) > oneDay) {
+      setShowFeedbackPopup(true);
+    }
   }, []);
 
   const searchInDatabase = (searchTerm, db) => {
@@ -176,7 +182,7 @@ const BarcodeSearch = () => {
       color: '#9ca3af',
       cursor: 'pointer',
       display: 'flex',
-      alignItems: 'center',
+alignItems: 'center',
       justifyContent: 'center',
       padding: '0.25rem',
     },
@@ -349,19 +355,26 @@ const BarcodeSearch = () => {
       {showFeedbackPopup && (
         <div style={styles.popupOverlay}>
           <div style={styles.popupContent}>
-            <h3 style={styles.popupTitle}>مرحبا بك فالنسخة الثانيةV2.0</h3>
+            <h3 style={styles.popupTitle}>!V2.0 مرحبا بك ف</h3>
             <p style={styles.popupText}>
-              الا كان ممكنك تعطي ملاحظات على التطبيق، غادي نكونو ممتنين بزاف.
+              !الا كان ممكنك تعطي ملاحظات على التطبيق، غادي نكونو ممتنين بزاف
             </p>
             <button
               style={styles.popupButton}
-              onClick={() => window.open('https://forms.gle/1AyuNVHN5iuwwbqR6', '_blank')}
+              onClick={() => {
+                localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
+                window.open('https://forms.gle/oKGgzeRU4zfkraQN9', '_blank');
+                setShowFeedbackPopup(false);
+              }}
             >
               اظغط هنا
             </button>
             <button
               style={styles.popupCloseButton}
-              onClick={() => setShowFeedbackPopup(false)}
+              onClick={() => {
+                localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
+                setShowFeedbackPopup(false);
+              }}
             >
               إغلاق
             </button>
