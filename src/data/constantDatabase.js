@@ -108,8 +108,8 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Piment fort 500g - FILIERE M",
+            "EAN": "2619300005004",
             "isConstant": true
           },
         
