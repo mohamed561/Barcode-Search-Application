@@ -450,7 +450,7 @@ alignItems: 'center',
         <div style={styles.footer}>
           <p style={styles.footerText}>Made by: Wyatt</p>
           <p style={styles.footerText}>Powered by: Team AINSBAA</p>
-          <p style={styles.footerText}>Version: V2.0</p>
+          <p style={styles.footerText}>V2.0</p>
         </div>
       </div>
     </div>
