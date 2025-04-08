@@ -394,6 +394,7 @@ const BarcodeSearch = () => {
         <div style={styles.footer}>
           <p style={styles.footerText}>Made by: Wyatt</p>
           <p style={styles.footerText}>Powered by: Team AINSBAA</p>
+          <p style={styles.footerText}>2.0</p>
         </div>
       </div>
     </div>
