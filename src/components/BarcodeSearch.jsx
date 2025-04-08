@@ -55,24 +55,20 @@ const BarcodeSearch = () => {
   }, [result]);
 
   useEffect(() => {
-    const hasReviewed = localStorage.getItem('hasReviewed'); // Check if user has completed review
+    const hasReviewed = localStorage.getItem('hasReviewed');
     const lastShown = localStorage.getItem('feedbackPopupLastShown');
     const now = new Date().getTime();
-    const tenHours = 10 * 60 * 60 * 1000; // 10 hours in milliseconds
+    const tenHours = 10 * 60 * 60 * 1000;
 
     if (!hasReviewed) {
-      // If they haven’t reviewed, show popup every time unless suppressed by "Review"
       setShowFeedbackPopup(true);
     } else if (lastShown && now - parseInt(lastShown) < tenHours) {
-      // If reviewed but less than 10 hours have passed, don’t show
       setShowFeedbackPopup(false);
     } else {
-      // If reviewed and 10+ hours have passed, show again
       setShowFeedbackPopup(true);
     }
   }, []);
 
-  // Handle "Review" button click with time tracking
   const handleReviewClick = () => {
     const startTime = new Date().getTime();
     localStorage.setItem('feedbackPopupLastShown', startTime.toString());
@@ -81,20 +77,18 @@ const BarcodeSearch = () => {
     const checkTimeSpent = setInterval(() => {
       if (reviewWindow.closed) {
         const endTime = new Date().getTime();
-        const timeSpent = (endTime - startTime) / 1000; // Time in seconds
+        const timeSpent = (endTime - startTime) / 1000;
         if (timeSpent >= 30) {
-          localStorage.setItem('hasReviewed', 'true'); // Mark as reviewed if 30+ seconds
+          localStorage.setItem('hasReviewed', 'true');
         }
         clearInterval(checkTimeSpent);
       }
-    }, 1000); // Check every second
+    }, 1000);
 
-    setShowFeedbackPopup(false); // Hide popup immediately
+    setShowFeedbackPopup(false);
   };
 
-  // Handle "Close" button click
   const handleCloseClick = () => {
-    // Don’t set hasReviewed, so it keeps showing every time
     localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
     setShowFeedbackPopup(false);
   };
@@ -327,7 +321,7 @@ const BarcodeSearch = () => {
     footer: {
       textAlign: 'center',
       paddingTop: '2rem',
-      color: '#9ca3af',
+      color: 'rgba(156, 163, 175, 0.8)', // Slightly transparent for subtlety
       fontSize: '0.875rem',
     },
     footerText: {
@@ -339,49 +333,65 @@ const BarcodeSearch = () => {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)', // Slightly lighter for less intensity
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 1000,
+      animation: 'fadeIn 0.2s ease-in-out', // Faster fade-in
     },
     popupContent: {
-      backgroundColor: '#ffffff',
-      padding: '2rem',
-      borderRadius: '0.5rem',
+      background: 'linear-gradient(135deg, #ffffff, #f1f5f9)',
+      padding: '1.25rem', // Reduced padding
+      borderRadius: '0.75rem', // Smaller radius
       textAlign: 'center',
-      maxWidth: '24rem',
-      width: '90%',
-      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+      maxWidth: '20rem', // Smaller max width
+      width: '85%', // Slightly less wide
+      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)', // Lighter shadow
+      position: 'relative',
+      overflow: 'hidden',
     },
     popupTitle: {
-      fontSize: '1.25rem',
-      fontWeight: '600',
-      color: '#1f2937',
-      marginBottom: '1rem',
+      fontSize: '1.25rem', // Smaller title
+      fontWeight: '700',
+      color: '#1e40af',
+      marginBottom: '0.75rem', // Reduced margin
+      textTransform: 'uppercase',
+      letterSpacing: '0.03em', // Slightly less spacing
     },
     popupText: {
-      fontSize: '1rem',
-      color: '#374151',
-      marginBottom: '1.5rem',
+      fontSize: '0.9rem', // Smaller text
+      color: '#4b5563',
+      marginBottom: '1rem', // Reduced margin
+      lineHeight: '1.4', // Slightly tighter
     },
     popupButton: {
-      backgroundColor: '#3b82f6',
+      backgroundColor: '#1e40af',
       color: 'white',
       border: 'none',
-      borderRadius: '0.5rem',
-      padding: '0.75rem 1.5rem',
-      fontSize: '1rem',
+      borderRadius: '0.5rem', // Smaller radius
+      padding: '0.6rem 1.5rem', // Reduced padding
+      fontSize: '0.95rem', // Smaller font
+      fontWeight: '600',
       cursor: 'pointer',
-      transition: 'background-color 0.2s',
+      transition: 'transform 0.2s, background-color 0.2s',
+      boxShadow: '0 3px 10px rgba(30, 64, 175, 0.25)', // Smaller shadow
+    },
+    popupButtonHover: {
+      backgroundColor: '#1e3a8a',
+      transform: 'scale(1.03)', // Slightly smaller scale
     },
     popupCloseButton: {
+      position: 'absolute',
+      top: '0.5rem', // Closer to edge
+      right: '0.5rem',
       background: 'none',
       border: 'none',
-      color: '#9ca3af',
-      fontSize: '0.875rem',
+      color: '#6b7280',
+      fontSize: '1rem', // Smaller "✕"
       cursor: 'pointer',
-      marginTop: '1rem',
+      padding: '0.2rem', // Reduced padding
+      transition: 'color 0.2s',
     },
   };
 
@@ -390,21 +400,25 @@ const BarcodeSearch = () => {
       {showFeedbackPopup && (
         <div style={styles.popupOverlay}>
           <div style={styles.popupContent}>
-            <h3 style={styles.popupTitle}>!V2.0 مرحبا بك ف</h3>
+            <button
+              style={styles.popupCloseButton}
+              onClick={handleCloseClick}
+              onMouseEnter={(e) => (e.target.style.color = '#ef4444')}
+              onMouseLeave={(e) => (e.target.style.color = '#6b7280')}
+            >
+              ✕
+            </button>
+            <h3 style={styles.popupTitle}>!V2.0 مرحبا بك في</h3>
             <p style={styles.popupText}>
-              !الا كان ممكنك تعطي ملاحظات على التطبيق، غادي نكونو ممتنين بزاف
+              !إذا كان ممكنك تعطينا ملاحظاتك على التطبيق، غادي نكونو ممتنين بزاف
             </p>
             <button
               style={styles.popupButton}
               onClick={handleReviewClick}
+              onMouseEnter={(e) => Object.assign(e.target.style, styles.popupButtonHover)}
+              onMouseLeave={(e) => Object.assign(e.target.style, styles.popupButton)}
             >
-              اظغط هنا
-            </button>
-            <button
-              style={styles.popupCloseButton}
-              onClick={handleCloseClick}
-            >
-              إغلاق
+              اضغط هنا
             </button>
           </div>
         </div>
