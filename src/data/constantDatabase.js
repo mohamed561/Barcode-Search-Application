@@ -98,8 +98,8 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Ananas à la pièce",
+            "EAN": "2698571000017",
             "isConstant": true
           },
           {
