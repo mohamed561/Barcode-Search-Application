@@ -10,7 +10,7 @@ const BarcodeSearch = () => {
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
   const [isEasterEgg, setIsEasterEgg] = useState(false);
-  const [showFeedbackPopup, setShowFeedbackPopup] = useState(false); // Changed to false
+  const [showFeedbackPopup, setShowFeedbackPopup] = useState(false);
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -55,14 +55,49 @@ const BarcodeSearch = () => {
   }, [result]);
 
   useEffect(() => {
+    const hasReviewed = localStorage.getItem('hasReviewed'); // Check if user has completed review
     const lastShown = localStorage.getItem('feedbackPopupLastShown');
     const now = new Date().getTime();
-    const oneDay = 24 * 60 * 60 * 1000;
+    const tenHours = 10 * 60 * 60 * 1000; // 10 hours in milliseconds
 
-    if (!lastShown || now - parseInt(lastShown) > oneDay) {
+    if (!hasReviewed) {
+      // If they haven’t reviewed, show popup every time unless suppressed by "Review"
+      setShowFeedbackPopup(true);
+    } else if (lastShown && now - parseInt(lastShown) < tenHours) {
+      // If reviewed but less than 10 hours have passed, don’t show
+      setShowFeedbackPopup(false);
+    } else {
+      // If reviewed and 10+ hours have passed, show again
       setShowFeedbackPopup(true);
     }
   }, []);
+
+  // Handle "Review" button click with time tracking
+  const handleReviewClick = () => {
+    const startTime = new Date().getTime();
+    localStorage.setItem('feedbackPopupLastShown', startTime.toString());
+    const reviewWindow = window.open('https://forms.gle/oKGgzeRU4zfkraQN9', '_blank');
+
+    const checkTimeSpent = setInterval(() => {
+      if (reviewWindow.closed) {
+        const endTime = new Date().getTime();
+        const timeSpent = (endTime - startTime) / 1000; // Time in seconds
+        if (timeSpent >= 30) {
+          localStorage.setItem('hasReviewed', 'true'); // Mark as reviewed if 30+ seconds
+        }
+        clearInterval(checkTimeSpent);
+      }
+    }, 1000); // Check every second
+
+    setShowFeedbackPopup(false); // Hide popup immediately
+  };
+
+  // Handle "Close" button click
+  const handleCloseClick = () => {
+    // Don’t set hasReviewed, so it keeps showing every time
+    localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
+    setShowFeedbackPopup(false);
+  };
 
   const searchInDatabase = (searchTerm, db) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
@@ -182,7 +217,7 @@ const BarcodeSearch = () => {
       color: '#9ca3af',
       cursor: 'pointer',
       display: 'flex',
-alignItems: 'center',
+      alignItems: 'center',
       justifyContent: 'center',
       padding: '0.25rem',
     },
@@ -361,20 +396,13 @@ alignItems: 'center',
             </p>
             <button
               style={styles.popupButton}
-              onClick={() => {
-                localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
-                window.open('https://forms.gle/oKGgzeRU4zfkraQN9', '_blank');
-                setShowFeedbackPopup(false);
-              }}
+              onClick={handleReviewClick}
             >
               اظغط هنا
             </button>
             <button
               style={styles.popupCloseButton}
-              onClick={() => {
-                localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
-                setShowFeedbackPopup(false);
-              }}
+              onClick={handleCloseClick}
             >
               إغلاق
             </button>
