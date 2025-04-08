@@ -1,4 +1,3 @@
-<meta name="google-site-verification" content="4vVWKVtziRoM4FUWxmGgAfPuLWT71TMUWPBD-ZaKNJc" />
 import React, { useState, useEffect } from 'react';
 import JsBarcode from 'jsbarcode';
 import { database } from '../data/database';
@@ -80,7 +79,6 @@ const BarcodeSearch = () => {
       return;
     }
 
-    // Easter egg check
     if (searchTerm.trim() === '4=4') {
       setResult({ easterEgg: true });
       setError('');
@@ -96,6 +94,7 @@ const BarcodeSearch = () => {
     if (!foundItem) {
       foundItem = searchInDatabase(searchTerm, database);
       isFromConstant = false;
+// Removed invalid code
     }
 
     if (foundItem) {
@@ -120,80 +119,282 @@ const BarcodeSearch = () => {
     document.getElementById('search-input').focus();
   };
 
+  // Inline styles with improved centering
+  const styles = {
+    container: {
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', // Centers vertically
+      alignItems: 'center',     // Centers horizontally
+      padding: '1rem',
+      background: 'linear-gradient(135deg, #111827, #030712)',
+      color: '#f9fafb',
+    },
+    appContainer: {
+      width: '100%',
+      maxWidth: '28rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '1.5rem', // Adds consistent spacing between elements
+    },
+    header: {
+      textAlign: 'center',
+    },
+    title: {
+      fontSize: '1.875rem',
+      fontWeight: '700',
+      color: '#f9fafb',
+      marginBottom: '0.5rem',
+    },
+    subtitle: {
+      fontSize: '0.875rem',
+      color: '#9ca3af',
+    },
+    searchContainer: {
+      width: '100%',
+    },
+    inputWrapper: {
+      position: 'relative',
+      width: '100%',
+      marginBottom: '1rem',
+    },
+    input: {
+      width: '100%',
+      backgroundColor: 'rgba(31, 41, 55, 0.8)',
+      color: '#f9fafb',
+      border: 'none',
+      borderRadius: '0.5rem',
+      padding: '0.75rem 2.5rem 0.75rem 1rem',
+      fontSize: '1rem',
+      outline: 'none',
+      boxSizing: 'border-box',
+    },
+    clearButton: {
+      position: 'absolute',
+      right: '0.75rem',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      background: 'none',
+      border: 'none',
+      color: '#9ca3af',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '0.25rem',
+    },
+    searchButton: {
+      width: '100%',
+      backgroundColor: '#3b82f6',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.5rem',
+      padding: '0.75rem 1rem',
+      fontSize: '1rem',
+      fontWeight: '500',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.5rem',
+      transition: 'background-color 0.2s',
+    },
+    resultsContainer: {
+      width: '100%',
+      backgroundColor: '#ffffff',
+      borderRadius: '0.5rem',
+      overflow: 'hidden',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    },
+    resultsHeader: {
+      backgroundColor: '#f3f4f6',
+      padding: '0.75rem 1rem',
+      borderBottom: '1px solid #e5e7eb',
+      textAlign: 'center',
+    },
+    resultsTitle: {
+      fontSize: '1rem',
+      fontWeight: '500',
+      color: '#374151',
+      margin: '0',
+    },
+    resultsContent: {
+      padding: '1.5rem',
+      minHeight: '16rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+    },
+    errorMessage: {
+      color: '#ef4444',
+      fontSize: '1rem',
+    },
+    emptyState: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      color: '#9ca3af',
+    },
+    emptyStateIcon: {
+      width: '4rem',
+      height: '4rem',
+      marginBottom: '1rem',
+    },
+    emptyStateText: {
+      margin: '0',
+      marginBottom: '0.5rem',
+    },
+    emptyStateSubtext: {
+      fontSize: '0.875rem',
+      margin: '0',
+    },
+    productResult: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '1rem',
+      width: '100%',
+    },
+    productName: {
+      fontSize: '1.125rem',
+      fontWeight: '500',
+      color: '#1f2937',
+      textAlign: 'center',
+      wordBreak: 'break-word',
+    },
+    barcodeContainer: {
+      backgroundColor: 'white',
+      padding: '1rem',
+      borderRadius: '0.375rem',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+    barcodeError: {
+      color: '#ef4444',
+      fontSize: '0.875rem',
+      marginTop: '0.5rem',
+    },
+    eanDisplay: {
+      fontSize: '1.125rem',
+      fontWeight: '700',
+      color: '#1f2937',
+    },
+    easterEgg: {
+      width: '12rem',
+      height: 'auto',
+    },
+    footer: {
+      textAlign: 'center',
+      paddingTop: '2rem',
+      color: '#9ca3af',
+      fontSize: '0.875rem',
+    },
+    footerText: {
+      margin: '0.25rem 0',
+    },
+  };
+
   return (
-    <div className="fixed inset-0 bg-black flex flex-col items-center justify-between p-4">
-      <div className="w-full max-w-lg mx-auto flex-1 flex flex-col items-center gap-6 pt-10">
-        <div className="w-full flex flex-col items-center gap-4 relative">
-          <input
-            id="search-input"
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Enter product name"
-            className="w-full max-w-md px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          {searchTerm && (
-            <button
-              onClick={clearSearch}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xl"
-            >
-              ×
-            </button>
-          )}
-          <button 
+    <div style={styles.container}>
+      <div style={styles.appContainer}>
+        {/* Header */}
+        <div style={styles.header}>
+          <h1 style={styles.title}>EAN Barcode Finder</h1>
+          <p style={styles.subtitle}>Search for products and generate EAN barcodes instantly</p>
+        </div>
+
+        {/* Search Input */}
+        <div style={styles.searchContainer}>
+          <div style={styles.inputWrapper}>
+            <input
+              id="search-input"
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Enter product name..."
+              style={styles.input}
+            />
+            {searchTerm && (
+              <button
+                onClick={clearSearch}
+                style={styles.clearButton}
+                aria-label="Clear search"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              </button>
+            )}
+          </div>
+
+          <button
             onClick={handleSearch}
-            className="w-48 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-medium transition-colors duration-200"
+            style={styles.searchButton}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+            </svg>
             SEARCH
           </button>
         </div>
 
-        <div className="w-full flex justify-center">
-          <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
-            <div className="bg-gray-50 rounded-lg p-6 min-h-[400px] flex flex-col items-center justify-center text-center">
-              {error ? (
-                <p className="text-red-500 text-lg font-medium">{error}</p>
-              ) : result ? (
-                result.easterEgg ? (
-                  <img
-                    src={easterEggGif}
-                    alt="Easter egg animation"
-                    className="w-[200px] h-auto"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center gap-6 w-full">
-                    <p className="text-xl text-center font-medium break-words w-full">
-                      {result["libellé eCommerce"]}
-                    </p>
-                    <div className="bg-white p-4 rounded-lg flex justify-center w-full">
-                      <svg id="barcode" className="w-full"></svg>
-                      {barcodeError && (
-                        <p className="text-red-500 text-sm mt-2">Unable to generate barcode</p>
-                      )}
-                    </div>
-                    <p className="text-lg font-bold">EAN: {result.EAN}</p>
-                  </div>
-                )
+        {/* Results Container */}
+        <div style={styles.resultsContainer}>
+          <div style={styles.resultsHeader}>
+            <h2 style={styles.resultsTitle}>Search Results</h2>
+          </div>
+          
+          <div style={styles.resultsContent}>
+            {error ? (
+              <p style={styles.errorMessage}>{error}</p>
+            ) : result ? (
+              result.easterEgg ? (
+                <img
+                  src={easterEggGif}
+                  alt="Easter egg animation"
+                  style={styles.easterEgg}
+                />
               ) : (
-                <p className="text-gray-500 text-center text-lg">
-                  Enter a product name to search
-                </p>
-              )}
-            </div>
+                <div style={styles.productResult}>
+                  <p style={styles.productName}>
+                    {result["libellé eCommerce"]}
+                  </p>
+                  
+                  <div style={styles.barcodeContainer}>
+                    <svg id="barcode"></svg>
+                    {barcodeError && (
+                      <p style={styles.barcodeError}>Unable to generate barcode</p>
+                    )}
+                  </div>
+                  
+                  {!barcodeError && (
+                    <p style={styles.eanDisplay}>EAN: {result.EAN}</p>
+                  )}
+                </div>
+              )
+            ) : (
+              <div style={styles.emptyState}>
+                <svg style={styles.emptyStateIcon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <p style={styles.emptyStateText}>Enter a product name to search</p>
+                <p style={styles.emptyStateSubtext}>Results will appear here</p>
+              </div>
+            )}
           </div>
         </div>
-      </div>
 
-      <div className="w-full text-white text-center py-4">
-        {isEasterEgg ? (
-          <p className="text-sm md:text-base">🦅🦅🦅 T3ich Raja 🦅🦅🦅</p>
-        ) : (
-          <>
-            <p className="text-sm md:text-base">Made by: Wyatt</p>
-            <p className="text-sm md:text-base">Powered by: Team AINSBAA</p>
-          </>
-        )}
+        {/* Footer */}
+        <div style={styles.footer}>
+          <p style={styles.footerText}>Made by: Wyatt</p>
+          <p style={styles.footerText}>Powered by: Team AINSBAA</p>
+        </div>
       </div>
     </div>
   );
