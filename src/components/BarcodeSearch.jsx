@@ -10,6 +10,7 @@ const BarcodeSearch = () => {
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
   const [isEasterEgg, setIsEasterEgg] = useState(false);
+  const [showFeedbackPopup, setShowFeedbackPopup] = useState(true); // New state
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -29,11 +30,8 @@ const BarcodeSearch = () => {
         document.getElementById('barcode').innerHTML = '';
         setBarcodeError(false);
         const formattedEAN = formatEAN(result.EAN);
-
         if (!formattedEAN) throw new Error('Invalid EAN code');
-
         const barcodeFormat = formattedEAN.length === 8 ? "EAN8" : "EAN13";
-        
         JsBarcode("#barcode", formattedEAN, {
           format: barcodeFormat,
           width: 2,
@@ -56,9 +54,12 @@ const BarcodeSearch = () => {
     }
   }, [result]);
 
+  useEffect(() => {
+    setShowFeedbackPopup(true); // Show popup on load
+  }, []);
+
   const searchInDatabase = (searchTerm, db) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
-    
     for (const item of db) {
       if (item["Articles Ecommerce"]) {
         const foundItem = item["Articles Ecommerce"].find(article => {
@@ -78,7 +79,6 @@ const BarcodeSearch = () => {
       setIsEasterEgg(false);
       return;
     }
-
     if (searchTerm.trim() === '4=4') {
       setResult({ easterEgg: true });
       setError('');
@@ -86,17 +86,13 @@ const BarcodeSearch = () => {
       setIsEasterEgg(true);
       return;
     }
-
     setIsEasterEgg(false);
     let foundItem = searchInDatabase(searchTerm, constantDatabase);
     let isFromConstant = true;
-
     if (!foundItem) {
       foundItem = searchInDatabase(searchTerm, database);
       isFromConstant = false;
-// Removed invalid code
     }
-
     if (foundItem) {
       setResult({ ...foundItem, isConstant: isFromConstant });
       setError('');
@@ -119,14 +115,13 @@ const BarcodeSearch = () => {
     document.getElementById('search-input').focus();
   };
 
-  // Inline styles with improved centering
   const styles = {
     container: {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center', // Centers vertically
-      alignItems: 'center',     // Centers horizontally
+      justifyContent: 'center',
+      alignItems: 'center',
       padding: '1rem',
       background: 'linear-gradient(135deg, #111827, #030712)',
       color: '#f9fafb',
@@ -137,7 +132,7 @@ const BarcodeSearch = () => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '1.5rem', // Adds consistent spacing between elements
+      gap: '1.5rem',
     },
     header: {
       textAlign: 'center',
@@ -297,18 +292,87 @@ const BarcodeSearch = () => {
     footerText: {
       margin: '0.25rem 0',
     },
+    popupOverlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 1000,
+    },
+    popupContent: {
+      backgroundColor: '#ffffff',
+      padding: '2rem',
+      borderRadius: '0.5rem',
+      textAlign: 'center',
+      maxWidth: '24rem',
+      width: '90%',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+    },
+    popupTitle: {
+      fontSize: '1.25rem',
+      fontWeight: '600',
+      color: '#1f2937',
+      marginBottom: '1rem',
+    },
+    popupText: {
+      fontSize: '1rem',
+      color: '#374151',
+      marginBottom: '1.5rem',
+    },
+    popupButton: {
+      backgroundColor: '#3b82f6',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.5rem',
+      padding: '0.75rem 1.5rem',
+      fontSize: '1rem',
+      cursor: 'pointer',
+      transition: 'background-color 0.2s',
+    },
+    popupCloseButton: {
+      background: 'none',
+      border: 'none',
+      color: '#9ca3af',
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      marginTop: '1rem',
+    },
   };
 
   return (
     <div style={styles.container}>
+      {showFeedbackPopup && (
+        <div style={styles.popupOverlay}>
+          <div style={styles.popupContent}>
+            <h3 style={styles.popupTitle}>مرحبا بك فالنسخة الثانيةV2.0</h3>
+            <p style={styles.popupText}>
+              الا كان ممكنك تعطي ملاحظات على التطبيق، غادي نكونو ممتنين بزاف.
+            </p>
+            <button
+              style={styles.popupButton}
+              onClick={() => window.open('https://forms.gle/1AyuNVHN5iuwwbqR6', '_blank')}
+            >
+              اظغط هنا
+            </button>
+            <button
+              style={styles.popupCloseButton}
+              onClick={() => setShowFeedbackPopup(false)}
+            >
+              إغلاق
+            </button>
+          </div>
+        </div>
+      )}
       <div style={styles.appContainer}>
-        {/* Header */}
         <div style={styles.header}>
           <h1 style={styles.title}>EAN Barcode Finder</h1>
           <p style={styles.subtitle}>Search for products and generate EAN barcodes instantly</p>
         </div>
-
-        {/* Search Input */}
         <div style={styles.searchContainer}>
           <div style={styles.inputWrapper}>
             <input
@@ -332,50 +396,31 @@ const BarcodeSearch = () => {
               </button>
             )}
           </div>
-
-          <button
-            onClick={handleSearch}
-            style={styles.searchButton}
-          >
+          <button onClick={handleSearch} style={styles.searchButton}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
               <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
             </svg>
             SEARCH
           </button>
         </div>
-
-        {/* Results Container */}
         <div style={styles.resultsContainer}>
           <div style={styles.resultsHeader}>
             <h2 style={styles.resultsTitle}>Search Results</h2>
           </div>
-          
           <div style={styles.resultsContent}>
             {error ? (
               <p style={styles.errorMessage}>{error}</p>
             ) : result ? (
               result.easterEgg ? (
-                <img
-                  src={easterEggGif}
-                  alt="Easter egg animation"
-                  style={styles.easterEgg}
-                />
+                <img src={easterEggGif} alt="Easter egg animation" style={styles.easterEgg} />
               ) : (
                 <div style={styles.productResult}>
-                  <p style={styles.productName}>
-                    {result["libellé eCommerce"]}
-                  </p>
-                  
+                  <p style={styles.productName}>{result["libellé eCommerce"]}</p>
                   <div style={styles.barcodeContainer}>
                     <svg id="barcode"></svg>
-                    {barcodeError && (
-                      <p style={styles.barcodeError}>Unable to generate barcode</p>
-                    )}
+                    {barcodeError && <p style={styles.barcodeError}>Unable to generate barcode</p>}
                   </div>
-                  
-                  {!barcodeError && (
-                    <p style={styles.eanDisplay}>EAN: {result.EAN}</p>
-                  )}
+                  {!barcodeError && <p style={styles.eanDisplay}>EAN: {result.EAN}</p>}
                 </div>
               )
             ) : (
@@ -389,12 +434,10 @@ const BarcodeSearch = () => {
             )}
           </div>
         </div>
-
-        {/* Footer */}
         <div style={styles.footer}>
           <p style={styles.footerText}>Made by: Wyatt</p>
           <p style={styles.footerText}>Powered by: Team AINSBAA</p>
-          <p style={styles.footerText}>2.0</p>
+          <p style={styles.footerText}>Version: V2.0</p>
         </div>
       </div>
     </div>
