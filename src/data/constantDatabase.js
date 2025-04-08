@@ -103,8 +103,8 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Saucisse poulet fines herbes 250g",
+            "EAN": "2666614002656",
             "isConstant": true
           },
           {
