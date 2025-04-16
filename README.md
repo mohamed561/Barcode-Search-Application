@@ -148,18 +148,6 @@ The BSA Barcode Search APP is licensed under the **MIT License**. This license a
 
 This is a search application designed to query EAN codes from user-provided or sample databases. Users are responsible for testing the application with their own data to ensure accuracy and functionality.
 
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -m 'Add feature'`).
-4. Push to the branch (`git push origin feature-name`).
-5. Open a pull request.
-
-For detailed guidelines, see the `CONTRIBUTING.md` file (to be added). Contributions must comply with the MIT License.
-
 ## Credits
 
 - **Developed by**: Mohamed Troufi
