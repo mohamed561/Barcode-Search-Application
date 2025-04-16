@@ -25,7 +25,7 @@ The BSA Barcode Search APP is a React-based web application that allows users to
 1. **Clone the Repository**:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/mohamed561/Barcode-Search-Application.git
    cd bsa-barcode-search
    ```
 
