@@ -10,7 +10,8 @@ const BarcodeSearch = () => {
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
   const [isEasterEgg, setIsEasterEgg] = useState(false);
-  const [showFeedbackPopup, setShowFeedbackPopup] = useState(false);
+  // Commented popup state - uncomment when needed
+  /* const [showFeedbackPopup, setShowFeedbackPopup] = useState(false); */
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -54,6 +55,8 @@ const BarcodeSearch = () => {
     }
   }, [result]);
 
+  // Commented popup effect - uncomment when needed
+  /* 
   useEffect(() => {
     const hasReviewed = localStorage.getItem('hasReviewed');
     const lastShown = localStorage.getItem('feedbackPopupLastShown');
@@ -68,7 +71,10 @@ const BarcodeSearch = () => {
       setShowFeedbackPopup(true);
     }
   }, []);
+  */
 
+  // Commented popup handlers - uncomment when needed
+  /*
   const handleReviewClick = () => {
     const startTime = new Date().getTime();
     localStorage.setItem('feedbackPopupLastShown', startTime.toString());
@@ -92,6 +98,7 @@ const BarcodeSearch = () => {
     localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
     setShowFeedbackPopup(false);
   };
+  */
 
   const searchInDatabase = (searchTerm, db) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
@@ -321,82 +328,86 @@ const BarcodeSearch = () => {
     footer: {
       textAlign: 'center',
       paddingTop: '2rem',
-      color: 'rgba(156, 163, 175, 0.8)', // Slightly transparent for subtlety
+      color: 'rgba(156, 163, 175, 0.8)',
       fontSize: '0.875rem',
     },
     footerText: {
       margin: '0.25rem 0',
     },
+    // Commented popup styles - uncomment when needed
+    /*
     popupOverlay: {
       position: 'fixed',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.6)', // Slightly lighter for less intensity
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 1000,
-      animation: 'fadeIn 0.2s ease-in-out', // Faster fade-in
+      animation: 'fadeIn 0.2s ease-in-out',
     },
     popupContent: {
       background: 'linear-gradient(135deg, #ffffff, #f1f5f9)',
-      padding: '1.25rem', // Reduced padding
-      borderRadius: '0.75rem', // Smaller radius
+      padding: '1.25rem',
+      borderRadius: '0.75rem',
       textAlign: 'center',
-      maxWidth: '20rem', // Smaller max width
-      width: '85%', // Slightly less wide
-      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)', // Lighter shadow
+      maxWidth: '20rem',
+      width: '85%',
+      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
       position: 'relative',
       overflow: 'hidden',
     },
     popupTitle: {
-      fontSize: '1.25rem', // Smaller title
+      fontSize: '1.25rem',
       fontWeight: '700',
       color: '#1e40af',
-      marginBottom: '0.75rem', // Reduced margin
+      marginBottom: '0.75rem',
       textTransform: 'uppercase',
-      letterSpacing: '0.03em', // Slightly less spacing
+      letterSpacing: '0.03em',
     },
     popupText: {
-      fontSize: '0.9rem', // Smaller text
+      fontSize: '0.9rem',
       color: '#4b5563',
-      marginBottom: '1rem', // Reduced margin
-      lineHeight: '1.4', // Slightly tighter
+      marginBottom: '1rem',
+      lineHeight: '1.4',
     },
     popupButton: {
       backgroundColor: '#1e40af',
       color: 'white',
       border: 'none',
-      borderRadius: '0.5rem', // Smaller radius
-      padding: '0.6rem 1.5rem', // Reduced padding
-      fontSize: '0.95rem', // Smaller font
+      borderRadius: '0.5rem',
+      padding: '0.6rem 1.5rem',
+      fontSize: '0.95rem',
       fontWeight: '600',
       cursor: 'pointer',
       transition: 'transform 0.2s, background-color 0.2s',
-      boxShadow: '0 3px 10px rgba(30, 64, 175, 0.25)', // Smaller shadow
+      boxShadow: '0 3px 10px rgba(30, 64, 175, 0.25)',
     },
     popupButtonHover: {
       backgroundColor: '#1e3a8a',
-      transform: 'scale(1.03)', // Slightly smaller scale
+      transform: 'scale(1.03)',
     },
     popupCloseButton: {
       position: 'absolute',
-      top: '0.5rem', // Closer to edge
+      top: '0.5rem',
       right: '0.5rem',
       background: 'none',
       border: 'none',
       color: '#6b7280',
-      fontSize: '1rem', // Smaller "✕"
+      fontSize: '1rem',
       cursor: 'pointer',
-      padding: '0.2rem', // Reduced padding
+      padding: '0.2rem',
       transition: 'color 0.2s',
     },
+    */
   };
 
   return (
     <div style={styles.container}>
+      {/* Commented popup JSX - uncomment when needed
       {showFeedbackPopup && (
         <div style={styles.popupOverlay}>
           <div style={styles.popupContent}>
@@ -423,6 +434,7 @@ const BarcodeSearch = () => {
           </div>
         </div>
       )}
+      */}
       <div style={styles.appContainer}>
         <div style={styles.header}>
           <h1 style={styles.title}>EAN Barcode Finder</h1>
