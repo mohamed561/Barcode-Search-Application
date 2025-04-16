@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import JsBarcode from 'jsbarcode';
 import { database } from '../data/database';
 import { constantDatabase } from '../data/constantDatabase';
@@ -7,11 +7,17 @@ import easterEggGif from '../assets/easter-egg.gif';
 const BarcodeSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [result, setResult] = useState(null);
+  const [allResults, setAllResults] = useState([]);
+  const [currentResultIndex, setCurrentResultIndex] = useState(0);
   const [error, setError] = useState('');
   const [barcodeError, setBarcodeError] = useState(false);
   const [isEasterEgg, setIsEasterEgg] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   // Commented popup state - uncomment when needed
   /* const [showFeedbackPopup, setShowFeedbackPopup] = useState(false); */
+
+  const resultContainerRef = useRef(null);
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -24,6 +30,12 @@ const BarcodeSearch = () => {
   const normalizeString = (str) => {
     return str.toLowerCase().replace(/[^a-z0-9]/g, '');
   };
+
+  useEffect(() => {
+    if (allResults.length > 0) {
+      setResult(allResults[currentResultIndex]);
+    }
+  }, [currentResultIndex, allResults]);
 
   useEffect(() => {
     if (result && result.EAN) {
@@ -100,47 +112,68 @@ const BarcodeSearch = () => {
   };
   */
 
-  const searchInDatabase = (searchTerm, db) => {
+  const findAllMatchingItems = (searchTerm) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
-    for (const item of db) {
+    const allMatches = [];
+
+    // Search in constant database
+    constantDatabase.forEach(item => {
       if (item["Articles Ecommerce"]) {
-        const foundItem = item["Articles Ecommerce"].find(article => {
+        item["Articles Ecommerce"].forEach(article => {
           const normalizedLibelle = normalizeString(article["libellé eCommerce"]);
-          return normalizedLibelle.includes(normalizedSearchTerm);
+          if (normalizedLibelle.includes(normalizedSearchTerm)) {
+            allMatches.push({...article, isConstant: true});
+          }
         });
-        if (foundItem) return foundItem;
       }
-    }
-    return null;
+    });
+
+    // Search in regular database
+    database.forEach(item => {
+      if (item["Articles Ecommerce"]) {
+        item["Articles Ecommerce"].forEach(article => {
+          const normalizedLibelle = normalizeString(article["libellé eCommerce"]);
+          if (normalizedLibelle.includes(normalizedSearchTerm)) {
+            allMatches.push({...article, isConstant: false});
+          }
+        });
+      }
+    });
+
+    return allMatches;
   };
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
       setError('Please enter a product name');
       setResult(null);
+      setAllResults([]);
       setIsEasterEgg(false);
       return;
     }
+    
     if (searchTerm.trim() === '4=4') {
       setResult({ easterEgg: true });
+      setAllResults([{ easterEgg: true }]);
+      setCurrentResultIndex(0);
       setError('');
       setBarcodeError(false);
       setIsEasterEgg(true);
       return;
     }
+    
     setIsEasterEgg(false);
-    let foundItem = searchInDatabase(searchTerm, constantDatabase);
-    let isFromConstant = true;
-    if (!foundItem) {
-      foundItem = searchInDatabase(searchTerm, database);
-      isFromConstant = false;
-    }
-    if (foundItem) {
-      setResult({ ...foundItem, isConstant: isFromConstant });
+    const matchingItems = findAllMatchingItems(searchTerm);
+    
+    if (matchingItems.length > 0) {
+      setAllResults(matchingItems);
+      setCurrentResultIndex(0);
+      setResult(matchingItems[0]);
       setError('');
       setBarcodeError(false);
     } else {
       setResult(null);
+      setAllResults([]);
       setError('Product not found');
     }
   };
@@ -153,8 +186,50 @@ const BarcodeSearch = () => {
     setSearchTerm('');
     setError('');
     setResult(null);
+    setAllResults([]);
+    setCurrentResultIndex(0);
     setIsEasterEgg(false);
     document.getElementById('search-input').focus();
+  };
+
+  // Swipe handling
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe && currentResultIndex < allResults.length - 1) {
+      // Swipe left to see next result
+      setCurrentResultIndex(currentResultIndex + 1);
+    } else if (isRightSwipe && currentResultIndex > 0) {
+      // Swipe right to see previous result
+      setCurrentResultIndex(currentResultIndex - 1);
+    }
+  };
+
+  const nextResult = () => {
+    if (currentResultIndex < allResults.length - 1) {
+      setCurrentResultIndex(currentResultIndex + 1);
+    }
+  };
+
+  const prevResult = () => {
+    if (currentResultIndex > 0) {
+      setCurrentResultIndex(currentResultIndex - 1);
+    }
   };
 
   const styles = {
@@ -295,6 +370,7 @@ const BarcodeSearch = () => {
       alignItems: 'center',
       gap: '1rem',
       width: '100%',
+      position: 'relative',
     },
     productName: {
       fontSize: '1.125rem',
@@ -310,6 +386,7 @@ const BarcodeSearch = () => {
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
+      position: 'relative',
     },
     barcodeError: {
       color: '#ef4444',
@@ -333,6 +410,62 @@ const BarcodeSearch = () => {
     },
     footerText: {
       margin: '0.25rem 0',
+    },
+    multipleResultsWarning: {
+      color: '#ef4444',
+      fontSize: '0.875rem',
+      fontWeight: '500',
+      marginTop: '0.5rem',
+      textAlign: 'center',
+      animation: 'pulse 2s infinite',
+    },
+    resultsNavigation: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '100%',
+      marginTop: '1rem',
+    },
+    navButton: {
+      backgroundColor: '#3b82f6',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.375rem',
+      padding: '0.5rem 1rem',
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem',
+      transition: 'background-color 0.2s',
+      opacity: '0.9',
+    },
+    navDisabled: {
+      backgroundColor: '#9ca3af',
+      cursor: 'default',
+      opacity: '0.5',
+    },
+    navButtonsContainer: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '100%',
+      marginTop: '0.5rem',
+    },
+    resultCounter: {
+      fontSize: '0.875rem',
+      color: '#4b5563',
+      marginTop: '0.5rem',
+    },
+    swipeHintContainer: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '0.5rem',
+    },
+    swipeHint: {
+      color: '#ef4444',
+      fontSize: '0.75rem',
+      textAlign: 'center',
+      marginTop: '0.5rem',
     },
     // Commented popup styles - uncomment when needed
     /*
@@ -481,13 +614,61 @@ const BarcodeSearch = () => {
               result.easterEgg ? (
                 <img src={easterEggGif} alt="Easter egg animation" style={styles.easterEgg} />
               ) : (
-                <div style={styles.productResult}>
+                <div 
+                  ref={resultContainerRef}
+                  style={styles.productResult}
+                  onTouchStart={onTouchStart}
+                  onTouchMove={onTouchMove}
+                  onTouchEnd={onTouchEnd}
+                >
                   <p style={styles.productName}>{result["libellé eCommerce"]}</p>
                   <div style={styles.barcodeContainer}>
                     <svg id="barcode"></svg>
                     {barcodeError && <p style={styles.barcodeError}>Unable to generate barcode</p>}
                   </div>
                   {!barcodeError && <p style={styles.eanDisplay}>EAN: {result.EAN}</p>}
+                  
+                  {allResults.length > 1 && (
+                    <>
+                      <div style={styles.swipeHintContainer}>
+                        <p style={styles.swipeHint}>
+                          This item has {allResults.length} different EAN codes. 
+                          Swipe left/right to explore.
+                        </p>
+                      </div>
+                      <p style={styles.resultCounter}>
+                        {currentResultIndex + 1} of {allResults.length}
+                      </p>
+                      <div style={styles.navButtonsContainer}>
+                        <button
+                          onClick={prevResult}
+                          style={{
+                            ...styles.navButton,
+                            ...(currentResultIndex === 0 ? styles.navDisabled : {})
+                          }}
+                          disabled={currentResultIndex === 0}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          Previous
+                        </button>
+                        <button
+                          onClick={nextResult}
+                          style={{
+                            ...styles.navButton,
+                            ...(currentResultIndex === allResults.length - 1 ? styles.navDisabled : {})
+                          }}
+                          disabled={currentResultIndex === allResults.length - 1}
+                        >
+                          Next
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               )
             ) : (
