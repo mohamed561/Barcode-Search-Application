@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import JsBarcode from 'jsbarcode';
 import { database } from '../data/database';
 import { constantDatabase } from '../data/constantDatabase';
-import easterEggGif from '../assets/easterEgg.gif';
+import easterEggGif from '../assets/easter-egg.gif';
 
 const BarcodeSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
