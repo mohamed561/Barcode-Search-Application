@@ -683,10 +683,16 @@ const BarcodeSearch = () => {
           </div>
         </div>
         <div style={styles.footer}>
-          <p style={styles.footerText}>Made by: Wyatt</p>
-          <p style={styles.footerText}>Powered by: Team AINSBAA</p>
-          <p style={styles.footerText}>V2.0</p>
-        </div>
+  <p style={styles.footerText}>
+    Made by <strong>Wyatt</strong> &nbsp;|&nbsp; Powered by <strong>Team AINSBAA</strong>
+  </p>
+  <p style={styles.footerText}>
+    DB Updated: <strong>2025/04/17</strong>
+  </p>
+  <p style={styles.footerText}>
+    App Version: <strong>2.0</strong>
+  </p>
+</div>
       </div>
     </div>
   );
