@@ -687,7 +687,7 @@ const BarcodeSearch = () => {
     Made by <strong>Wyatt</strong> &nbsp;|&nbsp; Powered by <strong>Team AINSBAA</strong>
   </p>
   <p style={styles.footerText}>
-    DB Updated: <strong>2025/04/17</strong>
+    DB Updated: <strong>2025/04/24</strong>
   </p>
   <p style={styles.footerText}>
     App Version: <strong>2.0</strong>

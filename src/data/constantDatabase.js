@@ -112,6 +112,11 @@ export const constantDatabase = [
             "EAN": "2619300005004",
             "isConstant": true
           },
+          {
+            "libellé eCommerce": "Variantes au vinaigre 200g",
+            "EAN": "2624959002007",
+            "isConstant": true
+          },
         
       ]
     }
