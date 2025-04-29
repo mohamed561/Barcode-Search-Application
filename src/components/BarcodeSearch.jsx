@@ -14,10 +14,9 @@ const BarcodeSearch = () => {
   const [isEasterEgg, setIsEasterEgg] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-  // Commented popup state - uncomment when needed
-  /* const [showFeedbackPopup, setShowFeedbackPopup] = useState(false); */
 
   const resultContainerRef = useRef(null);
+  const barcodeRef = useRef(null);
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -67,56 +66,35 @@ const BarcodeSearch = () => {
     }
   }, [result]);
 
-  // Commented popup effect - uncomment when needed
-  /* 
-  useEffect(() => {
-    const hasReviewed = localStorage.getItem('hasReviewed');
-    const lastShown = localStorage.getItem('feedbackPopupLastShown');
-    const now = new Date().getTime();
-    const tenHours = 10 * 60 * 60 * 1000;
+  const downloadBarcode = (format = 'png') => {
+    const svg = document.getElementById('barcode');
+    if (!svg) return;
 
-    if (!hasReviewed) {
-      setShowFeedbackPopup(true);
-    } else if (lastShown && now - parseInt(lastShown) < tenHours) {
-      setShowFeedbackPopup(false);
-    } else {
-      setShowFeedbackPopup(true);
-    }
-  }, []);
-  */
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const img = new Image();
 
-  // Commented popup handlers - uncomment when needed
-  /*
-  const handleReviewClick = () => {
-    const startTime = new Date().getTime();
-    localStorage.setItem('feedbackPopupLastShown', startTime.toString());
-    const reviewWindow = window.open('https://forms.gle/oKGgzeRU4zfkraQN9', '_blank');
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
 
-    const checkTimeSpent = setInterval(() => {
-      if (reviewWindow.closed) {
-        const endTime = new Date().getTime();
-        const timeSpent = (endTime - startTime) / 1000;
-        if (timeSpent >= 30) {
-          localStorage.setItem('hasReviewed', 'true');
-        }
-        clearInterval(checkTimeSpent);
-      }
-    }, 1000);
+      const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
+      const extension = format === 'jpg' ? 'jpg' : 'png';
+      const link = document.createElement('a');
+      link.download = `barcode_${result.EAN}.${extension}`;
+      link.href = canvas.toDataURL(mimeType, format === 'jpg' ? 0.9 : 1.0);
+      link.click();
+    };
 
-    setShowFeedbackPopup(false);
+    img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
   };
-
-  const handleCloseClick = () => {
-    localStorage.setItem('feedbackPopupLastShown', new Date().getTime().toString());
-    setShowFeedbackPopup(false);
-  };
-  */
 
   const findAllMatchingItems = (searchTerm) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
     const allMatches = [];
 
-    // Search in constant database
     constantDatabase.forEach(item => {
       if (item["Articles Ecommerce"]) {
         item["Articles Ecommerce"].forEach(article => {
@@ -128,7 +106,6 @@ const BarcodeSearch = () => {
       }
     });
 
-    // Search in regular database
     database.forEach(item => {
       if (item["Articles Ecommerce"]) {
         item["Articles Ecommerce"].forEach(article => {
@@ -192,7 +169,6 @@ const BarcodeSearch = () => {
     document.getElementById('search-input').focus();
   };
 
-  // Swipe handling
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
@@ -212,10 +188,8 @@ const BarcodeSearch = () => {
     const isRightSwipe = distance < -minSwipeDistance;
     
     if (isLeftSwipe && currentResultIndex < allResults.length - 1) {
-      // Swipe left to see next result
       setCurrentResultIndex(currentResultIndex + 1);
     } else if (isRightSwipe && currentResultIndex > 0) {
-      // Swipe right to see previous result
       setCurrentResultIndex(currentResultIndex - 1);
     }
   };
@@ -385,7 +359,9 @@ const BarcodeSearch = () => {
       borderRadius: '0.375rem',
       width: '100%',
       display: 'flex',
-      justifyContent: 'center',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '0.5rem',
       position: 'relative',
     },
     barcodeError: {
@@ -397,6 +373,19 @@ const BarcodeSearch = () => {
       fontSize: '1.125rem',
       fontWeight: '700',
       color: '#1f2937',
+    },
+    downloadButton: {
+      backgroundColor: '#10b981',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.375rem',
+      padding: '0.5rem 1rem',
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem',
+      transition: 'background-color 0.2s',
     },
     easterEgg: {
       width: '12rem',
@@ -467,107 +456,10 @@ const BarcodeSearch = () => {
       textAlign: 'center',
       marginTop: '0.5rem',
     },
-    // Commented popup styles - uncomment when needed
-    /*
-    popupOverlay: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.6)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      zIndex: 1000,
-      animation: 'fadeIn 0.2s ease-in-out',
-    },
-    popupContent: {
-      background: 'linear-gradient(135deg, #ffffff, #f1f5f9)',
-      padding: '1.25rem',
-      borderRadius: '0.75rem',
-      textAlign: 'center',
-      maxWidth: '20rem',
-      width: '85%',
-      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
-      position: 'relative',
-      overflow: 'hidden',
-    },
-    popupTitle: {
-      fontSize: '1.25rem',
-      fontWeight: '700',
-      color: '#1e40af',
-      marginBottom: '0.75rem',
-      textTransform: 'uppercase',
-      letterSpacing: '0.03em',
-    },
-    popupText: {
-      fontSize: '0.9rem',
-      color: '#4b5563',
-      marginBottom: '1rem',
-      lineHeight: '1.4',
-    },
-    popupButton: {
-      backgroundColor: '#1e40af',
-      color: 'white',
-      border: 'none',
-      borderRadius: '0.5rem',
-      padding: '0.6rem 1.5rem',
-      fontSize: '0.95rem',
-      fontWeight: '600',
-      cursor: 'pointer',
-      transition: 'transform 0.2s, background-color 0.2s',
-      boxShadow: '0 3px 10px rgba(30, 64, 175, 0.25)',
-    },
-    popupButtonHover: {
-      backgroundColor: '#1e3a8a',
-      transform: 'scale(1.03)',
-    },
-    popupCloseButton: {
-      position: 'absolute',
-      top: '0.5rem',
-      right: '0.5rem',
-      background: 'none',
-      border: 'none',
-      color: '#6b7280',
-      fontSize: '1rem',
-      cursor: 'pointer',
-      padding: '0.2rem',
-      transition: 'color 0.2s',
-    },
-    */
   };
 
   return (
     <div style={styles.container}>
-      {/* Commented popup JSX - uncomment when needed
-      {showFeedbackPopup && (
-        <div style={styles.popupOverlay}>
-          <div style={styles.popupContent}>
-            <button
-              style={styles.popupCloseButton}
-              onClick={handleCloseClick}
-              onMouseEnter={(e) => (e.target.style.color = '#ef4444')}
-              onMouseLeave={(e) => (e.target.style.color = '#6b7280')}
-            >
-              ✕
-            </button>
-            <h3 style={styles.popupTitle}>!V2.0 مرحبا بك في</h3>
-            <p style={styles.popupText}>
-              !إذا كان ممكنك تعطينا ملاحظاتك على التطبيق، غادي نكونو ممتنين بزاف
-            </p>
-            <button
-              style={styles.popupButton}
-              onClick={handleReviewClick}
-              onMouseEnter={(e) => Object.assign(e.target.style, styles.popupButtonHover)}
-              onMouseLeave={(e) => Object.assign(e.target.style, styles.popupButton)}
-            >
-              اضغط هنا
-            </button>
-          </div>
-        </div>
-      )}
-      */}
       <div style={styles.appContainer}>
         <div style={styles.header}>
           <h1 style={styles.title}>EAN Barcode Finder</h1>
@@ -623,10 +515,20 @@ const BarcodeSearch = () => {
                 >
                   <p style={styles.productName}>{result["libellé eCommerce"]}</p>
                   <div style={styles.barcodeContainer}>
-                    <svg id="barcode"></svg>
+                    <svg id="barcode" ref={barcodeRef}></svg>
                     {barcodeError && <p style={styles.barcodeError}>Unable to generate barcode</p>}
+                    {!barcodeError && (
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button onClick={() => downloadBarcode('png')} style={styles.downloadButton}>
+                          Download PNG
+                        </button>
+                        <button onClick={() => downloadBarcode('jpg')} style={styles.downloadButton}>
+                          Download JPG
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  {!barcodeError && <p style={styles.eanDisplay}>EAN: {result.EAN}</p>}
+                  <p style={styles.eanDisplay}>EAN: {result.EAN}</p>
                   
                   {allResults.length > 1 && (
                     <>
@@ -683,16 +585,16 @@ const BarcodeSearch = () => {
           </div>
         </div>
         <div style={styles.footer}>
-  <p style={styles.footerText}>
-    Made by <strong>Wyatt</strong> &nbsp;|&nbsp; Powered by <strong>Team AINSBAA</strong>
-  </p>
-  <p style={styles.footerText}>
-    DB Updated: <strong>2025/04/24</strong>
-  </p>
-  <p style={styles.footerText}>
-    App Version: <strong>2.0</strong>
-  </p>
-</div>
+          <p style={styles.footerText}>
+            Made by <strong>Wyatt</strong>  |  Powered by <strong>Team AINSBAA</strong>
+          </p>
+          <p style={styles.footerText}>
+            DB Updated: <strong>2025/04/24</strong>
+          </p>
+          <p style={styles.footerText}>
+            App Version: <strong>2.0</strong>
+          </p>
+        </div>
       </div>
     </div>
   );
