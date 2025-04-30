@@ -76,13 +76,14 @@ const BarcodeSearch = () => {
     const img = new Image();
 
     img.onload = () => {
-      const padding = 20;
-      const lineHeight = 20;
-      const eanHeight = 30;
-      const maxWidth = img.width;
+      const resolutionScale = 2; // Increase resolution by a factor of 2
+      const padding = 40 * resolutionScale;
+      const lineHeight = 30 * resolutionScale;
+      const eanHeight = 40 * resolutionScale;
+      const maxWidth = img.width * resolutionScale;
 
       // Handle text wrapping for long titles
-      ctx.font = 'bold 16px Arial';
+      ctx.font = `bold ${24 * resolutionScale}px Arial`;
       const titleText = result["libellé eCommerce"];
       const words = titleText.split(' ');
       let lines = [];
@@ -101,28 +102,30 @@ const BarcodeSearch = () => {
       lines.push(currentLine);
 
       const textHeight = lines.length * lineHeight;
-      const totalHeight = textHeight + img.height + eanHeight + padding * 3;
+      const totalHeight = textHeight + (img.height * resolutionScale) + eanHeight + padding * 3;
 
-      canvas.width = img.width + padding * 2;
+      canvas.width = (img.width * resolutionScale) + padding * 2;
       canvas.height = totalHeight;
 
+      // Adjust for high resolution
+      ctx.scale(resolutionScale, resolutionScale);
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw the title (potentially multiple lines)
-      ctx.font = 'bold 16px Arial';
+      ctx.font = `bold ${24}px Arial`;
       ctx.fillStyle = '#000000';
       ctx.textAlign = 'center';
       lines.forEach((line, index) => {
-        ctx.fillText(line, canvas.width / 2, padding + (index + 1) * lineHeight);
+        ctx.fillText(line, canvas.width / (2 * resolutionScale), (padding / resolutionScale) + (index + 1) * (lineHeight / resolutionScale));
       });
 
       // Draw the barcode
-      ctx.drawImage(img, padding, textHeight + padding * 2);
+      ctx.drawImage(img, padding / resolutionScale, (textHeight + padding * 2) / resolutionScale, img.width, img.height);
 
       // Draw the EAN
-      ctx.font = 'bold 16px Arial';
-      ctx.fillText(`EAN: ${result.EAN}`, canvas.width / 2, totalHeight - eanHeight);
+      ctx.font = `bold ${24}px Arial`;
+      ctx.fillText(`EAN: ${result.EAN}`, canvas.width / (2 * resolutionScale), (totalHeight - eanHeight) / resolutionScale);
 
       const link = document.createElement('a');
       link.download = `barcode_${result.EAN}.png`;
@@ -631,7 +634,7 @@ const BarcodeSearch = () => {
   <p style={styles.footerText}>
     <strong>Version 2.1</strong>
   </p>
-</div>
+        </div>
       </div>
     </div>
   );
