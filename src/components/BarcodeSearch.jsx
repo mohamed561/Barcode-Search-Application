@@ -66,7 +66,7 @@ const BarcodeSearch = () => {
     }
   }, [result]);
 
-  const downloadBarcode = (format = 'png') => {
+  const downloadBarcode = () => {
     const svg = document.getElementById('barcode');
     if (!svg) return;
 
@@ -76,15 +76,57 @@ const BarcodeSearch = () => {
     const img = new Image();
 
     img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+      const padding = 20;
+      const lineHeight = 20;
+      const eanHeight = 30;
+      const maxWidth = img.width;
 
-      const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
-      const extension = format === 'jpg' ? 'jpg' : 'png';
+      // Handle text wrapping for long titles
+      ctx.font = 'bold 16px Arial';
+      const titleText = result["libellé eCommerce"];
+      const words = titleText.split(' ');
+      let lines = [];
+      let currentLine = words[0];
+
+      for (let i = 1; i < words.length; i++) {
+        const testLine = currentLine + ' ' + words[i];
+        const testWidth = ctx.measureText(testLine).width;
+        if (testWidth > maxWidth) {
+          lines.push(currentLine);
+          currentLine = words[i];
+        } else {
+          currentLine = testLine;
+        }
+      }
+      lines.push(currentLine);
+
+      const textHeight = lines.length * lineHeight;
+      const totalHeight = textHeight + img.height + eanHeight + padding * 3;
+
+      canvas.width = img.width + padding * 2;
+      canvas.height = totalHeight;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the title (potentially multiple lines)
+      ctx.font = 'bold 16px Arial';
+      ctx.fillStyle = '#000000';
+      ctx.textAlign = 'center';
+      lines.forEach((line, index) => {
+        ctx.fillText(line, canvas.width / 2, padding + (index + 1) * lineHeight);
+      });
+
+      // Draw the barcode
+      ctx.drawImage(img, padding, textHeight + padding * 2);
+
+      // Draw the EAN
+      ctx.font = 'bold 16px Arial';
+      ctx.fillText(`EAN: ${result.EAN}`, canvas.width / 2, totalHeight - eanHeight);
+
       const link = document.createElement('a');
-      link.download = `barcode_${result.EAN}.${extension}`;
-      link.href = canvas.toDataURL(mimeType, format === 'jpg' ? 0.9 : 1.0);
+      link.download = `barcode_${result.EAN}.png`;
+      link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
     };
 
@@ -386,6 +428,7 @@ const BarcodeSearch = () => {
       alignItems: 'center',
       gap: '0.25rem',
       transition: 'background-color 0.2s',
+      margin: '0 auto',
     },
     easterEgg: {
       width: '12rem',
@@ -517,19 +560,13 @@ const BarcodeSearch = () => {
                   <div style={styles.barcodeContainer}>
                     <svg id="barcode" ref={barcodeRef}></svg>
                     {barcodeError && <p style={styles.barcodeError}>Unable to generate barcode</p>}
-                    {!barcodeError && (
-                      <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        <button onClick={() => downloadBarcode('png')} style={styles.downloadButton}>
-                          Download PNG
-                        </button>
-                        <button onClick={() => downloadBarcode('jpg')} style={styles.downloadButton}>
-                          Download JPG
-                        </button>
-                      </div>
-                    )}
                   </div>
                   <p style={styles.eanDisplay}>EAN: {result.EAN}</p>
-                  
+                  {!barcodeError && (
+                    <button onClick={downloadBarcode} style={styles.downloadButton}>
+                      Download Barcode
+                    </button>
+                  )}
                   {allResults.length > 1 && (
                     <>
                       <div style={styles.swipeHintContainer}>
@@ -585,16 +622,16 @@ const BarcodeSearch = () => {
           </div>
         </div>
         <div style={styles.footer}>
-          <p style={styles.footerText}>
-            Made by <strong>Wyatt</strong>  |  Powered by <strong>Team AINSBAA</strong>
-          </p>
-          <p style={styles.footerText}>
-            DB Updated: <strong>2025/04/24</strong>
-          </p>
-          <p style={styles.footerText}>
-            App Version: <strong>2.0</strong>
-          </p>
-        </div>
+  <p style={styles.footerText}>
+    Built with <span style={{ color: "#e25555" }}>❤️</span> by <strong>Wyatt</strong> · <strong>Team AINSBAA</strong>
+  </p>
+  <p style={styles.footerText}>
+    DB Snapshot: <strong>2025-04-24</strong>
+  </p>
+  <p style={styles.footerText}>
+    <strong>Version 2.1</strong>
+  </p>
+</div>
       </div>
     </div>
   );
