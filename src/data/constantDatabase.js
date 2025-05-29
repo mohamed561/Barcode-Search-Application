@@ -122,7 +122,11 @@ export const constantDatabase = [
             "EAN": "2624100005253",
             "isConstant": true
           },
-        
+        {
+            "libellé eCommerce": "Pêche moyen calibre 500g",
+            "EAN": "2624100005253",
+            "isConstant": true
+          },
       ]
     }
   ];
