@@ -629,7 +629,7 @@ const BarcodeSearch = () => {
     Built with <span style={{ color: "#e25555" }}>❤️</span> by <strong>Wyatt</strong> · <strong>Team AINSBAA</strong>
   </p>
   <p style={styles.footerText}>
-    DB Snapshot: <strong>2025-05-13</strong>
+    DB Snapshot: <strong>2025-05-24</strong>
   </p>
   <p style={styles.footerText}>
     <strong>Version 2.1</strong>
