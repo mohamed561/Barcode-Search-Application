@@ -14,9 +14,24 @@ const BarcodeSearch = () => {
   const [isEasterEgg, setIsEasterEgg] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
+
+  // Online/Offline status listener
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   const formatEAN = (ean) => {
     if (!ean) return null;
@@ -76,13 +91,12 @@ const BarcodeSearch = () => {
     const img = new Image();
 
     img.onload = () => {
-      const resolutionScale = 2; // Increase resolution by a factor of 2
+      const resolutionScale = 2;
       const padding = 40 * resolutionScale;
       const lineHeight = 30 * resolutionScale;
       const eanHeight = 40 * resolutionScale;
       const maxWidth = img.width * resolutionScale;
 
-      // Handle text wrapping for long titles
       ctx.font = `bold ${24 * resolutionScale}px Arial`;
       const titleText = result["libellé eCommerce"];
       const words = titleText.split(' ');
@@ -107,12 +121,10 @@ const BarcodeSearch = () => {
       canvas.width = (img.width * resolutionScale) + padding * 2;
       canvas.height = totalHeight;
 
-      // Adjust for high resolution
       ctx.scale(resolutionScale, resolutionScale);
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw the title (potentially multiple lines)
       ctx.font = `bold ${24}px Arial`;
       ctx.fillStyle = '#000000';
       ctx.textAlign = 'center';
@@ -120,10 +132,8 @@ const BarcodeSearch = () => {
         ctx.fillText(line, canvas.width / (2 * resolutionScale), (padding / resolutionScale) + (index + 1) * (lineHeight / resolutionScale));
       });
 
-      // Draw the barcode
       ctx.drawImage(img, padding / resolutionScale, (textHeight + padding * 2) / resolutionScale, img.width, img.height);
 
-      // Draw the EAN
       ctx.font = `bold ${24}px Arial`;
       ctx.fillText(`EAN: ${result.EAN}`, canvas.width / (2 * resolutionScale), (totalHeight - eanHeight) / resolutionScale);
 
@@ -272,6 +282,24 @@ const BarcodeSearch = () => {
     },
     header: {
       textAlign: 'center',
+      position: 'relative',
+      width: '100%',
+    },
+    onlineIndicator: {
+      position: 'absolute',
+      top: '-0.5rem',
+      right: '0',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem',
+      fontSize: '0.75rem',
+      fontWeight: '500',
+      color: isOnline ? '#10b981' : '#ef4444',
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      padding: '0.25rem 0.75rem',
+      borderRadius: '1rem',
+      backdropFilter: 'blur(10px)',
+      border: `1px solid ${isOnline ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
     },
     title: {
       fontSize: '1.875rem',
@@ -506,11 +534,27 @@ const BarcodeSearch = () => {
 
   return (
     <div style={styles.container}>
+      <style>
+        {`
+          @keyframes pulse {
+            0%, 100% {
+              opacity: 1;
+            }
+            50% {
+              opacity: 0.5;
+            }
+          }
+        `}
+      </style>
       <div style={styles.appContainer}>
         <div style={styles.header}>
+          <div style={styles.onlineIndicator}>
+            <span>Status: {isOnline ? 'Connected' : 'Offline'}</span>
+          </div>
           <h1 style={styles.title}>EAN Barcode Finder</h1>
           <p style={styles.subtitle}>Search for products and generate EAN barcodes instantly</p>
         </div>
+        
         <div style={styles.searchContainer}>
           <div style={styles.inputWrapper}>
             <input
@@ -541,6 +585,7 @@ const BarcodeSearch = () => {
             SEARCH
           </button>
         </div>
+        
         <div style={styles.resultsContainer}>
           <div style={styles.resultsHeader}>
             <h2 style={styles.resultsTitle}>Search Results</h2>
@@ -624,16 +669,17 @@ const BarcodeSearch = () => {
             )}
           </div>
         </div>
+        
         <div style={styles.footer}>
-  <p style={styles.footerText}>
-    Built with <span style={{ color: "#e25555" }}>❤️</span> by <strong>Wyatt</strong> · <strong>Team AINSBAA</strong>
-  </p>
-  <p style={styles.footerText}>
-    DB Snapshot: <strong>2025-06-05</strong>
-  </p>
-  <p style={styles.footerText}>
-    <strong>Version 2.1</strong>
-  </p>
+          <p style={styles.footerText}>
+            Built with <span style={{ color: "#e25555" }}>❤️</span> by <strong>Wyatt</strong> · <strong>Team AINSBAA</strong>
+          </p>
+          <p style={styles.footerText}>
+            DB Snapshot: <strong>2025-06-05</strong>
+          </p>
+          <p style={styles.footerText}>
+            <strong>Version 2.1</strong>
+          </p>
         </div>
       </div>
     </div>
