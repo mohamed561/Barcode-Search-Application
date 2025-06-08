@@ -127,6 +127,11 @@ export const constantDatabase = [
             "EAN": "2624100005253",
             "isConstant": true
           },
+          {
+            "libellé eCommerce": "Laitue lolo rouge, la pièce - FILIERE M",
+            "EAN": "2669003000010",
+            "isConstant": true
+          },
       ]
     }
   ];
