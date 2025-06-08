@@ -291,7 +291,7 @@ const BarcodeSearch = () => {
       right: '0',
       display: 'flex',
       alignItems: 'center',
-      gap: '0.25rem',
+      gap: '0.5rem',
       fontSize: '0.75rem',
       fontWeight: '500',
       color: isOnline ? '#10b981' : '#ef4444',
@@ -300,6 +300,14 @@ const BarcodeSearch = () => {
       borderRadius: '1rem',
       backdropFilter: 'blur(10px)',
       border: `1px solid ${isOnline ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+    },
+    statusDot: {
+      width: '0.5rem',
+      height: '0.5rem',
+      borderRadius: '50%',
+      backgroundColor: isOnline ? '#10b981' : '#ef4444',
+      boxShadow: `0 0 0.5rem ${isOnline ? '#10b981' : '#ef4444'}`,
+      animation: isOnline ? 'pulse 2s infinite' : 'none',
     },
     title: {
       fontSize: '1.875rem',
@@ -549,7 +557,8 @@ const BarcodeSearch = () => {
       <div style={styles.appContainer}>
         <div style={styles.header}>
           <div style={styles.onlineIndicator}>
-            <span>Status: {isOnline ? 'Connected' : 'Offline'}</span>
+            <div style={styles.statusDot}></div>
+            <span>{isOnline ? 'Connected' : 'Offline'}</span>
           </div>
           <h1 style={styles.title}>EAN Barcode Finder</h1>
           <p style={styles.subtitle}>Search for products and generate EAN barcodes instantly</p>
@@ -678,7 +687,7 @@ const BarcodeSearch = () => {
             DB Snapshot: <strong>2025-06-05</strong>
           </p>
           <p style={styles.footerText}>
-            <strong>Version 2.1</strong>
+            <strong>Version 3.0</strong>
           </p>
         </div>
       </div>
