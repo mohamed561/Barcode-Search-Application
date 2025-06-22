@@ -53,7 +53,7 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "Faux filet de bœuf 250g - FILIÈRE M",
+            "libellé eCommerce": "Faux filet de bœuf 250g - FILIERE M",
             "EAN": "2608806002556",
             "isConstant": true
           },
