@@ -132,6 +132,51 @@ export const constantDatabase = [
             "EAN": "2669003000010",
             "isConstant": true
           },
+          {
+            "libellé eCommerce": "Laitue verte, la pièce - FILIERE M",
+            "EAN": "2687432000010",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "Laitue feuille de chêne verte, la pièce - FILIERE M",
+            "EAN": "2687715000010",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "Laitue feuille de chêne rouge à la pièce - FILIERE M",
+            "EAN": "2611557000010",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "Laitue lolo verte pièce - FILIERE M",
+            "EAN": "2669002000010",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "Poulet x2 environ 1,25Kg - FILIERE",
+            "EAN": "2698236025000",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "Poulet x1 environ 1,25Kg - FILIERE",
+            "EAN": "2698128012500",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "#",
+            "EAN": "#",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "#",
+            "EAN": "#",
+            "isConstant": true
+          },
+          {
+            "libellé eCommerce": "#",
+            "EAN": "#",
+            "isConstant": true
+          },
       ]
     }
   ];
