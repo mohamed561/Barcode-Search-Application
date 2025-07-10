@@ -217191,8 +217191,8 @@ export const database = [
       "libellé eCommerce": ""
     },
     {
-      "EAN": "2000014095908",
-      "libellé eCommerce": ""
+      "EAN": "6111272001207",
+      "libellé eCommerce": "Éponges abrasives ecolife Pack de 3 - ATLAS"
     },
     {
       "EAN": "2000014095915",
