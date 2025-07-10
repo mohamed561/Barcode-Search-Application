@@ -163,8 +163,8 @@ export const constantDatabase = [
             "isConstant": true
           },
           {
-            "libellé eCommerce": "#",
-            "EAN": "#",
+            "libellé eCommerce": "Beefsteak de bœuf 500g - FILIÈRE M",
+            "EAN": "2600488005009",
             "isConstant": true
           },
           {
