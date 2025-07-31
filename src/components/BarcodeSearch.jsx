@@ -21,29 +21,40 @@ const BarcodeSearch = () => {
 
   // Initialize Auto Ads after component mounts
   useEffect(() => {
+    let retryCount = 0;
+    const maxRetries = 3;
+
     const initializeAutoAds = () => {
       try {
-        // Check if AdSense script is loaded
-        if (window.adsbygoogle) {
+        // Check if AdSense script is loaded (not blocked by ad blocker)
+        if (window.adsbygoogle && window.adsbygoogle.push) {
           // Initialize Auto Ads
           window.adsbygoogle = window.adsbygoogle || [];
           window.adsbygoogle.push({
             google_ad_client: "ca-pub-5558307543618104",
             enable_page_level_ads: true
           });
-          console.log('Auto Ads initialized successfully');
+          console.log('✅ Auto Ads initialized successfully');
+          return true;
+        } else if (retryCount < maxRetries) {
+          // Script might still be loading
+          retryCount++;
+          console.log(`⏳ AdSense script loading... (attempt ${retryCount}/${maxRetries})`);
+          setTimeout(initializeAutoAds, 2000);
+          return false;
         } else {
-          // Retry after a short delay if script isn't loaded yet
-          setTimeout(initializeAutoAds, 1000);
+          console.log('ℹ️ AdSense script not available - this is normal during approval process');
+          console.log('📝 Next steps: Wait for Google AdSense approval (1-14 days)');
+          return false;
         }
       } catch (error) {
-        console.log('Auto Ads initialization delayed, will retry...');
-        setTimeout(initializeAutoAds, 2000);
+        console.log('ℹ️ Ads not ready yet - app continues normally');
+        return false;
       }
     };
 
-    // Initialize after a short delay to ensure DOM is ready
-    setTimeout(initializeAutoAds, 500);
+    // Start initialization after DOM is ready
+    setTimeout(initializeAutoAds, 1000);
   }, []);
 
   // Notify AdSense about page content changes for better ad targeting
