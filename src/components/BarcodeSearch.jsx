@@ -19,6 +19,48 @@ const BarcodeSearch = () => {
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
 
+  // Initialize Auto Ads after component mounts
+  useEffect(() => {
+    const initializeAutoAds = () => {
+      try {
+        // Check if AdSense script is loaded
+        if (window.adsbygoogle) {
+          // Initialize Auto Ads
+          window.adsbygoogle = window.adsbygoogle || [];
+          window.adsbygoogle.push({
+            google_ad_client: "ca-pub-5558307543618104",
+            enable_page_level_ads: true
+          });
+          console.log('Auto Ads initialized successfully');
+        } else {
+          // Retry after a short delay if script isn't loaded yet
+          setTimeout(initializeAutoAds, 1000);
+        }
+      } catch (error) {
+        console.log('Auto Ads initialization delayed, will retry...');
+        setTimeout(initializeAutoAds, 2000);
+      }
+    };
+
+    // Initialize after a short delay to ensure DOM is ready
+    setTimeout(initializeAutoAds, 500);
+  }, []);
+
+  // Notify AdSense about page content changes for better ad targeting
+  useEffect(() => {
+    if (result || error) {
+      try {
+        // Refresh Auto Ads when content changes significantly
+        if (window.adsbygoogle && window.adsbygoogle.loaded) {
+          // Signal content change to AdSense for better ad placement
+          window.dispatchEvent(new Event('resize'));
+        }
+      } catch (error) {
+        // Silently handle any Auto Ads refresh errors
+      }
+    }
+  }, [result, error]);
+
   // Online/Offline status listener
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -481,14 +523,6 @@ const BarcodeSearch = () => {
     },
     footerText: {
       margin: '0.25rem 0',
-    },
-    multipleResultsWarning: {
-      color: '#ef4444',
-      fontSize: '0.875rem',
-      fontWeight: '500',
-      marginTop: '0.5rem',
-      textAlign: 'center',
-      animation: 'pulse 2s infinite',
     },
     resultsNavigation: {
       display: 'flex',
