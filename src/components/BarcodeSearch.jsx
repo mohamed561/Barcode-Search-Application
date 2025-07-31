@@ -15,9 +15,52 @@ const BarcodeSearch = () => {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [adsLoaded, setAdsLoaded] = useState(false);
 
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
+
+  // Initialize Google AdSense
+  useEffect(() => {
+    const initializeAds = () => {
+      try {
+        if (window.adsbygoogle && window.adsbygoogle.loaded) {
+          setAdsLoaded(true);
+          return;
+        }
+        
+        // Push ads to adsbygoogle array
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({});
+          setAdsLoaded(true);
+        }
+      } catch (error) {
+        console.log('AdSense not loaded yet');
+      }
+    };
+
+    // Try to initialize ads immediately
+    initializeAds();
+    
+    // Also try after a delay in case AdSense script is still loading
+    const timer = setTimeout(initializeAds, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Refresh ads when results change
+  useEffect(() => {
+    if (adsLoaded && (result || error)) {
+      try {
+        // Refresh ads when content changes
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({});
+        }
+      } catch (error) {
+        console.log('Ad refresh failed:', error);
+      }
+    }
+  }, [result, error, adsLoaded]);
 
   // Online/Offline status listener
   useEffect(() => {
@@ -260,6 +303,20 @@ const BarcodeSearch = () => {
       setCurrentResultIndex(currentResultIndex - 1);
     }
   };
+
+  // Ad Component
+  const AdBanner = ({ slot, style = {} }) => (
+    <div style={{ textAlign: 'center', margin: '1rem 0', ...style }}>
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client="pub-5558307543618104"
+        data-ad-slot={slot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+    </div>
+  );
 
   const styles = {
     container: {
@@ -538,6 +595,14 @@ const BarcodeSearch = () => {
       textAlign: 'center',
       marginTop: '0.5rem',
     },
+    adContainer: {
+      backgroundColor: '#f8f9fa',
+      border: '1px solid #e9ecef',
+      borderRadius: '0.375rem',
+      padding: '0.5rem',
+      margin: '1rem 0',
+      width: '100%',
+    },
   };
 
   return (
@@ -601,7 +666,13 @@ const BarcodeSearch = () => {
           </div>
           <div style={styles.resultsContent}>
             {error ? (
-              <p style={styles.errorMessage}>{error}</p>
+              <>
+                <p style={styles.errorMessage}>{error}</p>
+                {/* Ad after error message */}
+                <div style={styles.adContainer}>
+                  <AdBanner slot="1234567890" />
+                </div>
+              </>
             ) : result ? (
               result.easterEgg ? (
                 <img src={easterEggGif} alt="Easter egg animation" style={styles.easterEgg} />
@@ -614,6 +685,12 @@ const BarcodeSearch = () => {
                   onTouchEnd={onTouchEnd}
                 >
                   <p style={styles.productName}>{result["libellé eCommerce"]}</p>
+                  
+                  {/* Ad before barcode */}
+                  <div style={styles.adContainer}>
+                    <AdBanner slot="9876543210" />
+                  </div>
+                  
                   <div style={styles.barcodeContainer}>
                     <svg id="barcode" ref={barcodeRef}></svg>
                     {barcodeError && <p style={styles.barcodeError}>Unable to generate barcode</p>}
@@ -624,6 +701,12 @@ const BarcodeSearch = () => {
                       Download Barcode
                     </button>
                   )}
+                  
+                  {/* Ad after download button */}
+                  <div style={styles.adContainer}>
+                    <AdBanner slot="5555555555" />
+                  </div>
+                  
                   {allResults.length > 1 && (
                     <>
                       <div style={styles.swipeHintContainer}>
@@ -668,13 +751,19 @@ const BarcodeSearch = () => {
                 </div>
               )
             ) : (
-              <div style={styles.emptyState}>
-                <svg style={styles.emptyStateIcon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <p style={styles.emptyStateText}>Enter a product name to search</p>
-                <p style={styles.emptyStateSubtext}>Results will appear here</p>
-              </div>
+              <>
+                <div style={styles.emptyState}>
+                  <svg style={styles.emptyStateIcon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <p style={styles.emptyStateText}>Enter a product name to search</p>
+                  <p style={styles.emptyStateSubtext}>Results will appear here</p>
+                </div>
+                {/* Ad in empty state */}
+                <div style={styles.adContainer}>
+                  <AdBanner slot="1111111111" />
+                </div>
+              </>
             )}
           </div>
         </div>
