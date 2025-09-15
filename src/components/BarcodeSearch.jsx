@@ -24,6 +24,7 @@ const BarcodeSearch = () => {
     updateFound: false,
     lastCheck: null
   });
+  const [showPopup, setShowPopup] = useState(true); // State for popup visibility
 
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
@@ -35,9 +36,7 @@ const BarcodeSearch = () => {
 
     const initializeAutoAds = () => {
       try {
-        // Check if AdSense script is loaded (not blocked by ad blocker)
         if (window.adsbygoogle && window.adsbygoogle.push) {
-          // Initialize Auto Ads
           window.adsbygoogle = window.adsbygoogle || [];
           window.adsbygoogle.push({
             google_ad_client: "ca-pub-5558307543618104",
@@ -46,7 +45,6 @@ const BarcodeSearch = () => {
           console.log('✅ Auto Ads initialized successfully');
           return true;
         } else if (retryCount < maxRetries) {
-          // Script might still be loading
           retryCount++;
           console.log(`⏳ AdSense script loading... (attempt ${retryCount}/${maxRetries})`);
           setTimeout(initializeAutoAds, 2000);
@@ -62,36 +60,28 @@ const BarcodeSearch = () => {
       }
     };
 
-    // Start initialization after DOM is ready
     setTimeout(initializeAutoAds, 1000);
   }, []);
 
-  // Notify AdSense about page content changes for better ad targeting
+  // Notify AdSense about page content changes
   useEffect(() => {
     if (result || error) {
       try {
-        // Refresh Auto Ads when content changes significantly
         if (window.adsbygoogle && window.adsbygoogle.loaded) {
-          // Signal content change to AdSense for better ad placement
           window.dispatchEvent(new Event('resize'));
         }
-      } catch (error) {
-        // Silently handle any Auto Ads refresh errors
-      }
+      } catch (error) {}
     }
   }, [result, error]);
 
-  // Check for app updates when coming back online
+  // Check for app updates
   const checkForUpdates = async () => {
     const checkTime = new Date().toISOString();
     console.log('🔍 Checking for updates at:', checkTime);
     
     try {
-      // Check if service worker is available and has updates
       if ('serviceWorker' in navigator) {
         const registration = await navigator.serviceWorker.ready;
-        
-        // Update service worker status
         setServiceWorkerStatus(prev => ({
           ...prev,
           registered: true,
@@ -103,7 +93,6 @@ const BarcodeSearch = () => {
         console.log('⏳ Waiting SW:', registration.waiting);
         console.log('🔄 Installing SW:', registration.installing);
         
-        // Check for waiting service worker
         if (registration.waiting) {
           console.log('⚡ Update available - service worker waiting');
           setUpdateAvailable(true);
@@ -115,17 +104,13 @@ const BarcodeSearch = () => {
           return;
         }
         
-        // Force check for updates
         console.log('🔍 Forcing service worker update check...');
         await registration.update();
         
-        // Get current service worker version/timestamp
         if (registration.active) {
           try {
-            // Try to get version from service worker
             const channel = new MessageChannel();
             registration.active.postMessage({ type: 'GET_VERSION' }, [channel.port2]);
-            
             channel.port1.onmessage = (event) => {
               const swVersion = event.data.version || 'Unknown';
               console.log('📝 Service Worker Version:', swVersion);
@@ -143,7 +128,6 @@ const BarcodeSearch = () => {
           }
         }
         
-        // Listen for new service worker
         registration.addEventListener('updatefound', () => {
           console.log('🆕 New service worker found!');
           const newWorker = registration.installing;
@@ -163,12 +147,10 @@ const BarcodeSearch = () => {
           }
         });
         
-        // Log current cache status
         if ('caches' in window) {
           const cacheNames = await caches.keys();
           console.log('💾 Available caches:', cacheNames);
         }
-        
       } else {
         console.log('❌ Service Workers not supported');
         setServiceWorkerStatus(prev => ({
@@ -178,46 +160,13 @@ const BarcodeSearch = () => {
         }));
       }
       
-      // Alternative method: Check app version via build info
-      const currentVersion = '3.1.1'; // Updated version
+      const currentVersion = '3.1.1';
       const buildTime = new Date('2025-08-27').getTime();
       const currentTime = Date.now();
       const daysSinceBuild = Math.floor((currentTime - buildTime) / (1000 * 60 * 60 * 24));
       
       console.log('📱 App Version:', currentVersion);
       console.log('📅 Build Age:', daysSinceBuild, 'days');
-      
-      // You can implement a version check API call here
-      // This would check against your server's latest version
-      try {
-        // Example API call (uncomment and modify for your backend):
-        /*
-        const response = await fetch('/api/version', {
-          cache: 'no-cache',
-          headers: {
-            'Cache-Control': 'no-cache'
-          }
-        });
-        const serverInfo = await response.json();
-        
-        console.log('🌐 Server Version:', serverInfo.version);
-        console.log('🌐 Server Build Time:', serverInfo.buildTime);
-        
-        if (serverInfo.version !== currentVersion || serverInfo.buildTime > buildTime) {
-          console.log('🔄 New version available on server');
-          setUpdateAvailable(true);
-        }
-        */
-        
-        // For now, simulate version check based on build age
-        // This is just for demonstration - remove in production
-        if (daysSinceBuild > 7) { // If build is older than 7 days
-          console.log('⏰ Build is older than 7 days, suggesting update check');
-        }
-        
-      } catch (error) {
-        console.log('🌐 Version API check failed:', error);
-      }
       
     } catch (error) {
       console.log('❌ Update check failed:', error);
@@ -229,10 +178,8 @@ const BarcodeSearch = () => {
     }
   };
 
-  // Debug function to manually check service worker status
   const logServiceWorkerStatus = async () => {
     console.log('🔍 === SERVICE WORKER DEBUG INFO ===');
-    
     if ('serviceWorker' in navigator) {
       try {
         const registration = await navigator.serviceWorker.ready;
@@ -245,59 +192,47 @@ const BarcodeSearch = () => {
         if ('caches' in window) {
           const cacheNames = await caches.keys();
           console.log('💾 Cache names:', cacheNames);
-          
           for (const cacheName of cacheNames) {
             const cache = await caches.open(cacheName);
             const keys = await cache.keys();
             console.log(`📦 Cache "${cacheName}" has ${keys.length} entries`);
           }
         }
-        
       } catch (error) {
         console.log('❌ SW Debug failed:', error);
       }
     } else {
       console.log('❌ Service Workers not supported in this browser');
     }
-    
     console.log('🔍 === END DEBUG INFO ===');
   };
 
   const handleUpdate = async () => {
     setIsUpdating(true);
-    
     try {
       if ('serviceWorker' in navigator) {
         const registration = await navigator.serviceWorker.ready;
         if (registration.waiting) {
-          // Tell the waiting service worker to skip waiting and activate
           registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-          
-          // Listen for the controlling service worker change
           navigator.serviceWorker.addEventListener('controllerchange', () => {
             window.location.reload();
           });
         } else {
-          // If no service worker waiting, just reload
           window.location.reload();
         }
       } else {
-        // Fallback: simple reload
         window.location.reload();
       }
     } catch (error) {
       console.log('Update failed:', error);
-      // Fallback to simple reload
       window.location.reload();
     }
   };
 
-  // Online/Offline status listener with update check
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true);
-      // Check for updates when coming back online
-      setTimeout(checkForUpdates, 2000); // Wait 2 seconds after coming online
+      setTimeout(checkForUpdates, 2000);
     };
     
     const handleOffline = () => setIsOnline(false);
@@ -305,12 +240,10 @@ const BarcodeSearch = () => {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Initial update check if online
     if (navigator.onLine) {
-      setTimeout(checkForUpdates, 5000); // Check 5 seconds after app load
+      setTimeout(checkForUpdates, 5000);
     }
 
-    // Add keyboard shortcut for debug info (Ctrl+Shift+D)
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.shiftKey && event.key === 'D') {
         event.preventDefault();
@@ -454,10 +387,9 @@ const BarcodeSearch = () => {
     try {
       await navigator.clipboard.writeText(result.EAN);
       setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
+      setTimeout(() => setCopySuccess(false), 2000);
     } catch (err) {
       console.error('Failed to copy EAN:', err);
-      // Fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = result.EAN;
       document.body.appendChild(textArea);
@@ -896,6 +828,54 @@ const BarcodeSearch = () => {
       backgroundColor: '#9ca3af',
       cursor: 'not-allowed',
     },
+    modalOverlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 2000,
+    },
+    modalContent: {
+      backgroundColor: '#ffffff',
+      borderRadius: '0.5rem',
+      padding: '1.5rem',
+      maxWidth: '90%',
+      width: '28rem',
+      textAlign: 'right',
+      direction: 'rtl',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+      position: 'relative',
+    },
+    modalTitle: {
+      fontSize: '1.25rem',
+      fontWeight: '700',
+      color: '#1f2937',
+      marginBottom: '1rem',
+    },
+    modalText: {
+      fontSize: '1rem',
+      color: '#374151',
+      lineHeight: '1.5',
+      marginBottom: '1rem',
+    },
+    modalCloseButton: {
+      backgroundColor: '#3b82f6',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.375rem',
+      padding: '0.5rem 1rem',
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.25rem',
+      transition: 'background-color 0.2s',
+    },
   };
 
   return (
@@ -903,15 +883,37 @@ const BarcodeSearch = () => {
       <style>
         {`
           @keyframes pulse {
-            0%, 100% {
-              opacity: 1;
-            }
-            50% {
-              opacity: 0.5;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+          }
+          @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
           }
         `}
       </style>
+      {/* START POPUP FUNCTION - Delete from here to remove popup */}
+      {showPopup && (
+        <div style={styles.modalOverlay}>
+          <div style={styles.modalContent}>
+            <h2 style={styles.modalTitle}>إشعار التحديث</h2>
+            <p style={styles.modalText}>
+              الآن في النسخة الجديدة ديال الأبليكاسيون تقدر دير كوبي للكود غير بكليك وحدة و تقدر تيليشارجي الكودبار في حالة بغيتي تسيفطو لشي واحد بلا ماتحتاج دير ليه سكرين شوت، هاد التحديث الجديد غادي يعون الناس لي كيخدمو بالتلفون ديالهم بحال الناس ديال الاكسبريس أكثر، ثاني زدنا خاصية التحديث التلقائي، دابا بلا ماتحتاج تأكتياليزي الباج، الأبليكاسيون غادي دير تحديث لراسها 2 ثواني من ورا ما تكونيكطا بالأنترنيت، هادشي غادي يعون فأنه تكون عندك آخر نسخة ديال الداتا بايس ديال لي كود ديما، زائد ماشي جديدة و لكن غير إعلام دابا تقدر تخدم الأبليكاسيون بلا أنترنيت، غير هو مرة مرة كونيكطيها بالأنترنيت باش دير التحديث إلى كان، هادشي لي كاين، الله يسر.
+              <br /><br />
+              <span style={{ color: '#10b981' }}>💚</span> ديما رجاء و الله يعلي الدرجة <span style={{ color: '#10b981' }}>💚</span>
+              <br />
+              <strong>Wyatt, Team AINSBAA</strong>
+            </p>
+            <button
+              onClick={() => setShowPopup(false)}
+              style={styles.modalCloseButton}
+            >
+              إغلاق
+            </button>
+          </div>
+        </div>
+      )}
+      {/* END POPUP FUNCTION - Delete up to here to remove popup */}
       <div style={styles.appContainer}>
         <div style={styles.header}>
           <div style={styles.onlineIndicator}>
@@ -1077,6 +1079,18 @@ const BarcodeSearch = () => {
           )}
         </div>
       </div>
+      {updateAvailable && (
+        <button
+          onClick={handleUpdate}
+          style={{
+            ...styles.updateButton,
+            ...(isUpdating ? styles.updateButtonUpdating : {})
+          }}
+          disabled={isUpdating}
+        >
+          {isUpdating ? 'Updating...' : 'Update Available'}
+        </button>
+      )}
     </div>
   );
 };
