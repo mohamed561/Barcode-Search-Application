@@ -15,6 +15,7 @@ const BarcodeSearch = () => {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
@@ -199,6 +200,31 @@ const BarcodeSearch = () => {
     img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
   };
 
+  const copyEAN = async () => {
+    if (!result || !result.EAN) return;
+    
+    try {
+      await navigator.clipboard.writeText(result.EAN);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
+    } catch (err) {
+      console.error('Failed to copy EAN:', err);
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = result.EAN;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr);
+      }
+      document.body.removeChild(textArea);
+    }
+  };
+
   const findAllMatchingItems = (searchTerm) => {
     const normalizedSearchTerm = normalizeString(searchTerm);
     const allMatches = [];
@@ -274,6 +300,7 @@ const BarcodeSearch = () => {
     setAllResults([]);
     setCurrentResultIndex(0);
     setIsEasterEgg(false);
+    setCopySuccess(false);
     document.getElementById('search-input').focus();
   };
 
@@ -508,6 +535,12 @@ const BarcodeSearch = () => {
       fontWeight: '700',
       color: '#1f2937',
     },
+    buttonsContainer: {
+      display: 'flex',
+      gap: '0.75rem',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+    },
     downloadButton: {
       backgroundColor: '#10b981',
       color: 'white',
@@ -520,7 +553,21 @@ const BarcodeSearch = () => {
       alignItems: 'center',
       gap: '0.25rem',
       transition: 'background-color 0.2s',
-      margin: '0 auto',
+    },
+    copyButton: {
+      backgroundColor: copySuccess ? '#10b981' : '#3b82f6',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.375rem',
+      padding: '0.5rem 1rem',
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.25rem',
+      transition: 'background-color 0.2s',
+      minWidth: '120px',
+      justifyContent: 'center',
     },
     easterEgg: {
       width: '12rem',
@@ -665,9 +712,32 @@ const BarcodeSearch = () => {
                   </div>
                   <p style={styles.eanDisplay}>EAN: {result.EAN}</p>
                   {!barcodeError && (
-                    <button onClick={downloadBarcode} style={styles.downloadButton}>
-                      Download Barcode
-                    </button>
+                    <div style={styles.buttonsContainer}>
+                      <button onClick={copyEAN} style={styles.copyButton}>
+                        {copySuccess ? (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                            </svg>
+                            Copy EAN
+                          </>
+                        )}
+                      </button>
+                      <button onClick={downloadBarcode} style={styles.downloadButton}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                          <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                        Download EAN
+                      </button>
+                    </div>
                   )}
                   {allResults.length > 1 && (
                     <>
@@ -732,7 +802,7 @@ const BarcodeSearch = () => {
             DB Snapshot: <strong>2025-08-27</strong>
           </p>
           <p style={styles.footerText}>
-            <strong>Version 3.0.1</strong>
+            <strong>Version 3.1.0</strong>
           </p>
         </div>
       </div>
