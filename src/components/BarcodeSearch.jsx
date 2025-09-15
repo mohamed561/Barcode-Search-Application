@@ -24,7 +24,7 @@ const BarcodeSearch = () => {
     updateFound: false,
     lastCheck: null
   });
-  const [showPopup, setShowPopup] = useState(true); // State for popup visibility
+  const [showPopup, setShowPopup] = useState(true);
 
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
@@ -783,7 +783,7 @@ const BarcodeSearch = () => {
       opacity: '0.9',
     },
     navDisabled: {
-      backgroundColor: '#9ca3af',
+      backgroundColor: 'rgba(156, 163, 175, 0.5)',
       cursor: 'default',
       opacity: '0.5',
     },
@@ -846,22 +846,25 @@ const BarcodeSearch = () => {
       padding: '1.5rem',
       maxWidth: '90%',
       width: '28rem',
-      textAlign: 'right',
+      textAlign: 'center',
       direction: 'rtl',
       boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
       position: 'relative',
+      fontFamily: '"Amiri", serif',
     },
     modalTitle: {
       fontSize: '1.25rem',
       fontWeight: '700',
       color: '#1f2937',
       marginBottom: '1rem',
+      fontFamily: '"Amiri", serif',
     },
     modalText: {
       fontSize: '1rem',
       color: '#374151',
       lineHeight: '1.5',
       marginBottom: '1rem',
+      fontFamily: '"Amiri", serif',
     },
     modalCloseButton: {
       backgroundColor: '#3b82f6',
@@ -875,6 +878,7 @@ const BarcodeSearch = () => {
       alignItems: 'center',
       gap: '0.25rem',
       transition: 'background-color 0.2s',
+      fontFamily: '"Amiri", serif',
     },
   };
 
@@ -890,6 +894,9 @@ const BarcodeSearch = () => {
             from { transform: translateY(100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
           }
+          /* START POPUP FONT IMPORT - Delete this to remove popup font */
+          @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+          /* END POPUP FONT IMPORT */
         `}
       </style>
       {/* START POPUP FUNCTION - Delete from here to remove popup */}
@@ -898,7 +905,7 @@ const BarcodeSearch = () => {
           <div style={styles.modalContent}>
             <h2 style={styles.modalTitle}>إشعار التحديث</h2>
             <p style={styles.modalText}>
-              الآن في النسخة الجديدة ديال الأبليكاسيون تقدر دير كوبي للكود غير بكليك وحدة و تقدر تيليشارجي الكودبار في حالة بغيتي تسيفطو لشي واحد بلا ماتحتاج دير ليه سكرين شوت، هاد التحديث الجديد غادي يعون الناس لي كيخدمو بالتلفون ديالهم بحال الناس ديال الاكسبريس أكثر، ثاني زدنا خاصية التحديث التلقائي، دابا بلا ماتحتاج تأكتياليزي الباج، الأبليكاسيون غادي دير تحديث لراسها 2 ثواني من ورا ما تكونيكطا بالأنترنيت، هادشي غادي يعون فأنه تكون عندك آخر نسخة ديال الداتا بايس ديال لي كود ديما، زائد ماشي جديدة و لكن غير إعلام دابا تقدر تخدم الأبليكاسيون بلا أنترنيت، غير هو مرة مرة كونيكطيها بالأنترنيت باش دير التحديث إلى كان، هادشي لي كاين، الله يسر.
+              الآن في النسخة الجديدة ديال الأبليكاسيون تقدر دير كوبي للكود غير بكليك وحدة و تقدر تيليشارجي الكودبار في حالة بغيتي تسيفطو لشي واحد بلا ماتحتاج دير ليه سكرين شوت، هاد التحديث الجديد غادي يعون الناس لي كيخدمو بالتلفون ديالهم بحال الناس ديال الاكسبريس أكثر، ثاني زدنا خاصية التحديث التلقائي، دابا بلا ماتحتاج تأكتياليزي الباج، الأبليكاسيون غادي دير تحديث لراسها 2 ثواني من ورا ما تكونيكطا بالأنترنيت، هادشي غادي يعون فأنه تكون عاندك آخر نسخة ديال الداتا بايس ديال لي كود ديما، زائد ماشي جديدة و لكن غير إعلام دابا تقدر تخدم الأبليكاسيون بلا أنترنيت، غير هو مرة مرة كونيكطيها بالأنترنيت باش دير التحديث إلى كان، هادشي لي كاين، الله يسر.
               <br /><br />
               <span style={{ color: '#10b981' }}>💚</span> ديما رجاء و الله يعلي الدرجة <span style={{ color: '#10b981' }}>💚</span>
               <br />
