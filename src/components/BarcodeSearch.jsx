@@ -16,6 +16,14 @@ const BarcodeSearch = () => {
   const [touchEnd, setTouchEnd] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [serviceWorkerStatus, setServiceWorkerStatus] = useState({
+    registered: false,
+    version: null,
+    updateFound: false,
+    lastCheck: null
+  });
 
   const resultContainerRef = useRef(null);
   const barcodeRef = useRef(null);
@@ -73,17 +81,257 @@ const BarcodeSearch = () => {
     }
   }, [result, error]);
 
-  // Online/Offline status listener
+  // Check for app updates when coming back online
+  const checkForUpdates = async () => {
+    const checkTime = new Date().toISOString();
+    console.log('🔍 Checking for updates at:', checkTime);
+    
+    try {
+      // Check if service worker is available and has updates
+      if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.ready;
+        
+        // Update service worker status
+        setServiceWorkerStatus(prev => ({
+          ...prev,
+          registered: true,
+          lastCheck: checkTime
+        }));
+        
+        console.log('📋 Service Worker Registration:', registration);
+        console.log('🔄 Active SW:', registration.active);
+        console.log('⏳ Waiting SW:', registration.waiting);
+        console.log('🔄 Installing SW:', registration.installing);
+        
+        // Check for waiting service worker
+        if (registration.waiting) {
+          console.log('⚡ Update available - service worker waiting');
+          setUpdateAvailable(true);
+          setServiceWorkerStatus(prev => ({
+            ...prev,
+            updateFound: true,
+            version: 'Update Waiting'
+          }));
+          return;
+        }
+        
+        // Force check for updates
+        console.log('🔍 Forcing service worker update check...');
+        await registration.update();
+        
+        // Get current service worker version/timestamp
+        if (registration.active) {
+          try {
+            // Try to get version from service worker
+            const channel = new MessageChannel();
+            registration.active.postMessage({ type: 'GET_VERSION' }, [channel.port2]);
+            
+            channel.port1.onmessage = (event) => {
+              const swVersion = event.data.version || 'Unknown';
+              console.log('📝 Service Worker Version:', swVersion);
+              setServiceWorkerStatus(prev => ({
+                ...prev,
+                version: swVersion
+              }));
+            };
+          } catch (error) {
+            console.log('📝 Could not get SW version:', error);
+            setServiceWorkerStatus(prev => ({
+              ...prev,
+              version: 'Active (No version info)'
+            }));
+          }
+        }
+        
+        // Listen for new service worker
+        registration.addEventListener('updatefound', () => {
+          console.log('🆕 New service worker found!');
+          const newWorker = registration.installing;
+          setServiceWorkerStatus(prev => ({
+            ...prev,
+            updateFound: true
+          }));
+          
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              console.log('🔄 New SW state:', newWorker.state);
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                console.log('✅ New service worker installed and ready');
+                setUpdateAvailable(true);
+              }
+            });
+          }
+        });
+        
+        // Log current cache status
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          console.log('💾 Available caches:', cacheNames);
+        }
+        
+      } else {
+        console.log('❌ Service Workers not supported');
+        setServiceWorkerStatus(prev => ({
+          ...prev,
+          registered: false,
+          version: 'Not Supported'
+        }));
+      }
+      
+      // Alternative method: Check app version via build info
+      const currentVersion = '3.1.1'; // Updated version
+      const buildTime = new Date('2025-08-27').getTime();
+      const currentTime = Date.now();
+      const daysSinceBuild = Math.floor((currentTime - buildTime) / (1000 * 60 * 60 * 24));
+      
+      console.log('📱 App Version:', currentVersion);
+      console.log('📅 Build Age:', daysSinceBuild, 'days');
+      
+      // You can implement a version check API call here
+      // This would check against your server's latest version
+      try {
+        // Example API call (uncomment and modify for your backend):
+        /*
+        const response = await fetch('/api/version', {
+          cache: 'no-cache',
+          headers: {
+            'Cache-Control': 'no-cache'
+          }
+        });
+        const serverInfo = await response.json();
+        
+        console.log('🌐 Server Version:', serverInfo.version);
+        console.log('🌐 Server Build Time:', serverInfo.buildTime);
+        
+        if (serverInfo.version !== currentVersion || serverInfo.buildTime > buildTime) {
+          console.log('🔄 New version available on server');
+          setUpdateAvailable(true);
+        }
+        */
+        
+        // For now, simulate version check based on build age
+        // This is just for demonstration - remove in production
+        if (daysSinceBuild > 7) { // If build is older than 7 days
+          console.log('⏰ Build is older than 7 days, suggesting update check');
+        }
+        
+      } catch (error) {
+        console.log('🌐 Version API check failed:', error);
+      }
+      
+    } catch (error) {
+      console.log('❌ Update check failed:', error);
+      setServiceWorkerStatus(prev => ({
+        ...prev,
+        lastCheck: checkTime,
+        version: 'Check Failed'
+      }));
+    }
+  };
+
+  // Debug function to manually check service worker status
+  const logServiceWorkerStatus = async () => {
+    console.log('🔍 === SERVICE WORKER DEBUG INFO ===');
+    
+    if ('serviceWorker' in navigator) {
+      try {
+        const registration = await navigator.serviceWorker.ready;
+        console.log('📋 Registration scope:', registration.scope);
+        console.log('🔄 Active SW:', registration.active?.scriptURL);
+        console.log('⏳ Waiting SW:', registration.waiting?.scriptURL);
+        console.log('🔄 Installing SW:', registration.installing?.scriptURL);
+        console.log('📅 Last update check:', registration.updateViaCache);
+        
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          console.log('💾 Cache names:', cacheNames);
+          
+          for (const cacheName of cacheNames) {
+            const cache = await caches.open(cacheName);
+            const keys = await cache.keys();
+            console.log(`📦 Cache "${cacheName}" has ${keys.length} entries`);
+          }
+        }
+        
+      } catch (error) {
+        console.log('❌ SW Debug failed:', error);
+      }
+    } else {
+      console.log('❌ Service Workers not supported in this browser');
+    }
+    
+    console.log('🔍 === END DEBUG INFO ===');
+  };
+
+  const handleUpdate = async () => {
+    setIsUpdating(true);
+    
+    try {
+      if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.ready;
+        if (registration.waiting) {
+          // Tell the waiting service worker to skip waiting and activate
+          registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+          
+          // Listen for the controlling service worker change
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            window.location.reload();
+          });
+        } else {
+          // If no service worker waiting, just reload
+          window.location.reload();
+        }
+      } else {
+        // Fallback: simple reload
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log('Update failed:', error);
+      // Fallback to simple reload
+      window.location.reload();
+    }
+  };
+
+  // Online/Offline status listener with update check
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
+    const handleOnline = () => {
+      setIsOnline(true);
+      // Check for updates when coming back online
+      setTimeout(checkForUpdates, 2000); // Wait 2 seconds after coming online
+    };
+    
     const handleOffline = () => setIsOnline(false);
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
+    // Initial update check if online
+    if (navigator.onLine) {
+      setTimeout(checkForUpdates, 5000); // Check 5 seconds after app load
+    }
+
+    // Add keyboard shortcut for debug info (Ctrl+Shift+D)
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key === 'D') {
+        event.preventDefault();
+        logServiceWorkerStatus();
+        console.log('📊 Current App State:', {
+          isOnline,
+          updateAvailable,
+          isUpdating,
+          serviceWorkerStatus,
+          searchTerm,
+          resultsCount: allResults.length
+        });
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -624,11 +872,29 @@ const BarcodeSearch = () => {
       justifyContent: 'center',
       marginTop: '0.5rem',
     },
-    swipeHint: {
-      color: '#ef4444',
-      fontSize: '0.75rem',
-      textAlign: 'center',
-      marginTop: '0.5rem',
+    updateButton: {
+      position: 'fixed',
+      bottom: '1rem',
+      right: '1rem',
+      backgroundColor: '#f59e0b',
+      color: 'white',
+      border: 'none',
+      borderRadius: '0.5rem',
+      padding: '0.75rem 1rem',
+      fontSize: '0.875rem',
+      fontWeight: '500',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      zIndex: 1000,
+      transition: 'all 0.2s',
+      animation: 'slideInUp 0.3s ease-out',
+    },
+    updateButtonUpdating: {
+      backgroundColor: '#9ca3af',
+      cursor: 'not-allowed',
     },
   };
 
@@ -735,7 +1001,7 @@ const BarcodeSearch = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
                           <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
-                        Download EAN
+                        Download Barcode
                       </button>
                     </div>
                   )}
@@ -802,8 +1068,13 @@ const BarcodeSearch = () => {
             DB Snapshot: <strong>2025-08-27</strong>
           </p>
           <p style={styles.footerText}>
-            <strong>Version 3.1.0</strong>
+            <strong>Version 3.1.1</strong>
           </p>
+          {serviceWorkerStatus.lastCheck && (
+            <p style={{ ...styles.footerText, fontSize: '0.75rem', color: '#6b7280' }}>
+              Last update check: {new Date(serviceWorkerStatus.lastCheck).toLocaleTimeString()}
+            </p>
+          )}
         </div>
       </div>
     </div>
