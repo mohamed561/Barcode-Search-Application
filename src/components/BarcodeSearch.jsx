@@ -899,29 +899,34 @@ const BarcodeSearch = () => {
           /* END POPUP FONT IMPORT */
         `}
       </style>
-      {/* START POPUP FUNCTION - Delete from here to remove popup */}
-      {showPopup && (
-        <div style={styles.modalOverlay}>
-          <div style={styles.modalContent}>
-            <h2 style={styles.modalTitle}> UPDATE NOTICE</h2>
-            <p style={styles.modalText}>
-              الآن في النسخة الجديدة ديال الأبليكاسيون تقدر دير كوبي للكود غير بكليك وحدة و تقدر تيليشارجي الكودبار في حالة بغيتي تسيفطو لشي واحد بلا ماتحتاج دير ليه سكرين شوت، هاد التحديث الجديد غادي يعون الناس لي كيخدمو بالتلفون ديالهم بحال الناس ديال الاكسبريس أكثر، ثاني زدنا خاصية التحديث التلقائي، دابا بلا ماتحتاج تأكتياليزي الباج، الأبليكاسيون غادي دير تحديث لراسها 2 ثواني من ورا ما تكونيكطا بالأنترنيت، هادشي غادي يعون فأنه تكون عاندك آخر نسخة ديال الداتا بايس ديال لي كود ديما، زائد ماشي جديدة و لكن غير إعلام دابا تقدر تخدم الأبليكاسيون بلا أنترنيت، غير هو مرة مرة كونيكطيها بالأنترنيت باش دير التحديث إلى كان، هادشي لي كاين، الله يسر.
-              <br /><br />
-              <span style={{ color: '#114c3c', fontWeight: 'bold', fontFamily: 'Poppins, sans-serif', fontSize: '1.3rem', letterSpacing: '1px' }}>
-  💚 VAMOS R.C.A 💚
-</span>
-              <br />
-            </p>
-            <button
-              onClick={() => setShowPopup(false)}
-              style={styles.modalCloseButton}
-            >
-              إغلاق
-            </button>
-          </div>
-        </div>
-      )}
-      {/* END POPUP FUNCTION - Delete up to here to remove popup */}
+      {/* POPUP FUNCTION */}
+      {/*
+  START POPUP FUNCTION - Delete from here to remove popup
+
+  {showPopup && (
+    <div style={styles.modalOverlay}>
+      <div style={styles.modalContent}>
+        <h2 style={styles.modalTitle}> UPDATE NOTICE</h2>
+        <p style={styles.modalText}>
+          الآن في النسخة الجديدة ديال الأبليكاسيون تقدر دير كوبي للكود غير بكليك وحدة و تقدر تيليشارجي الكودبار في حالة بغيتي تسيفطو لشي واحد بلا ماتحتاج دير ليه سكرين شوت، هاد التحديث الجديد غادي يعون الناس لي كيخدمو بالتلفون ديالهم بحال الناس ديال الاكسبريس أكثر، ثاني زدنا خاصية التحديث التلقائي، دابا بلا ماتحتاج تأكتياليزي الباج، الأبليكاسيون غادي دير تحديث لراسها 2 ثواني من ورا ما تكونيكطا بالأنترنيت، هادشي غادي يعون فأنه تكون عاندك آخر نسخة ديال الداتا بايس ديال لي كود ديما، زائد ماشي جديدة و لكن غير إعلام دابا تقدر تخدم الأبليكاسيون بلا أنترنيت، غير هو مرة مرة كونيكطيها بالأنترنيت باش دير التحديث إلى كان، هادشي لي كاين، الله يسر.
+          <br /><br />
+          <span style={{ color: '#114c3c', fontWeight: 'bold', fontFamily: 'Poppins, sans-serif', fontSize: '1.3rem', letterSpacing: '1px' }}>
+            💚 VAMOS R.C.A 💚
+          </span>
+          <br />
+        </p>
+        <button
+          onClick={() => setShowPopup(false)}
+          style={styles.modalCloseButton}
+        >
+          إغلاق
+        </button>
+      </div>
+    </div>
+  )}
+
+  END POPUP FUNCTION - Delete up to here to remove popup
+*/}
       <div style={styles.appContainer}>
         <div style={styles.header}>
           <div style={styles.onlineIndicator}>
