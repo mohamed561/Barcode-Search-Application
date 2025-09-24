@@ -1,3 +1,5 @@
+![License: Proprietary](https://img.shields.io/badge/license-Proprietary-red)
+
 # 🏷️ EAN Barcode Finder
 
 A modern, responsive web application for searching products and generating EAN barcodes instantly. Built with React and designed for both desktop and mobile users.
@@ -178,9 +180,11 @@ We welcome contributions! Here's how you can help:
 - Update documentation
 - Ensure offline functionality works
 
-## 📝 License
+### 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
+This project is licensed under a **Proprietary Software License**.  
+See the [LICENSE.md](./LICENSE.md) file for the summary and [LICENSE_FULL.md](./LICENSE_FULL.md) for the complete terms.
+
 
 ## 👥 Team
 

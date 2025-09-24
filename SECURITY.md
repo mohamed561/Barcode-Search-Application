@@ -1,52 +1,165 @@
-# Security Policy
+# 🔐 Security Policy
 
 ## Supported Versions
 
-The BSA Barcode Search APP is actively maintained, and security updates are provided for the latest version. Ensure you’re using the most recent release to benefit from security fixes.
+We actively maintain and provide security updates for the following versions of EAN Barcode Finder:
 
-| Version | Supported |
-| --- | --- |
-| 2.0 | ✅ |
-| &lt; 2.0 | ❌ |
+| Version | Supported          | Status |
+| ------- | ------------------ | ------ |
+| 3.1.x   | ✅ Fully Supported | Current |
+| 3.0.x   | ✅ Security Updates Only | LTS |
+| 2.x.x   | ❌ End of Life | Deprecated |
+| < 2.0   | ❌ End of Life | Deprecated |
 
-## Reporting a Vulnerability
+## 🛡️ Security Features
 
-We take the security of the BSA Barcode Search APP seriously. If you discover a security vulnerability, please report it responsibly by following these steps:
+### Client-Side Security
+- **Local Processing**: All barcode generation and search operations happen locally in the browser
+- **No External APIs**: Core functionality doesn't rely on external services
+- **Secure Clipboard**: Uses modern Clipboard API with fallback for older browsers
+- **Content Security Policy**: Implements CSP headers where applicable
+- **XSS Protection**: All user inputs are properly sanitized
 
-1. **Do Not Disclose Publicly**: Avoid sharing the vulnerability in public forums (e.g., GitHub issues, social media) until it has been addressed to protect users.
-2. **Email Us**: Send a detailed report to mohamedtroufi01@gmail.com. Include:
-   - A description of the vulnerability (e.g., XSS in search input).
-   - Steps to reproduce the issue.
-   - Potential impact (e.g., data exposure, app crash).
-   - Any suggested fixes, if applicable.
-3. **Expect a Response**: We’ll acknowledge your email within 48 hours and work with you to assess and resolve the issue. We aim to release a fix within 14 days for critical vulnerabilities, depending on complexity.
-4. **Coordinated Disclosure**: Once the vulnerability is fixed, we’ll coordinate with you to disclose it responsibly, crediting you (if desired) in release notes or a security advisory.
+### Data Privacy
+- **No Data Collection**: The application doesn't collect or store personal user data
+- **Local Storage Only**: All data remains on the user's device
+- **No Tracking**: No analytics or tracking scripts are included in core functionality
+- **Privacy by Design**: Built with privacy-first principles
 
-## Scope
+### Network Security
+- **HTTPS Only**: Application should be served over HTTPS in production
+- **Service Worker Security**: Secure caching strategies implemented
+- **No Sensitive Data Transmission**: No sensitive information is transmitted over the network
+- **Offline Capability**: Reduces attack surface by working without network connectivity
 
-This security policy applies to:
+## 🚨 Reporting Security Vulnerabilities
 
-- The core source code of the BSA Barcode Search APP (e.g., `src/components/BarcodeSearch.js`, `src/App.js`).
-- Included sample data files (`src/data/database.js`, `src/data/constantDatabase.js`).
-- Documentation in this repository (e.g., `README.md`).
+We take security seriously and appreciate your help in keeping EAN Barcode Finder secure.
 
-**Out of Scope**:
+### How to Report
 
-- The `easter-egg.gif` asset, as it is currently disabled and excluded pending copyright confirmation.
-- User-provided EAN code databases, which are the user’s responsibility.
-- Third-party dependencies (e.g., `jsbarcode`, React), though we’ll address vulnerabilities by updating to secure versions.
+**🔒 For Security Issues:**
+Please **DO NOT** open public GitHub issues for security vulnerabilities.
 
-## Security Best Practices
+Instead, please report security vulnerabilities via:
 
-To keep your instance of the BSA Barcode Search APP secure:
+1. **Email**: Send details to `mohamed561.security@gmail.com`
+2. **GitHub Security**: Use GitHub's [Private Security Reporting](https://github.com/mohamed561/Barcode-Search-Application/security/advisories/new)
 
-- **Update Dependencies**: Regularly run `npm update` to ensure `jsbarcode`, React, and other dependencies are on the latest secure versions. Check for known vulnerabilities using `npm audit`.
-- **Sanitize Inputs**: The app sanitizes search inputs to prevent XSS, but verify this if deploying publicly.
-- **Secure Deployment**: If hosting online, use HTTPS, set secure HTTP headers (e.g., Content-Security-Policy), and limit API access to trusted sources.
-- **Monitor Logs**: Watch for unusual activity (e.g., repeated failed searches) that might indicate an attack.
+### What to Include
 
-## Credits
+When reporting a security issue, please provide:
 
-We appreciate the security community’s help in keeping the BSA Barcode Search APP safe. Contributors reporting valid vulnerabilities will be acknowledged in our release notes, unless anonymity is requested.
+- **Description**: Clear description of the vulnerability
+- **Steps to Reproduce**: Detailed steps to reproduce the issue
+- **Impact**: Potential impact and severity assessment
+- **Environment**: Browser, version, and operating system details
+- **Proof of Concept**: If applicable, include a minimal reproduction case
+- **Suggested Fix**: If you have ideas for remediation
 
-Thank you for helping us maintain a secure project!
+### Response Timeline
+
+- **Initial Response**: Within 48 hours
+- **Assessment**: Within 7 days
+- **Fix Development**: Within 30 days (depending on severity)
+- **Public Disclosure**: After fix is deployed and users have had time to update
+
+## 🔍 Security Considerations
+
+### For Users
+
+**Safe Usage Practices:**
+- Keep your browser updated to the latest version
+- Only use the official application from trusted sources
+- Be cautious when downloading generated barcodes from unknown sources
+- Report suspicious behavior or unexpected prompts
+
+**Data Privacy:**
+- The application processes data locally on your device
+- No personal information is sent to external servers
+- Generated barcodes contain only product information from the database
+
+### For Developers
+
+**Development Security:**
+- Use `npm audit` regularly to check for vulnerable dependencies
+- Implement Content Security Policy (CSP) headers
+- Validate and sanitize all user inputs
+- Use HTTPS in production environments
+- Keep dependencies updated
+
+**Code Review Guidelines:**
+- Review all pull requests for potential security issues
+- Check for XSS vulnerabilities in dynamic content
+- Verify input validation and output encoding
+- Ensure no sensitive data is logged
+
+## 🛠️ Security Best Practices
+
+### Deployment Security
+- **HTTPS Enforcement**: Always serve over HTTPS in production
+- **Security Headers**: Implement appropriate security headers
+- **Regular Updates**: Keep all dependencies updated
+- **Monitoring**: Monitor for security advisories
+
+### Browser Security
+- **Same-Origin Policy**: Respect browser security policies
+- **Secure Storage**: Use appropriate storage mechanisms
+- **Permission Requests**: Minimize permission requests
+- **Error Handling**: Don't expose sensitive information in error messages
+
+## 📋 Security Checklist
+
+### For Maintainers
+
+- [ ] Regular dependency audits (`npm audit`)
+- [ ] Security header implementation
+- [ ] Input validation review
+- [ ] XSS prevention measures
+- [ ] CSRF protection where applicable
+- [ ] Secure coding practices
+- [ ] Regular security assessments
+
+### For Contributors
+
+- [ ] Follow secure coding guidelines
+- [ ] No hardcoded secrets or credentials
+- [ ] Proper input validation
+- [ ] Secure error handling
+- [ ] Documentation of security considerations
+- [ ] Testing for security issues
+
+## 🔗 Security Resources
+
+### Learn More About Web Security
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [MDN Web Security](https://developer.mozilla.org/en-US/docs/Web/Security)
+- [Google Web Security Guidelines](https://developers.google.com/web/fundamentals/security)
+
+### Tools and Scanning
+- [npm audit](https://docs.npmjs.com/cli/v8/commands/npm-audit)
+- [Snyk](https://snyk.io/)
+- [GitHub Security Advisories](https://github.com/advisories)
+
+## 📞 Contact
+
+For security-related questions or concerns:
+
+- **Security Email**: `mrajawi561@gmail.com`
+- **General Issues**: [GitHub Issues](https://github.com/mohamed561/Barcode-Search-Application/issues) (for non-security issues only)
+- **Discussions**: [GitHub Discussions](https://github.com/mohamed561/Barcode-Search-Application/discussions)
+
+## 📄 Acknowledgments
+
+We thank the security community for their responsible disclosure of vulnerabilities and their contributions to keeping our users safe.
+
+### Hall of Fame
+*Security researchers who have responsibly disclosed vulnerabilities will be acknowledged here (with their permission).*
+
+---
+
+**Last Updated**: September 24, 2025  
+**Version**: 3.1.1  
+**Team**: Wyatt
+
+> 🔒 **Remember**: Security is a shared responsibility. Help us keep the community safe by reporting issues responsibly.
