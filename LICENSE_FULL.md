@@ -96,7 +96,7 @@ THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIE
 **For Special Permissions:**
 If you require rights beyond those granted in this license, contact:
 
-- **Email**: mohamed561@gmail.com
+- **Email**: mrajawi561@gmail.com
 - **Subject**: "License Permission Request - EAN Barcode Finder"
 - **Repository**: https://github.com/mohamed561/Barcode-Search-Application
 
