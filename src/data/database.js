@@ -6039,6 +6039,10 @@ export const database = [
       "libellé eCommerce": "Turron chocolat au lait extrafino et amandes 230g - NESTLÉ "
     },
     {
+      "EAN": "8410679400414",
+      "libellé eCommerce": "Turrón au chocolat au lait et dragées au cacao 175g - TRAPA"
+    },
+    {
       "EAN": "5545005345992",
       "libellé eCommerce": "Turbo Twin  Air Fresh Auto"
     },
@@ -6073,6 +6077,30 @@ export const database = [
     {
       "EAN": "5400265040172",
       "libellé eCommerce": "Tuiles fines noires 125g - HAMLET"
+    },
+    {
+      "EAN": "5400265043852",
+      "libellé eCommerce": "Tuiles fines de chocolat noir et orange 100g - HAMLET"
+    },
+    {
+      "EAN": "5400265043937",
+      "libellé eCommerce": "Tuiles fines de chocolat noir et menthe 100g - HAMLET"
+    },
+    {
+      "EAN": "5400265043715",
+      "libellé eCommerce": "Tuiles fines de chocolat noir 100g - HAMLET"
+    },
+    {
+      "EAN": "5400265043869",
+      "libellé eCommerce": "Tuiles fines de chocolat caramel et sel de mer 100g - HAMLET"
+    },
+    {
+      "EAN": "5400265043845",
+      "libellé eCommerce": "Tuiles fines de chocolat au lait et noisettes 100g - HAMLET"
+    },
+    {
+      "EAN": "5400265043708",
+      "libellé eCommerce": "Tuiles fines de chocolat au lait croustillantes 100g - HAMLET"
     },
     {
       "EAN": "5400265040202",
@@ -6189,6 +6217,18 @@ export const database = [
     {
       "EAN": "5400265034140",
       "libellé eCommerce": "Truffes fantaisie amande violet 150g - EXCELCIUM "
+    },
+    {
+      "EAN": "8445291785182",
+      "libellé eCommerce": "Truffes au chocolat noir 85% 250g - NESTLÉ"
+    },
+    {
+      "EAN": "8445291784260",
+      "libellé eCommerce": "Truffes au chocolat noir 250g - NESTLÉ"
+    },
+    {
+      "EAN": "8445291785038",
+      "libellé eCommerce": "Truffes au chocolat lait 250g - NESTLÉ"
     },
     {
       "EAN": "8003535085377",
@@ -6535,20 +6575,20 @@ export const database = [
       "libellé eCommerce": "Trousse fille 2 zip visuelle 3D Bombe"
     },
     {
-      "EAN": "6111273382848",
-      "libellé eCommerce": "Trousse fille 1Zip visuelle 3D bombe "
-    },
-    {
-      "EAN": "6111273382855",
-      "libellé eCommerce": "Trousse fille 1Zip visuelle 3D bombe "
-    },
-    {
       "EAN": "6111273382824",
       "libellé eCommerce": "Trousse Fille 1Zip Visuelle 3D BOMBE"
     },
     {
       "EAN": "6111273382831",
       "libellé eCommerce": "Trousse Fille 1Zip Visuelle 3D BOMBE"
+    },
+    {
+      "EAN": "6111273382848",
+      "libellé eCommerce": "Trousse fille 1Zip visuelle 3D bombe "
+    },
+    {
+      "EAN": "6111273382855",
+      "libellé eCommerce": "Trousse fille 1Zip visuelle 3D bombe "
     },
     {
       "EAN": "3664944306528",
@@ -7205,6 +7245,10 @@ export const database = [
     {
       "EAN": "3083681047967",
       "libellé eCommerce": "Trio choux fleurs brocolis choux 750g - BONDUELLE "
+    },
+    {
+      "EAN": "8445291708129",
+      "libellé eCommerce": "Trio chocolat au lait noir et blanc L'escargot 296g - LANVIN"
     },
     {
       "EAN": "2000000707655",
@@ -9667,11 +9711,11 @@ export const database = [
       "libellé eCommerce": "Thermos plastique 1L doré"
     },
     {
-      "EAN": "2000014001893",
+      "EAN": "2000014001886",
       "libellé eCommerce": "Thermos plastique 1L "
     },
     {
-      "EAN": "2000014001886",
+      "EAN": "2000014001893",
       "libellé eCommerce": "Thermos plastique 1L "
     },
     {
@@ -10591,12 +10635,12 @@ export const database = [
       "libellé eCommerce": "The Power Of Strangers"
     },
     {
-      "EAN": "9781405941068",
-      "libellé eCommerce": "The Oracle"
-    },
-    {
       "EAN": "9781405941075",
       "libellé eCommerce": "The oracle"
+    },
+    {
+      "EAN": "9781405941068",
+      "libellé eCommerce": "The Oracle"
     },
     {
       "EAN": "9789464754919",
@@ -13163,6 +13207,10 @@ export const database = [
       "libellé eCommerce": "Tarte de brie en bloc 100g - PAYSAN BRETON"
     },
     {
+      "EAN": "2639985",
+      "libellé eCommerce": "Tarte de brie en bloc 100g - ÎLE DE FRANCE"
+    },
+    {
       "EAN": "3222472791454",
       "libellé eCommerce": "Tarte chèvre 400g - CASINO"
     },
@@ -13719,6 +13767,10 @@ export const database = [
       "libellé eCommerce": "Tapis de bain a 18 poches 59895EU"
     },
     {
+      "EAN": "2000014424357",
+      "libellé eCommerce": "Tapis db  Paspas Seti 2 Pcs "
+    },
+    {
       "EAN": "6935352127973",
       "libellé eCommerce": "Tapis d'exercice x4 gris 180x60x1cm "
     },
@@ -13865,10 +13917,6 @@ export const database = [
     {
       "EAN": "4893138232377",
       "libellé eCommerce": "Tapies Priere Enfant"
-    },
-    {
-      "EAN": "2000014424357",
-      "libellé eCommerce": "Tapi Sdb  Paspas Seti 2 Pcs "
     },
     {
       "EAN": "3665257512903",
@@ -14151,12 +14199,12 @@ export const database = [
       "libellé eCommerce": "Tajine pot en inox 34cm - ARIAN"
     },
     {
-      "EAN": "2000014091948",
-      "libellé eCommerce": "Tajine en verre doré 12cm"
-    },
-    {
       "EAN": "2000014091931",
       "libellé eCommerce": "Tajine en verre doré 12cm "
+    },
+    {
+      "EAN": "2000014091948",
+      "libellé eCommerce": "Tajine en verre doré 12cm"
     },
     {
       "EAN": "2000014476790",
@@ -17483,6 +17531,10 @@ export const database = [
       "libellé eCommerce": "SUPER BLENDER HY-258 IMPERIAL"
     },
     {
+      "EAN": "4100420083662",
+      "libellé eCommerce": "Super Additif Diesel 250 Ml LIQUI-MOLY"
+    },
+    {
       "EAN": "6192000752509",
       "libellé eCommerce": "SUNSILK SH ANTDNDRFF 2IN1SLCTA350 ML"
     },
@@ -17620,7 +17672,7 @@ export const database = [
     },
     {
       "EAN": "6111248930340",
-      "libellé eCommerce": "Sucre glace 5 kg - Sukari"
+      "libellé eCommerce": "Sucre glace 5 kg - SUKARI"
     },
     {
       "EAN": "6111242540651",
@@ -18225,6 +18277,14 @@ export const database = [
     {
       "EAN": "8806094290226",
       "libellé eCommerce": "Strap Sport  20 Mm(S/M) Gray Galaxy GALAXY"
+    },
+    {
+      "EAN": "4100420083686",
+      "libellé eCommerce": "Stop Fumees Diesel Concentre 250 Ml LIQUI-MOLY"
+    },
+    {
+      "EAN": "4100420083594",
+      "libellé eCommerce": "Stop Fuites D’Huile 300 Ml LIQUI-MOLY"
     },
     {
       "EAN": "6111252423289",
@@ -19021,6 +19081,10 @@ export const database = [
     {
       "EAN": "2000000944043",
       "libellé eCommerce": "Spin bike yd-690"
+    },
+    {
+      "EAN": "5425011420749",
+      "libellé eCommerce": "Spicy Potatos Wedges Skin on 1 kg - ECOFROST"
     },
     {
       "EAN": "2000014562240",
@@ -23423,6 +23487,10 @@ export const database = [
       "libellé eCommerce": "Shampoing baume cheveux très secs ou frisés 250ml - LE PETIT OLIVIER "
     },
     {
+      "EAN": "2000014251465",
+      "libellé eCommerce": "Shampoing Baby Gold 2x300ml le 2ème à -50% - JOHNSON & JOHNSON"
+    },
+    {
       "EAN": "8001841389820",
       "libellé eCommerce": "Shampoing avec huile argan et aloe vera 200ml - HEAD & SHOULDERS"
     },
@@ -24007,11 +24075,11 @@ export const database = [
       "libellé eCommerce": "Set salon nebraska III 5 places + table graphite"
     },
     {
-      "EAN": "8003723191774",
+      "EAN": "8003723490679",
       "libellé eCommerce": "Set salon nebraska 4 places + table marron"
     },
     {
-      "EAN": "8003723490679",
+      "EAN": "8003723191774",
       "libellé eCommerce": "Set salon nebraska 4 places + table marron"
     },
     {
@@ -24559,11 +24627,11 @@ export const database = [
       "libellé eCommerce": "Set De 6 Verres A The Traditionel Dunass Mm 6 Clr"
     },
     {
-      "EAN": "6111423202927",
+      "EAN": "6111423202910",
       "libellé eCommerce": "Set De 6 Verres A The Elive Mm        "
     },
     {
-      "EAN": "6111423202910",
+      "EAN": "6111423202927",
       "libellé eCommerce": "Set De 6 Verres A The Elive Mm        "
     },
     {
@@ -25655,12 +25723,24 @@ export const database = [
       "libellé eCommerce": "Serviettes hygiéniques ultra protection longues T3 x28 unités - ALWAYS"
     },
     {
+      "EAN": "6111271180620",
+      "libellé eCommerce": "Serviettes hygiéniques ultra nuit 2x14 unités la 2ème à -50% + under bag - MIA"
+    },
+    {
       "EAN": "6111245596051",
       "libellé eCommerce": "Serviettes hygiéniques ultra normal x10 -50% sur le 2ème - MIA"
     },
     {
       "EAN": "3574661212708",
       "libellé eCommerce": "Serviettes hygiéniques ultra normal plus x12pcs - CAREFREE"
+    },
+    {
+      "EAN": "6111271180606",
+      "libellé eCommerce": "Serviettes hygiéniques ultra normal 2x20 unités la 2ème à -50% + under bag - MIA"
+    },
+    {
+      "EAN": "6111271180613",
+      "libellé eCommerce": "Serviettes hygiéniques ultra normal 2x16 unités la 2ème à -50% + under bag - MIA"
     },
     {
       "EAN": "8001090122353",
@@ -26567,11 +26647,11 @@ export const database = [
       "libellé eCommerce": "Serviette main 30x30cm 650g faro blanc"
     },
     {
-      "EAN": "5602972276671",
+      "EAN": "5602972276626",
       "libellé eCommerce": "Serviette main 30x30cm 650g faro beige"
     },
     {
-      "EAN": "5602972276626",
+      "EAN": "5602972276671",
       "libellé eCommerce": "Serviette main 30x30cm 650g faro beige"
     },
     {
@@ -29363,6 +29443,10 @@ export const database = [
       "libellé eCommerce": "Savon perles orchidées noires et huile de genévrier Magical Beauty 85g - LUX"
     },
     {
+      "EAN": "6111024010402",
+      "libellé eCommerce": "Savon parfumé à la fleur d’oranger 4x120g - TAOUS"
+    },
+    {
       "EAN": "8000700000012",
       "libellé eCommerce": "Savon original 2x100g - DOVE"
     },
@@ -30468,15 +30552,11 @@ export const database = [
     },
     {
       "EAN": "2000014098336",
-      "libellé eCommerce": "Saucisses de boeuf piquantes 500g - FILIERE M"
-    },
-    {
-      "EAN": "2000014098350",
-      "libellé eCommerce": "Saucisses de boeuf douces 500g - FILIERE M"
+      "libellé eCommerce": "Saucisses de boeuf piquantes 500g"
     },
     {
       "EAN": "2000014098329",
-      "libellé eCommerce": "Saucisses de bœuf aux fines herbes 500g - FILIERE M"
+      "libellé eCommerce": "Saucisses de bœuf aux fines herbes 500g"
     },
     {
       "EAN": "6111271523595",
@@ -33155,6 +33235,10 @@ export const database = [
       "libellé eCommerce": "Salami de bœuf 80g - DEL PACHA"
     },
     {
+      "EAN": "6111242113725",
+      "libellé eCommerce": "Salami 380g + Mortadelle aux fines herbes 350g Lot - DINDY"
+    },
+    {
       "EAN": "8694064005518",
       "libellé eCommerce": "Saladier rond en plastique 5L - HOBBY LIFE"
     },
@@ -33392,7 +33476,7 @@ export const database = [
     },
     {
       "EAN": "6111261320173",
-      "libellé eCommerce": "Safran de taliouine boîte de 6 à 1g - DAR AZAAFARAN"
+      "libellé eCommerce": "Safran de Taliouine boîte de 6 à 1g - DAR AZAAFARAN"
     },
     {
       "EAN": "6111261320067",
@@ -33408,7 +33492,7 @@ export const database = [
     },
     {
       "EAN": "6111261320074",
-      "libellé eCommerce": "Safran de taliouine 10g - DAR AZAAFARAN "
+      "libellé eCommerce": "Safran de Taliouine 10g - DAR AZAAFARAN"
     },
     {
       "EAN": "2000014451469",
@@ -34719,11 +34803,11 @@ export const database = [
       "libellé eCommerce": "Sac à dos Trolley 18''avec une base rigide (motif Filles) 3 poches "
     },
     {
-      "EAN": "6111273382725",
+      "EAN": "6111273382732",
       "libellé eCommerce": "Sac à dos Trolley 18''avec une BASE RIGIDE  ( motif garcon ) 3POCHES"
     },
     {
-      "EAN": "6111273382732",
+      "EAN": "6111273382725",
       "libellé eCommerce": "Sac à dos Trolley 18''avec une BASE RIGIDE  ( motif garcon ) 3POCHES"
     },
     {
@@ -38883,11 +38967,11 @@ export const database = [
       "libellé eCommerce": "Recureur 5 unités - HANDY PAD"
     },
     {
-      "EAN": "3665257681937",
+      "EAN": "3665257638047",
       "libellé eCommerce": "RECTANGULAR 3 COMPARTMENTS PENCIL CASE WITH HANDLE - POLYESTER PRINTED - AUCHAN"
     },
     {
-      "EAN": "3665257638047",
+      "EAN": "3665257681937",
       "libellé eCommerce": "RECTANGULAR 3 COMPARTMENTS PENCIL CASE WITH HANDLE - POLYESTER PRINTED - AUCHAN"
     },
     {
@@ -39031,11 +39115,11 @@ export const database = [
       "libellé eCommerce": "Recharge vert pour roller effaçable pointe moyenne x3 - PILOT"
     },
     {
-      "EAN": "6959125751073",
+      "EAN": "6959125750090",
       "libellé eCommerce": "Recharge vadrouille chenille 42.5x13cm "
     },
     {
-      "EAN": "6959125750090",
+      "EAN": "6959125751073",
       "libellé eCommerce": "Recharge vadrouille chenille 42.5x13cm "
     },
     {
@@ -43155,16 +43239,16 @@ export const database = [
       "libellé eCommerce": "Poulet fermier peau jaune x1 pièce"
     },
     {
-      "EAN": "2000014744578",
-      "libellé eCommerce": "Poulet fermier environ 1,300"
-    },
-    {
       "EAN": "41014332",
       "libellé eCommerce": "Poulet fermier entier environ 1,3Kg"
     },
     {
       "EAN": "2000014097803",
       "libellé eCommerce": "Poulet fermier entier environ 1,3 Kg - APR"
+    },
+    {
+      "EAN": "2000014744578",
+      "libellé eCommerce": "Poulet Fermier Eldin au Kg"
     },
     {
       "EAN": "2000014578784",
@@ -43208,7 +43292,7 @@ export const database = [
     },
     {
       "EAN": "2000014744561",
-      "libellé eCommerce": "Poulet bio environ 1,200"
+      "libellé eCommerce": "Poulet Bio au Kg"
     },
     {
       "EAN": "3664944647669",
@@ -43905,6 +43989,10 @@ export const database = [
     {
       "EAN": "3166780025156",
       "libellé eCommerce": "Poteau sisal Pateo 37x36x42cm - RIGA"
+    },
+    {
+      "EAN": "5425011421296",
+      "libellé eCommerce": "Potatos Wedges Skin on 1 kg - ECOFROST"
     },
     {
       "EAN": "8710438114638",
@@ -45105,6 +45193,10 @@ export const database = [
     {
       "EAN": "3292590836573",
       "libellé eCommerce": "Pommes frites au four 1Kg - THIRIET"
+    },
+    {
+      "EAN": "5425011421357",
+      "libellé eCommerce": "Pommes frites allumettes 1Kg - ECOFROST"
     },
     {
       "EAN": "8710449026104",
@@ -49620,11 +49712,11 @@ export const database = [
     },
     {
       "EAN": "2000014097988",
-      "libellé eCommerce": "Pilons de poulet mariné 250g "
+      "libellé eCommerce": "Pilons de poulet mariné 250g"
     },
     {
       "EAN": "2000014097889",
-      "libellé eCommerce": "Pilons de poulet 250g "
+      "libellé eCommerce": "Pilons de poulet 250g"
     },
     {
       "EAN": "2631972",
@@ -52427,6 +52519,10 @@ export const database = [
       "libellé eCommerce": "Pâtes de riz 375g - MONT ASIE "
     },
     {
+      "EAN": "3264750423503",
+      "libellé eCommerce": "Pâtes de fruits Les délicieuses 1Kg - JACQUOT"
+    },
+    {
       "EAN": "3173284841106",
       "libellé eCommerce": "Pâtes de fruits exotiques 550g - JACQUOT"
     },
@@ -53152,7 +53248,7 @@ export const database = [
     },
     {
       "EAN": "6111266750753",
-      "libellé eCommerce": "Pâte à tartiner Tchico peanuts 350g - RÉVEY "
+      "libellé eCommerce": "Pâte à tartiner Tchico peanuts 350g - RÉVEY"
     },
     {
       "EAN": "6111266752054",
@@ -53445,6 +53541,10 @@ export const database = [
     {
       "EAN": "8410014443571",
       "libellé eCommerce": "Pâte à tartiner au cacao et noisettes 320g - NOCILLA"
+    },
+    {
+      "EAN": "6111037002883",
+      "libellé eCommerce": "Pâte à tartiner au cacao et aux noisettes 800g - FAMILIA"
     },
     {
       "EAN": "0016843698755",
@@ -66871,6 +66971,14 @@ export const database = [
       "libellé eCommerce": "Mini fusilli 500g - PANZANI"
     },
     {
+      "EAN": "8000500409572",
+      "libellé eCommerce": "Mini Friends en chocolat au lait avec morceaux de biscuits x20 122g - KINDER"
+    },
+    {
+      "EAN": "8000500427262",
+      "libellé eCommerce": "Mini Friends caramel avec éclats de biscuits 122g - KINDER"
+    },
+    {
       "EAN": "4008146008955",
       "libellé eCommerce": "MINI FOUR TO 2052 9L SEVRIN"
     },
@@ -67037,6 +67145,22 @@ export const database = [
     {
       "EAN": "3222477003323",
       "libellé eCommerce": "Mini choux saveur chèvre poivre 60g - CASINO"
+    },
+    {
+      "EAN": "8410679800603",
+      "libellé eCommerce": "Mini chocolats sans sucres ajoutés noirs 80% et au lait - TRAPA"
+    },
+    {
+      "EAN": "8410679800610",
+      "libellé eCommerce": "Mini chocolats noirs 80% sans sucres ajoutés Pack 3x20g - TRAPA"
+    },
+    {
+      "EAN": "8410679800511",
+      "libellé eCommerce": "Mini chocolats noirs 70% Intenso Pack 3x24 g - TRAPA"
+    },
+    {
+      "EAN": "8410679800504",
+      "libellé eCommerce": "Mini chocolats Intenso lait noirs 70% et noirs 80% 24g - TRAPA"
     },
     {
       "EAN": "6111017040829",
@@ -68851,12 +68975,16 @@ export const database = [
       "libellé eCommerce": "Meringue x10 unités"
     },
     {
-      "EAN": "2000014098343",
-      "libellé eCommerce": "Merguez de boeuf cocktail 500g - FILIERE M"
+      "EAN": "2000014098350",
+      "libellé eCommerce": "Merguez de boeuf cocktail 500g"
     },
     {
       "EAN": "41183236",
       "libellé eCommerce": "Merguez de bœuf 500g - FILIERE M"
+    },
+    {
+      "EAN": "2000014098343",
+      "libellé eCommerce": "Merguez de bœuf 500g"
     },
     {
       "EAN": "6111263080761",
@@ -69504,7 +69632,7 @@ export const database = [
     },
     {
       "EAN": "9782493909282",
-      "libellé eCommerce": "Mediter, Jour Apres Jour"
+      "libellé eCommerce": "Mediter Jour Apres Jour"
     },
     {
       "EAN": "9780241348482",
@@ -71676,7 +71804,7 @@ export const database = [
     },
     {
       "EAN": "41204030",
-      "libellé eCommerce": "Mangue 1Kg"
+      "libellé eCommerce": "Mangue 500g"
     },
     {
       "EAN": "2000014400245",
@@ -76091,6 +76219,10 @@ export const database = [
       "libellé eCommerce": "Lipton Ice Tea pêche canette 33cl "
     },
     {
+      "EAN": "6111252423210",
+      "libellé eCommerce": "Lipton Ice Tea pêche canette 33cl"
+    },
+    {
       "EAN": "6111252422411",
       "libellé eCommerce": "Lipton Ice Tea pêche 50cl"
     },
@@ -76105,6 +76237,10 @@ export const database = [
     {
       "EAN": "3228886030011",
       "libellé eCommerce": "Lipton Ice tea pêche 33cl"
+    },
+    {
+      "EAN": "6111252423227",
+      "libellé eCommerce": "Lipton Ice Tea fruits rouges canette 33cl"
     },
     {
       "EAN": "6111252422428",
@@ -80180,7 +80316,7 @@ export const database = [
     },
     {
       "EAN": "2000014744547",
-      "libellé eCommerce": "Lapin entier environ 1,200"
+      "libellé eCommerce": "Lapin entier 1,2Kg"
     },
     {
       "EAN": "2000014578715",
@@ -86872,7 +87008,7 @@ export const database = [
     },
     {
       "EAN": "4100420095030",
-      "libellé eCommerce": "Huile  Super Leichtlauf 10 W-40 1 L Liqui-Moly LIQUI-MOLY"
+      "libellé eCommerce": "Huile  Super Leichtlauf 10 W-40 1L LIQUI-MOLY"
     },
     {
       "EAN": "6111099000605",
@@ -86964,11 +87100,11 @@ export const database = [
     },
     {
       "EAN": "4100420089053",
-      "libellé eCommerce": "Huile Touring High Tech 15 W-40 1 Liqui-Moly"
+      "libellé eCommerce": "Huile Touring High Tech 15 W-40 1 L LIQUI-MOLY"
     },
     {
       "EAN": "4100420095108",
-      "libellé eCommerce": "Huile Synthetiquetop Tec 4100 5 W-40 1L Liqui-Moly LIQUI-MOLY"
+      "libellé eCommerce": "Huile Synthetiquetop Tec 4100 5 W-40 1L LIQUI-MOLY"
     },
     {
       "EAN": "4100420095054",
@@ -89388,7 +89524,7 @@ export const database = [
     },
     {
       "EAN": "2000014097872",
-      "libellé eCommerce": "Haut de cuisse de poulet 250g "
+      "libellé eCommerce": "Haut de cuisse de poulet 250g"
     },
     {
       "EAN": "2000014744530",
@@ -91181,6 +91317,30 @@ export const database = [
     {
       "EAN": "3245676054613",
       "libellé eCommerce": "Grand bonnet de Noël 46cm"
+    },
+    {
+      "EAN": "8000500434536",
+      "libellé eCommerce": "Grand assortiment de chocolats promenade en ville x42 pièces 432g - FERRERO"
+    },
+    {
+      "EAN": "8000500441138",
+      "libellé eCommerce": "Grand assortiment de chocolats promenade en ville x20 197g - FERRERO"
+    },
+    {
+      "EAN": "3110846250785",
+      "libellé eCommerce": "Grand assortiment de chocolats noirs 70% lait et blancs 409g - RÉVILLON"
+    },
+    {
+      "EAN": "8000500434482",
+      "libellé eCommerce": "Grand assortiment de chocolats merveilles d'hiver x42 440,7g - FERRERO"
+    },
+    {
+      "EAN": "8000500441169",
+      "libellé eCommerce": "Grand assortiment de chocolats merveilles d'hiver x20 203g - FERRERO"
+    },
+    {
+      "EAN": "8000500431719",
+      "libellé eCommerce": "Grand assortiment de chocolats lumières de fête x20 197g - FERRERO"
     },
     {
       "EAN": "2000014400351",
@@ -93272,7 +93432,7 @@ export const database = [
     },
     {
       "EAN": "22241450",
-      "libellé eCommerce": "Gigot d’agneau raccourci 1Kg "
+      "libellé eCommerce": "Gigot d’agneau raccourci 1Kg"
     },
     {
       "EAN": "2000014098244",
@@ -97687,6 +97847,10 @@ export const database = [
       "libellé eCommerce": "Fromage maasdam bloc 100g - JACKS CHEESE"
     },
     {
+      "EAN": "6111262583843",
+      "libellé eCommerce": "Fromage Maasdam 100g - MARJANE"
+    },
+    {
       "EAN": "3228020260106",
       "libellé eCommerce": "Fromage léger 250g - PRESIDENT"
     },
@@ -101275,6 +101439,10 @@ export const database = [
       "libellé eCommerce": "Fonds de tarte mini soirée chocolat 4.5/1.5"
     },
     {
+      "EAN": "3173287890101",
+      "libellé eCommerce": "Fondant chocolat au lait Les délicieux 200g - JACQUOT"
+    },
+    {
       "EAN": "3324040218933",
       "libellé eCommerce": "Fondant chaud tomate Origan et Ail 230g - PÂTURAGES COMTOIS"
     },
@@ -102875,6 +103043,10 @@ export const database = [
       "libellé eCommerce": "Figurines garçon/fille en pains d'épices C85727123 "
     },
     {
+      "EAN": "5400265043821",
+      "libellé eCommerce": "Figurines en chocolats hiver Arbre de Noël praliné 195g - HAMLET"
+    },
+    {
       "EAN": "5400265043197",
       "libellé eCommerce": "Figurines en chocolat fourrées à l'océan 250g - HAMLET"
     },
@@ -102889,6 +103061,18 @@ export const database = [
     {
       "EAN": "5400265043166",
       "libellé eCommerce": "Figurines de chocolat fourrées Boulanger 250g - HAMLET"
+    },
+    {
+      "EAN": "5400265043784",
+      "libellé eCommerce": "Figurines de chocolat fourrées au praliné Escargots 195g - HAMLET"
+    },
+    {
+      "EAN": "5400265043791",
+      "libellé eCommerce": "Figurines de chocolat fourrées au praliné Assortiment d'automne 195g - HAMLET"
+    },
+    {
+      "EAN": "5400265043838",
+      "libellé eCommerce": "Figurines de chocolat de Noël fourrées au praliné 195g - HAMLET"
     },
     {
       "EAN": "3245676838824",
@@ -105608,7 +105792,7 @@ export const database = [
     },
     {
       "EAN": "8680801627389",
-      "libellé eCommerce": "Etagére Rangement2Niveaux Blanc Screw OKYANUS"
+      "libellé eCommerce": "Etagére Rangement 2 Niveaux Blanc Screw OKYANUS"
     },
     {
       "EAN": "8680801617755",
@@ -108883,6 +109067,10 @@ export const database = [
       "libellé eCommerce": "Eclats de chocolat noir cranberries amandes graines bio 120g - MONOPRIX GOURMET"
     },
     {
+      "EAN": "8000500409596",
+      "libellé eCommerce": "Eclats de biscuits Mini Friends x20 122g - KINDER"
+    },
+    {
       "EAN": "2000014463134",
       "libellé eCommerce": "Échelle télescopique de 2.9M DLT209B"
     },
@@ -109909,6 +110097,10 @@ export const database = [
     {
       "EAN": "2000000763309",
       "libellé eCommerce": "Duo cuisson encastrable LX410 + Hotte 3501X/KO 830 - ROYAL"
+    },
+    {
+      "EAN": "8445291094574",
+      "libellé eCommerce": "Duo chocolat au lait et noir L'escargot 362g - LANVIN"
     },
     {
       "EAN": "4250078908760",
@@ -115300,7 +115492,7 @@ export const database = [
     },
     {
       "EAN": "2000014744516",
-      "libellé eCommerce": "Demi poulet fermier  environ 1,100"
+      "libellé eCommerce": "Demi Poulet Fermier au Kg"
     },
     {
       "EAN": "6111069000673",
@@ -116687,6 +116879,10 @@ export const database = [
       "libellé eCommerce": "Cuisse de dinde 80g - MARJANE"
     },
     {
+      "EAN": "22315700",
+      "libellé eCommerce": "CUISSE AU POIVRE NOIR DINDY 100G"
+    },
+    {
       "EAN": "8697413498054",
       "libellé eCommerce": "Cuisinière I-6020-T 4 feux inox - ITIMAT"
     },
@@ -117175,16 +117371,28 @@ export const database = [
       "libellé eCommerce": "Crunchips WOW Jalapeno & Cream Cheese 80g - LORENZ"
     },
     {
+      "EAN": "2000014702257",
+      "libellé eCommerce": "Crunchips saveur sel et vinaigre 2x100g la 2ème à -50% - LORENZ"
+    },
+    {
       "EAN": "4018077695452",
       "libellé eCommerce": "Crunchips saveur sel et vinaigre 100g - LORENZ"
     },
     {
+      "EAN": "2000014702264",
+      "libellé eCommerce": "Crunchips saveur piment rouge 2x100g la 2ème à -50% - LORENZ"
+    },
+    {
       "EAN": "4018077650512",
-      "libellé eCommerce": "Crunchips saveur poivron rouge red chili 100g - LORENZ"
+      "libellé eCommerce": "Crunchips saveur piment rouge 100g - LORENZ"
     },
     {
       "EAN": "4018077722127",
       "libellé eCommerce": "Crunchips saveur paprika 50g - LORENZ"
+    },
+    {
+      "EAN": "2000014702271",
+      "libellé eCommerce": "Crunchips saveur paprika 2x100g la 2ème à -50% - LORENZ"
     },
     {
       "EAN": "4018077700101",
@@ -117211,8 +117419,16 @@ export const database = [
       "libellé eCommerce": "Crunchips saveur chakalaka 100g - LORENZ"
     },
     {
+      "EAN": "2000014702240",
+      "libellé eCommerce": "Crunchips saveur barbecue 2x100g la 2ème à -50% - LORENZ"
+    },
+    {
       "EAN": "4018077695032",
       "libellé eCommerce": "Crunchips saveur barbecue 100g - LORENZ"
+    },
+    {
+      "EAN": "2000014702233",
+      "libellé eCommerce": "Crunchips salées 2x100g la 2ème à -50% - LORENZ"
     },
     {
       "EAN": "4017100712203",
@@ -121432,7 +121648,7 @@ export const database = [
     },
     {
       "EAN": "6111263500719",
-      "libellé eCommerce": "Couscous quinoi 500g - LAMMIMA"
+      "libellé eCommerce": "Couscous quinoa 500g - LAMMIMA"
     },
     {
       "EAN": "6111267930277",
@@ -121577,6 +121793,10 @@ export const database = [
     {
       "EAN": "6111261880035",
       "libellé eCommerce": "Couscous hamra au blé dur 1Kg - EL HADGA MFASSIS"
+    },
+    {
+      "EAN": "6111261880028",
+      "libellé eCommerce": "Couscous fin seffa blé dur 1kg - EL HADGA MFASSIS"
     },
     {
       "EAN": "6111251460285",
@@ -122609,10 +122829,6 @@ export const database = [
     {
       "EAN": "6111262582747",
       "libellé eCommerce": "Coude 500g - FAYZ"
-    },
-    {
-      "EAN": "6111261880028",
-      "libellé eCommerce": "Coucous fin seffa blé dur 1kg - EL HADGA MFASSIS "
     },
     {
       "EAN": "8001841677194",
@@ -123917,6 +124133,10 @@ export const database = [
     {
       "EAN": "2000014035003",
       "libellé eCommerce": "Cornets gaufrettes chocolat 3+1 gratuit x25g - OZMO"
+    },
+    {
+      "EAN": "8003340808932",
+      "libellé eCommerce": "Cornet de chocolats au caramel salé Lindor 200g - LINDT"
     },
     {
       "EAN": "8691707090122",
@@ -128303,6 +128523,14 @@ export const database = [
       "libellé eCommerce": "Coffret de 12 crayons de couleur planète souriante - MAPED"
     },
     {
+      "EAN": "3046920014458",
+      "libellé eCommerce": "Coffret chocolat champs elysées 400g - LINDT"
+    },
+    {
+      "EAN": "3046920014465",
+      "libellé eCommerce": "Coffret chocolat champs elysées 164g - LINDT"
+    },
+    {
       "EAN": "3395501954172",
       "libellé eCommerce": "Coffret Choco Monnaie Pirate 30g - FIZZY"
     },
@@ -128337,6 +128565,26 @@ export const database = [
     {
       "EAN": "3665257011291",
       "libellé eCommerce": "Coffret bébé doux avec animal 35cm - ONE TWO FUN"
+    },
+    {
+      "EAN": "3110846275009",
+      "libellé eCommerce": "Coffret au chocolat noir 70% Lait et blanc 233g - RÉVILLON"
+    },
+    {
+      "EAN": "3110846250754",
+      "libellé eCommerce": "Coffret au chocolat noir 70% et Lait 404g - RÉVILLON"
+    },
+    {
+      "EAN": "3110846275696",
+      "libellé eCommerce": "Coffret au chocolat noir 70% 232g - RÉVILLON"
+    },
+    {
+      "EAN": "3110846250662",
+      "libellé eCommerce": "Coffret au chocolat au lait 407g - RÉVILLON"
+    },
+    {
+      "EAN": "3110846274996",
+      "libellé eCommerce": "Coffret au chocolat au lait 230g - RÉVILLON"
     },
     {
       "EAN": "5035048010341",
@@ -130323,6 +130571,10 @@ export const database = [
       "libellé eCommerce": "Chopper VINTAGE 438 beige - ARIETE "
     },
     {
+      "EAN": "3046920012874",
+      "libellé eCommerce": "Chocolats variation noirs Connaisseurs 366g - LINDT"
+    },
+    {
       "EAN": "8410679001406",
       "libellé eCommerce": "Chocolats Séduction sans huile de palme x8 unités 56g - TRAPA"
     },
@@ -130345,6 +130597,10 @@ export const database = [
     {
       "EAN": "6111017045992",
       "libellé eCommerce": "Chocolats noirs Napolitain 72% cacao 2sachets x100g le 2ème à -50% - AIGUEBELLE"
+    },
+    {
+      "EAN": "8410679800078",
+      "libellé eCommerce": "Chocolats noirs au lait et biscuits Pack 3x35g - TRAPA"
     },
     {
       "EAN": "6111017040881",
@@ -130431,6 +130687,10 @@ export const database = [
       "libellé eCommerce": "Chocolats au lait papillotes calendrier de l'Avent 215g - CELEBRATIONS"
     },
     {
+      "EAN": "8410679180057",
+      "libellé eCommerce": "Chocolats au lait Pack 3x35g - TRAPA"
+    },
+    {
       "EAN": "6294001820253",
       "libellé eCommerce": "Chocolats au lait doux Minis 250g - GALAXY"
     },
@@ -130449,6 +130709,10 @@ export const database = [
     {
       "EAN": "3173287874606",
       "libellé eCommerce": "Chocolats au lait assortiment 214g - JACQUOT"
+    },
+    {
+      "EAN": "8003340095325",
+      "libellé eCommerce": "Chocolats assortis lait noirs et blancs Lindor 287g - LINDT"
     },
     {
       "EAN": "8410679106064",
@@ -131047,6 +131311,10 @@ export const database = [
       "libellé eCommerce": "Chocolat au lait suisse à l'ancienne 100g - VILLARS"
     },
     {
+      "EAN": "8445291699298",
+      "libellé eCommerce": "Chocolat au lait saveur caramel cœur praliné L'escargot 164g - LANVIN"
+    },
+    {
       "EAN": "8410679234507",
       "libellé eCommerce": "Chocolat au lait sans sucre 80g - TRAPA"
     },
@@ -131113,6 +131381,10 @@ export const database = [
     {
       "EAN": "3250393432545",
       "libellé eCommerce": "Chocolat au lait Les Rochers 192g - IVORIA"
+    },
+    {
+      "EAN": "8445291094635",
+      "libellé eCommerce": "Chocolat au lait L'escargot 362g - LANVIN"
     },
     {
       "EAN": "6942836713003",
@@ -131229,6 +131501,18 @@ export const database = [
     {
       "EAN": "8000380156832",
       "libellé eCommerce": "Chocolat au lait crème cacao 87g - LOACKER"
+    },
+    {
+      "EAN": "8445291707979",
+      "libellé eCommerce": "Chocolat au lait cœur praliné L'escargot 296g - LANVIN"
+    },
+    {
+      "EAN": "8445291699472",
+      "libellé eCommerce": "Chocolat au lait cœur praliné L'escargot 164g - LANVIN"
+    },
+    {
+      "EAN": "8445291699205",
+      "libellé eCommerce": "Chocolat au lait cœur praliné à l'amande L'escargot 164g - LANVIN"
     },
     {
       "EAN": "3173287205608",
@@ -138371,15 +138655,15 @@ export const database = [
       "libellé eCommerce": "Cancoillotte nature 250g - CASINO ÇA VIENT D ICI"
     },
     {
-      "EAN": "2000014744493",
-      "libellé eCommerce": "Canard environ 1,500"
-    },
-    {
       "EAN": "7613035885219",
       "libellé eCommerce": "Canard en sauce pour chat adulte 100g - FRISKIES"
     },
     {
       "EAN": "2000014578708",
+      "libellé eCommerce": "Canard au Kg"
+    },
+    {
+      "EAN": "2000014744493",
       "libellé eCommerce": "Canard au Kg"
     },
     {
@@ -138579,8 +138863,20 @@ export const database = [
       "libellé eCommerce": "Calissons d aix Amandine x11 unités 145g - LE ROY RENÉ"
     },
     {
+      "EAN": "8000500448571",
+      "libellé eCommerce": "Calendrier de l'Avent Mémo en chocolat Kinder & Co 316g - KINDER"
+    },
+    {
       "EAN": "8000500294772",
       "libellé eCommerce": "Calendrier de l'Avent maison 3d 234g - KINDER"
+    },
+    {
+      "EAN": "4000539770029",
+      "libellé eCommerce": "Calendrier de l'avent Lindor 109g - LINDT"
+    },
+    {
+      "EAN": "8000500446706",
+      "libellé eCommerce": "Calendrier de l'avent gaufrettes chocolat lait et noisette 181g - KINDER BUENO"
     },
     {
       "EAN": "8000500378588",
@@ -138593,6 +138889,30 @@ export const database = [
     {
       "EAN": "5000159476768",
       "libellé eCommerce": "Calendrier de l'avent enfants chocolat & freinds 361g - M&M'S"
+    },
+    {
+      "EAN": "8000500429969",
+      "libellé eCommerce": "Calendrier de l'Avent en chocolat x24 259g - FERRERO"
+    },
+    {
+      "EAN": "8000500452714",
+      "libellé eCommerce": "Calendrier de l'Avent en chocolat x24 258g - FERRERO ROCHER"
+    },
+    {
+      "EAN": "8000500426692",
+      "libellé eCommerce": "Calendrier de l'Avent en chocolat Pop Up x24 123g - KINDER"
+    },
+    {
+      "EAN": "8000500447697",
+      "libellé eCommerce": "Calendrier de l'Avent en chocolat Kinder & Co 265g - KINDER"
+    },
+    {
+      "EAN": "8445291774995",
+      "libellé eCommerce": "Calendrier de l'Avent en chocolat au lait et céréales croustillantes85g - CRUNCH"
+    },
+    {
+      "EAN": "8445291171213",
+      "libellé eCommerce": "Calendrier de l'Avent en chocolat 85g - GALAK"
     },
     {
       "EAN": "7622400011498",
@@ -140855,10 +141175,6 @@ export const database = [
       "libellé eCommerce": "Café moulu parfumé prestige 200g - ASTA"
     },
     {
-      "EAN": "6111232005061",
-      "libellé eCommerce": "Café moulu Pack 2x200g = Tasse et sous-tasse gratuits - DIAMANT NOIR"
-    },
-    {
       "EAN": "6111243003681",
       "libellé eCommerce": "Café moulu original 200g - CARTE NOIRE"
     },
@@ -141016,7 +141332,11 @@ export const database = [
     },
     {
       "EAN": "6111232003234",
-      "libellé eCommerce": "Café moulu Colombia 3x200g - DIAMANT NOIR"
+      "libellé eCommerce": "Café moulu Colombia Pack 3x200g - DIAMANT NOIR"
+    },
+    {
+      "EAN": "6111232005061",
+      "libellé eCommerce": "Café moulu Colombia Pack 2x200g - DIAMANT NOIR"
     },
     {
       "EAN": "6111232003012",
@@ -143739,6 +144059,10 @@ export const database = [
       "libellé eCommerce": "Brocolis en fleurettes 1Kg - THIRIET"
     },
     {
+      "EAN": "2000014097216",
+      "libellé eCommerce": "Brocolis 500g"
+    },
+    {
       "EAN": "6111271870224",
       "libellé eCommerce": "Brocolis 300g - KAMILTY"
     },
@@ -143768,7 +144092,7 @@ export const database = [
     },
     {
       "EAN": "2000014098008",
-      "libellé eCommerce": "Brochettes filets de poulet mariné 250g "
+      "libellé eCommerce": "Brochettes filets de poulet mariné 250g"
     },
     {
       "EAN": "6111245342559",
@@ -143780,7 +144104,7 @@ export const database = [
     },
     {
       "EAN": "2000014098015",
-      "libellé eCommerce": "Brochettes de filets de dinde mariné 250g "
+      "libellé eCommerce": "Brochettes de filets de dinde mariné 250g"
     },
     {
       "EAN": "2000014744462",
@@ -143821,10 +144145,6 @@ export const database = [
     {
       "EAN": "2000014315129",
       "libellé eCommerce": "Broche barbecue ZDBQ-0047 x6 unités - TOP HOME"
-    },
-    {
-      "EAN": "2000014097216",
-      "libellé eCommerce": "Broccolis 500g"
     },
     {
       "EAN": "20284664",
@@ -144503,6 +144823,10 @@ export const database = [
       "libellé eCommerce": "Box De Rangement Avec Bras  QLUX"
     },
     {
+      "EAN": "8000500451342",
+      "libellé eCommerce": "Box à partager Mix Mini & Eggs 193g - KINDER BUENO"
+    },
+    {
       "EAN": "8694064014251",
       "libellé eCommerce": "Box à 3 compartiments - HOBBY LIFE"
     },
@@ -145095,6 +145419,14 @@ export const database = [
       "libellé eCommerce": "Boules praliné chocolat au lait et éclats de noisettes 1Kg - JACQUOT"
     },
     {
+      "EAN": "3173287777143",
+      "libellé eCommerce": "Boules praliné au chocolat au noir Les incontournables 250g - JACQUOT"
+    },
+    {
+      "EAN": "3173287776948",
+      "libellé eCommerce": "Boules praliné au chocolat au lait Les incontournables 250g - JACQUOT"
+    },
+    {
       "EAN": "3245676834086",
       "libellé eCommerce": "Boules plastiques doré/rouge"
     },
@@ -145297,6 +145629,10 @@ export const database = [
     {
       "EAN": "3665257568573",
       "libellé eCommerce": "Boules cake style pièces"
+    },
+    {
+      "EAN": "3250390188681",
+      "libellé eCommerce": "Boules à suspendre + père noël chocolat au lait 125g - IVORIA"
     },
     {
       "EAN": "3665257580070",
@@ -145656,7 +145992,7 @@ export const database = [
     },
     {
       "EAN": "6111026122882",
-      "libellé eCommerce": "Bouillon crevettes 8 cubes x 9 g - Knor"
+      "libellé eCommerce": "Bouillon crevettes 8 cubes x 9 g - KNORR"
     },
     {
       "EAN": "6111026102976",
@@ -146983,6 +147319,46 @@ export const database = [
       "libellé eCommerce": "Bouchées de chocolats noix de coco et amande 400g - RAFFAELLO"
     },
     {
+      "EAN": "3046920012447",
+      "libellé eCommerce": "Bouchées de chocolats lait noisette Les Pyrénéens 175g - LINDT"
+    },
+    {
+      "EAN": "3046920012850",
+      "libellé eCommerce": "Bouchées de chocolats lait noirs et blancs Connaisseurs 367g - LINDT"
+    },
+    {
+      "EAN": "8445291775299",
+      "libellé eCommerce": "Bouchées de chocolats fourrées au citron et à la menthe 400g - AFTER EIGHT"
+    },
+    {
+      "EAN": "3046920013024",
+      "libellé eCommerce": "Bouchées de chocolats au Lait pralinés Connaisseurs 180g - LINDT"
+    },
+    {
+      "EAN": "3046920013086",
+      "libellé eCommerce": "Bouchées de chocolats au lait Mix Festif Teddy 146g - LINDT"
+    },
+    {
+      "EAN": "3046920012959",
+      "libellé eCommerce": "Bouchées de chocolats au Lait Hotte cadeau Teddy 134g - LINDT"
+    },
+    {
+      "EAN": "3046920012881",
+      "libellé eCommerce": "Bouchées de chocolats au lait et noirs Les Pyrénéens 204g - LINDT"
+    },
+    {
+      "EAN": "8003340805603",
+      "libellé eCommerce": "Bouchées de chocolats au lait et blancs Lindor 337g - LINDT"
+    },
+    {
+      "EAN": "3046920012836",
+      "libellé eCommerce": "Bouchées chocolats lait noirs et blancs Champs-Elysées éd. Arc lait235g-LINDT"
+    },
+    {
+      "EAN": "3046920012904",
+      "libellé eCommerce": "Bouchées chocolats lait noirs et blancs Champs-Elysées Avenue en fête 467g-LINDT"
+    },
+    {
       "EAN": "3222477766297",
       "libellé eCommerce": "Bouchées chien en sauce à la volaille et carottes 1240g - COAP ANIMAPLUS"
     },
@@ -147595,6 +147971,18 @@ export const database = [
       "libellé eCommerce": "Bonbons de chocolat cœur de lait aux éclats de noisettes 200g - IVORIA "
     },
     {
+      "EAN": "5400265043753",
+      "libellé eCommerce": "Bonbons de chocolat belge Pralinés Collection 200g - HAMLET"
+    },
+    {
+      "EAN": "5400265041650",
+      "libellé eCommerce": "Bonbons de chocolat belge Deluxe collection 175g - HAMLET"
+    },
+    {
+      "EAN": "5400265041667",
+      "libellé eCommerce": "Bonbons de chocolat belge Caramel Collection 175g - HAMLET"
+    },
+    {
       "EAN": "8690146102335",
       "libellé eCommerce": "Bonbons CoolBeans Tropic Mix 60g - BEBETO"
     },
@@ -147777,6 +148165,10 @@ export const database = [
     {
       "EAN": "8445291351356",
       "libellé eCommerce": "Bonbons au chocolat noir et et à la framboise Creations Caja Roja 109g - NESTLÉ"
+    },
+    {
+      "EAN": "8410679004452",
+      "libellé eCommerce": "Bonbons au chocolat au lait 53g - TRAPA"
     },
     {
       "EAN": "3250391504886",
@@ -148832,7 +149224,7 @@ export const database = [
     },
     {
       "EAN": "2000014090248",
-      "libellé eCommerce": "Boîte Rang Avcouvercle (2 Nive14*14*10.8Tl-2572-2"
+      "libellé eCommerce": "Boîte Rang Avcouvercle 2 Nive14*14*10.8Tl-2572-2"
     },
     {
       "EAN": "2000014296572",
@@ -150063,10 +150455,6 @@ export const database = [
       "libellé eCommerce": "Boite assortiment boules fourrées chocolat au lait Boules Crème 1Kg - JACQUOT"
     },
     {
-      "EAN": "8003340095325",
-      "libellé eCommerce": "Boîte assortiment bouchées de chocolats aux cœurs fondants Lindor 287g- LINDT\r\n\r\n\r\n"
-    },
-    {
       "EAN": "3173287772506",
       "libellé eCommerce": "Boîte assortiment bonbons de chocolat 800g - JACQUOT"
     },
@@ -150228,7 +150616,7 @@ export const database = [
     },
     {
       "EAN": "3664944389958",
-      "libellé eCommerce": "Boite A Pate Metal Embosse Brooklyn M12 18,3 x 7"
+      "libellé eCommerce": "Boite A Pate Metal Embosse Brooklyn M12 18,3 * 7"
     },
     {
       "EAN": "8699296672774",
@@ -150336,7 +150724,7 @@ export const database = [
     },
     {
       "EAN": "3664944389934",
-      "libellé eCommerce": "Boite A Farine Metal Embosse Brooklyn M12 18,3"
+      "libellé eCommerce": "Boite A Farine Metal Embosse Brooklyn M12 18,3 "
     },
     {
       "EAN": "6111185003008",
@@ -155291,6 +155679,10 @@ export const database = [
       "libellé eCommerce": "Beurre allégé doux en plaquette 200g - BADAOUIA"
     },
     {
+      "EAN": "2000014762619",
+      "libellé eCommerce": "Beurre allégé doux 60% MG 400g - MARGAFRIQUE"
+    },
+    {
       "EAN": "6111246720417",
       "libellé eCommerce": "Beurre allégé doux 45% MG 500g - LE BERGER"
     },
@@ -156683,6 +157075,10 @@ export const database = [
       "libellé eCommerce": "Barres chocolatéesfourrées au nougat et caramel 5+1 gratuite 270g - MARS"
     },
     {
+      "EAN": "8000500448908",
+      "libellé eCommerce": "Barres chocolatées x12 150g - KINDER"
+    },
+    {
       "EAN": "6221134003338",
       "libellé eCommerce": "Barres chocolatées minis fourrées au caramel x12 unités 227g - MARS"
     },
@@ -157807,6 +158203,18 @@ export const database = [
       "libellé eCommerce": "Balls cacao and lime 58g - GOOD CALORIES"
     },
     {
+      "EAN": "8000500449158",
+      "libellé eCommerce": "Balls au chocolat au Lait et éclats de noisettes croustillantes 164 g - KINDER"
+    },
+    {
+      "EAN": "8000500449202",
+      "libellé eCommerce": "Balls au cacao et éclats de biscuits croustillants 164 g - KINDER"
+    },
+    {
+      "EAN": "3457680000801",
+      "libellé eCommerce": "Ballotins de marrons glacés 300g - FRUTIGNAC"
+    },
+    {
       "EAN": "6111245510460",
       "libellé eCommerce": "Ballotine au foie gras et champignons noirs 300g - LA MAISON DU FOIE GRAS"
     },
@@ -157871,6 +158279,10 @@ export const database = [
       "libellé eCommerce": "Ballotin truffes au cacao 200g - FALIZE"
     },
     {
+      "EAN": "3173287240203",
+      "libellé eCommerce": "Ballotin rochers pralinés Les délicieux 250g - JACQUOT"
+    },
+    {
       "EAN": "8000500182567",
       "libellé eCommerce": "Ballotin rocher gaufrettes noix de coco et amande x26 unités 260g - RAFFAELLO"
     },
@@ -157909,6 +158321,14 @@ export const database = [
     {
       "EAN": "3015497035203",
       "libellé eCommerce": "Ballotin de chocolats Rochers praliné 250g - JACQUOT"
+    },
+    {
+      "EAN": "3110846247396",
+      "libellé eCommerce": "Ballotin de chocolats noirs lait et blancs 70% 215g - RÉVILLON"
+    },
+    {
+      "EAN": "3110846247440",
+      "libellé eCommerce": "Ballotin de chocolats noirs 70% 215g - RÉVILLON"
     },
     {
       "EAN": "3700125850005",
@@ -157969,6 +158389,10 @@ export const database = [
     {
       "EAN": "3046920000017",
       "libellé eCommerce": "Ballotin chocolat au lait Les Pyrénéens 175g - LINDT"
+    },
+    {
+      "EAN": "3110846247372",
+      "libellé eCommerce": "Ballotin chocolat au lait 214g - RÉVILLON"
     },
     {
       "EAN": "8437016512173",
@@ -159652,7 +160076,7 @@ export const database = [
     },
     {
       "EAN": "9782864972303",
-      "libellé eCommerce": "Asterix - L Anniversaire D Asterix Et Obelix - "
+      "libellé eCommerce": "Asterix - L Anniversaire D Asterix Et Obelix "
     },
     {
       "EAN": "9782012101425",
@@ -159755,7 +160179,7 @@ export const database = [
       "libellé eCommerce": "Assouplissant Grand Air 3L - SOUPLINE"
     },
     {
-      "EAN": "8718951191174",
+      "EAN": "8718951664289",
       "libellé eCommerce": "Assouplissant Grand Air 1,5L   - SOUPLINE"
     },
     {
@@ -159927,12 +160351,24 @@ export const database = [
       "libellé eCommerce": "Assortiment de mini tablettes chocolat x9 150g - RITTER SPORT"
     },
     {
+      "EAN": "8000500426913",
+      "libellé eCommerce": "Assortiment de chocolats sac de noël mix 223g - KINDER"
+    },
+    {
       "EAN": "5400265005553",
       "libellé eCommerce": "Assortiment de chocolats pralinés en forme de fruits de mer 250g - HAMLET"
     },
     {
       "EAN": "3173287540143",
       "libellé eCommerce": "Assortiment de chocolats pralinés Cheverny 239 - CEMOI"
+    },
+    {
+      "EAN": "3250393463327",
+      "libellé eCommerce": "Assortiment de chocolats praliné 179g - IVORIA"
+    },
+    {
+      "EAN": "8445291094604",
+      "libellé eCommerce": "Assortiment de chocolats noirs L'escargot 362g - LANVIN"
     },
     {
       "EAN": "7613037005127",
@@ -159943,12 +160379,32 @@ export const database = [
       "libellé eCommerce": "Assortiment de chocolats noirs et lactés aux noisettes 160g - DELAVIUDA"
     },
     {
+      "EAN": "8445291699366",
+      "libellé eCommerce": "Assortiment de chocolats noirs café L'escargot 164g - LANVIN"
+    },
+    {
       "EAN": "8003535077532",
       "libellé eCommerce": "Assortiment de chocolats noirs à la crème et éclats de cacao 250g - WITOR'S "
     },
     {
+      "EAN": "8445291219564",
+      "libellé eCommerce": "Assortiment de chocolats noirs 294g - LANVIN"
+    },
+    {
+      "EAN": "8445291083721",
+      "libellé eCommerce": "Assortiment de chocolats noirs 198g - NESTLÉ"
+    },
+    {
       "EAN": "3250393432484",
       "libellé eCommerce": "Assortiment de chocolats le mélange gourmand 140g - IVORIA "
+    },
+    {
+      "EAN": "3046920013116",
+      "libellé eCommerce": "Assortiment de chocolats lait noirs et blancs Lindor 371g - LINDT"
+    },
+    {
+      "EAN": "3046920013048",
+      "libellé eCommerce": "Assortiment de chocolats lait noirs croquants Connaisseurs 405g - LINDT"
     },
     {
       "EAN": "5410976271017",
@@ -159961,6 +160417,10 @@ export const database = [
     {
       "EAN": "8000500393277",
       "libellé eCommerce": "Assortiment de chocolats et biscuits 174g - KINDER"
+    },
+    {
+      "EAN": "8000500456323",
+      "libellé eCommerce": "Assortiment de chocolats cube lumière fête x18 185g - FERRERO"
     },
     {
       "EAN": "7622201690953",
@@ -159983,6 +160443,10 @@ export const database = [
       "libellé eCommerce": "Assortiment de chocolats au lait, noirs et aux noisettes 200g - DELAVIUDA"
     },
     {
+      "EAN": "3046920013079",
+      "libellé eCommerce": "Assortiment de chocolats au lait pralinés Connaisseurs 409g - LINDT"
+    },
+    {
       "EAN": "7622201803483",
       "libellé eCommerce": "Assortiment de chocolats au lait Moments Lait Alpin 268g - MILKA"
     },
@@ -159995,12 +160459,20 @@ export const database = [
       "libellé eCommerce": "Assortiment de chocolats au lait et noirs la boîte rouge 400g - NESTLÉ"
     },
     {
+      "EAN": "8445291083769",
+      "libellé eCommerce": "Assortiment de chocolats au Lait et noirs La Boîte Rouge 398g - NESTLÉ"
+    },
+    {
       "EAN": "8003535079970",
       "libellé eCommerce": "Assortiment de chocolats au lait et noirs aux céréales croquantes 200g -WITOR'S"
     },
     {
       "EAN": "8003535080136",
       "libellé eCommerce": "Assortiment de chocolats au lait et noirs aux céréales croquantes 150g -WITOR'S"
+    },
+    {
+      "EAN": "8445291219595",
+      "libellé eCommerce": "Assortiment de chocolats au lait et noirs 285g - LANVIN"
     },
     {
       "EAN": "3173287753604",
@@ -160013,6 +160485,14 @@ export const database = [
     {
       "EAN": "8003535069339",
       "libellé eCommerce": "Assortiment de chocolats au lait avec crème de noisettes et céréales1Kg-WITOR'S"
+    },
+    {
+      "EAN": "8445291219533",
+      "libellé eCommerce": "Assortiment de chocolats au lait 274g - LANVIN"
+    },
+    {
+      "EAN": "3250393463334",
+      "libellé eCommerce": "Assortiment de chocolats au lait 174g - IVORIA"
     },
     {
       "EAN": "8445291084001",
@@ -164175,10 +164655,6 @@ export const database = [
       "libellé eCommerce": "Amlou aux amandes 200g -  RIAD EL AÂSSAL"
     },
     {
-      "EAN": "6111260430583",
-      "libellé eCommerce": "Amlou au pistache 190g  - TERRE BRUNE"
-    },
-    {
       "EAN": "6111260430163",
       "libellé eCommerce": "Amlou au chocolat 190g  - TERRE BRUNE"
     },
@@ -164205,6 +164681,10 @@ export const database = [
     {
       "EAN": "2000014584426",
       "libellé eCommerce": "Amlou amande à huile de noix et miel 700g - FILIERE M"
+    },
+    {
+      "EAN": "6111260430583",
+      "libellé eCommerce": "Amlou à la pistache 190g  - TERRE BRUNE"
     },
     {
       "EAN": "6111275200386",
@@ -164512,7 +164992,7 @@ export const database = [
     },
     {
       "EAN": "9789920657365",
-      "libellé eCommerce": "Alqatiaa, Kayfa Taghayarna Fi Al Omq"
+      "libellé eCommerce": "Alqatiaa Kayfa Taghayarna Fi Al Omq"
     },
     {
       "EAN": "3222475752087",
@@ -164588,7 +165068,7 @@ export const database = [
     },
     {
       "EAN": "9789920657372",
-      "libellé eCommerce": "Alliqae, Kayfa Yakchifouna Li Anfoussina Wa Yafta"
+      "libellé eCommerce": "Alliqae Kayfa Yakchifouna Li Anfoussina Wa Yafta"
     },
     {
       "EAN": "193905283163",
@@ -166051,6 +166531,14 @@ export const database = [
       "libellé eCommerce": "Adélie bac de crème glacée vanille macadamia 472g"
     },
     {
+      "EAN": "3250390600671",
+      "libellé eCommerce": "Adélie bac de crème glacée vanille 478g"
+    },
+    {
+      "EAN": "3250390600657",
+      "libellé eCommerce": "Adélie bac de crème glacée pistache 532g"
+    },
+    {
       "EAN": "3250390600572",
       "libellé eCommerce": "Adélie bac de crème glacée menthe chocolat 501g"
     },
@@ -166063,8 +166551,16 @@ export const database = [
       "libellé eCommerce": "Adélie bac de crème glacée chocolat au sucre de canne bio 471g"
     },
     {
+      "EAN": "3250390600718",
+      "libellé eCommerce": "Adélie bac de crème glacée chocolat 595g"
+    },
+    {
       "EAN": "3250391997718",
       "libellé eCommerce": "Adélie bac de crème glacée caramel fleur de sel de Guérande 501g"
+    },
+    {
+      "EAN": "3250390601050",
+      "libellé eCommerce": "Adélie bac de crème glacée café 500g"
     },
     {
       "EAN": "3250392452094",
@@ -167616,7 +168112,7 @@ export const database = [
     },
     {
       "EAN": "9782212575163",
-      "libellé eCommerce": "50 Exercices Pour Rebondir Grace Aux Emotions Pos"
+      "libellé eCommerce": "50 Exercices Pour Rebondir Grace Aux Emotions Positives"
     },
     {
       "EAN": "9782212572148",
@@ -167636,7 +168132,7 @@ export const database = [
     },
     {
       "EAN": "9782416003394",
-      "libellé eCommerce": "50 Exercices Pour Les Ultrasensibles"
+      "libellé eCommerce": "50 Exercices Pour Les Ultra sensibles"
     },
     {
       "EAN": "9782212573107",
@@ -168176,7 +168672,7 @@ export const database = [
     },
     {
       "EAN": "6111017047699",
-      "libellé eCommerce": "3 tablettes chocolat Délice Rocher 2+1 gratuit-AIGUEBELLE\r\n"
+      "libellé eCommerce": "3 tablettes chocolat Délice Rocher 2+1 gratuit-AIGUEBELLE"
     },
     {
       "EAN": "2000014455122",
@@ -170469,18 +170965,6 @@ export const database = [
     {
       "EAN": "8001841820835",
       "libellé eCommerce": "1 bain de bouche Oral-B Pro Expert 500ml = 1 gratuit"
-    },
-    {
-      "EAN": "4100420083662",
-      "libellé eCommerce": "\"Super Additif Diesel 250 Ml Liqui-Moly\" LIQUI-MOLY"
-    },
-    {
-      "EAN": "4100420083686",
-      "libellé eCommerce": "\"Stop Fumees Diesel Concentre 250 Ml Liqui-Moly\" LIQUI-MOLY"
-    },
-    {
-      "EAN": "4100420083594",
-      "libellé eCommerce": "\"Stop Fuites D’Huile 300 Ml Liqui-Moly\" LIQUI-MOLY"
     },
     {
       "EAN": "4007817068694",
@@ -216727,10 +217211,6 @@ export const database = [
       "libellé eCommerce": ""
     },
     {
-      "EAN": "22315700",
-      "libellé eCommerce": ""
-    },
-    {
       "EAN": "3333750047276",
       "libellé eCommerce": ""
     },
@@ -216756,10 +217236,6 @@ export const database = [
     },
     {
       "EAN": "40992686",
-      "libellé eCommerce": ""
-    },
-    {
-      "EAN": "6111262583843",
       "libellé eCommerce": ""
     },
     {
@@ -220944,10 +221420,6 @@ export const database = [
     },
     {
       "EAN": "2639663",
-      "libellé eCommerce": ""
-    },
-    {
-      "EAN": "2639985",
       "libellé eCommerce": ""
     },
     {
@@ -239868,6 +240340,10 @@ export const database = [
     },
     {
       "EAN": "2000014680982",
+      "libellé eCommerce": ""
+    },
+    {
+      "EAN": "2635098",
       "libellé eCommerce": ""
     },
     {
